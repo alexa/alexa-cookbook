@@ -45,25 +45,23 @@
 1. Create a new Skill called HelloWorld with invocation name ```hello world```.
 1. Paste in the [IntentSchema.json](./speechAssets/IntentSchema.json) :
     ```
-{
-  "intents": [
     {
-      "intent": "MyIntent",  "slots":[]
-    },
+      "intents": [
+        {
+          "intent": "MyIntent",  "slots":[]
+        },
 
-    {
-      "intent": "AMAZON.HelpIntent"
-    },
-    {
-      "intent": "AMAZON.StopIntent"
-    },
-    {
-      "intent": "AMAZON.CancelIntent"
+        {
+          "intent": "AMAZON.HelpIntent"
+        },
+        {
+          "intent": "AMAZON.StopIntent"
+        },
+        {
+          "intent": "AMAZON.CancelIntent"
+        }
+      ]
     }
-  ]
-}
-
-
     ```
 1. Paste in the [SampleUtterances.txt](speechAssets/SampleUtterances.txt) :
     ```
