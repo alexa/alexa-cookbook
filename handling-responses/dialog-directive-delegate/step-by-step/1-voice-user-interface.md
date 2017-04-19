@@ -71,7 +71,7 @@ There are two parts to an Alexa skill.  The first part is the [Voice User Interf
 
     7.2. **Add an Intent** An intent defines the actions that we want our users to be able to take ([learn more](https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/ask-define-the-vui-with-gui#about-intents-slots-and-dialogs)). From the left navigation, click the ```ADD+``` button for Intents to open the Add Intent page.
 
-    7.3.  **Create a new custom intent** Type ```PlanMyTrip``` into the ```Create a new custom intent``` field. With the skill builder you can also choose from over 100 built-in Intents. Whenever one of these intents fits your scenario it's best to use one of these because the utterances and slots are already trained for you. For this example, we'll show you how to create a custom intent.
+    7.3.  **Create a new custom intent** Type ```PlanMyTrip``` into the ```Create a new custom intent``` field. With the skill builder you can also choose from over 100 built-in Intents (the 100+ built-in Intents are available to US only, UK/DE are limited to the 13 Amazon Standard Intents). Whenever one of these intents fits your scenario it's best to use one of these because the utterances and slots are already trained for you. For this example, we'll show you how to create a custom intent.
 
     7.4. **Sample Utterances** Add a list of phrases that people would say to invoke your new PlanMyTrip intent. Notice how we gather responses like the city we're going to by using ```{ }``` to create a slot. Enter any phrases people might say to start planning a trip.
     ```
