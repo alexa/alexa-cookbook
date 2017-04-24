@@ -65,7 +65,7 @@ There are two parts to an Alexa skill.  The first part is the [Voice User Interf
 
       >(F) Return to the rest of the pages on the developer portal to configure, test, and publish your skill.
 
-    7.1. *OPTIONAL:* You can choose to upload a file to fill out your interaction model. To do that for this sample click on the ```</> Code Editor``` tab and drag your JSON file from the [dialog-directive-delegate sample in the Alexa cookbook](https://github.com/alexa/alexa-cookbook/blob/master/handling-responses/dialog-directive-delegate/speech-assets/InteractionModel.json) to the cloud upload icon. Once you're done, click ```Apply Changes```. From this point you can follow along with the rest of step 7 to see how things work or move onto step 8.
+    7.1. *OPTIONAL:* You can choose to upload a file to fill out your interaction model. To do that for this sample click on the ```</> Code Editor``` tab and drag your JSON file from the [dialog-directive-delegate sample in the Alexa cookbook](https://github.com/alexa/alexa-cookbook/blob/master/handling-responses/dialog-directive-delegate/sample-nodejs-plan-my-trip/speech-assets/InteractionModel.json) to the cloud upload icon. Once you're done, click ```Apply Changes```. From this point you can follow along with the rest of step 7 to see how things work or move onto step 8.
 
     Here are the steps to build out your interaction model by hand.  
 

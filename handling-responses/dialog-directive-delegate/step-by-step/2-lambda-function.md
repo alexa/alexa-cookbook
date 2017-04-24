@@ -36,7 +36,7 @@ In the [first step of this guide](https://github.com/alexa/alexa-cookbook/blob/m
 
     <img src="https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/general/2-7-configure-your-function._TTH_.png" />
 
-8.  **Upload the [provided code](https://github.com/alexa/alexa-cookbook/tree/master/handling-responses/dialog-directive-delegate/src)** We have provided the code for this skill on [GitHub](https://github.com/alexa/alexa-cookbook/tree/master/handling-responses/dialog-directive-delegate/src).  
+8.  **Upload the [provided code](https://github.com/alexa/alexa-cookbook/tree/master/handling-responses/dialog-directive-delegate/sample-nodejs-plan-my-trip/src)** We have provided the code for this skill on [GitHub](https://github.com/alexa/alexa-cookbook/tree/master/handling-responses/dialog-directive-delegate/sample-nodejs-plan-my-trip/src).  
   8.1. From the Code entry type box, choose "Upload a .ZIP file"
 
   8.2. Clone the project and package the skill
