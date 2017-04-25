@@ -3,17 +3,16 @@
 
 [![Voice User Interface](https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/navigation/1-off._TTH_.png)](https://github.com/alexa/alexa-cookbook/blob/master/handling-responses/dialog-directive-delegate/step-by-step/1-voice-user-interface.md)[![Lambda Function](https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/navigation/2-off._TTH_.png)](https://github.com/alexa/alexa-cookbook/blob/master/handling-responses/dialog-directive-delegate/step-by-step/2-lambda-function.md)[![Connect VUI to Code](https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/navigation/3-off._TTH_.png)](https://github.com/alexa/alexa-cookbook/blob/master/handling-responses/dialog-directive-delegate/step-by-step/3-connect-vui-to-code.md)[![Testing](https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/navigation/4-off._TTH_.png)](https://github.com/alexa/alexa-cookbook/blob/master/handling-responses/dialog-directive-delegate/step-by-step/4-testing.md)
 
-
 ## What You Will Learn
-*  [AWS Lambda](http://aws.amazon.com/lambda)
-*  [Alexa Skills Kit (ASK)](https://developer.amazon.com/alexa-skills-kit)
+* [AWS Lambda](http://aws.amazon.com/lambda)
+* [Alexa Skills Kit (ASK)](https://developer.amazon.com/alexa-skills-kit)
 * Using the [skill builder (beta)](https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/ask-define-the-vui-with-gui) for required slots
 * The [delegate directive](https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/dialog-interface-reference#directives)
 
 ## What You Will Need
-*  [Amazon Developer Portal Account](http://developer.amazon.com)
-*  [Amazon Web Services Account](http://aws.amazon.com/)
-*  The sample code on [GitHub](https://github.com/alexa/alexa-cookbook/tree/master/handling-responses/dialog-directive-delegate).
+* [Amazon Developer Portal Account](http://developer.amazon.com)
+* [Amazon Web Services Account](http://aws.amazon.com/)
+* The sample code on [GitHub](https://github.com/alexa/alexa-cookbook/tree/master/handling-responses/dialog-directive-delegate).
 
 ## What Your Skill Will Do
 Focus on building the best voice experience, not error handling. The skill builder’s new dialog model reduces the amount of handling required in the skill endpoint (backend) to manage slot filling, prompts, and confirmations for a customer intent. All you have to do is respond with a Dialog.Delegate directive if the status in not complete. Alexa will manage the dialogs for you, greatly reducing the amount of handling needed by you to create a great experience.

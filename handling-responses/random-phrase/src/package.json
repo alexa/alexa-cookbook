@@ -1,8 +1,8 @@
 {
-  "name": "SkillStuff",
+  "name": "skill-sample-random-phrase",
   "version": "1.0.0",
-  "description": "Lambda function for Alexa",
-  "readme": "Lambda function for Alexa",
+  "description": "Lambda function for Alexa random-phrase example",
+  "readme": "Lambda function for Alexa random-phrase example",
   "repository": "my repository",
   "main": "index.js",
   "scripts": {
@@ -12,7 +12,7 @@
       "upload": "aws lambda update-function-code --function-name 'HelloWorld' --zip-file fileb://../index.zip",
       "zip": "zip -r ../index.zip . -x 'package.json' -x '*.git*' "
   },
-  "author": "me",
+  "author": "Amazon.com",
   "license": "Apache-2.0",
   "dependencies": {
     "alexa-sdk": "^1.0.7"

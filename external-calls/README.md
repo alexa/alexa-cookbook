@@ -1,6 +1,5 @@
 #### Alexa Skill Building Cookbook
 ## External Calls <a id="title"></a>
-<hr />
 
 ### Intro <a id="intro"></a>
 Alexa skill developers can take advantage of external APIs and web services available on the public Internet.

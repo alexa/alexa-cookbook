@@ -1,7 +1,7 @@
 ## Testing <a id="title"></a>
 ### Does my skill work?
 
- You can test your skill in a number of ways.   You do NOT need to publish your skill before you can begin testing and using it on any of your devices.
+You can test your skill in a number of ways.   You do NOT need to publish your skill before you can begin testing and using it on any of your devices.
 
  + Type in your utterance to the Service Simulator, within the Test page of your skill on the [Developer Portal](https://developer.amazon.com/edw/home.html#/skills/list).
  + Launch [EchoSim.IO](https://echosim.io), the browser based testing tool.  Toggle your Language setting via a link near the top right, such as ```EN-US```, ```EN-GB```, ```DE-DE```.
@@ -42,8 +42,7 @@ Go to [TestFlow](TestFlow)
 
 
 #### See also
-Read about Node.JS and other tools in the folder: [tools](../tools#title)
-
+Read about Node.JS and other tools in the [tools](../tools#title) folder.
 
 <hr />
 

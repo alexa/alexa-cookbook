@@ -1,83 +1,80 @@
 #### Alexa Cookbook
 ## Hello World <a id="title"></a>
-<hr />
 
 ### Intro <a id="intro"></a>
 
+This is a simple tutorial to introduce a simple Alexa skill and code.
 
-### This is a simple tutorial to introduce a simple Alexa skill and code.
-
-### Tutorial Steps
 #### Code
-1. Login to AWS and verify the region at the top right is set to the **Ireland** or **N. Virginia** Region region.
-1. Click [Lambda](https://console.aws.amazon.com/lambda/home) and then **Create a Lambda function**  Do not select the default **Blank** blueprint.
-1. Locate and click on the ```alexa-skill-kit-sdk-factskill``` skill template (hint: search for **fact** )
-1. Click in the empty square and choose the trigger *Alexa Skills Kit* and click Next.
+1. Login to AWS and verify the region at the top right is set to the **Ireland** or **N. Virginia** region.
+1. Click [Lambda](https://console.aws.amazon.com/lambda/home) and then **Create a Lambda function**.
+   Do not select the default **Blank** blueprint.
+1. Locate and click on the `alexa-skill-kit-sdk-factskill` skill template (hint: search for **fact** ).
+1. Click in the empty square and choose the trigger *Alexa Skills Kit* and click **Next**.
 1. Give your function the name *HelloWorld*
-1. Paste in the source code from [src/index.js](./src/index.js) :
+1. Paste in the source code from [src/index.js](./src/index.js):
+    ```
+    var Alexa = require('alexa-sdk');
 
-```
-        var Alexa = require('alexa-sdk');
+    exports.handler = function(event, context, callback) {
+        var alexa = Alexa.handler(event, context);
 
-        exports.handler = function(event, context, callback) {
-            var alexa = Alexa.handler(event, context);
+        // alexa.dynamoDBTableName = 'YourTableName'; // creates new table for userid:session.attributes
 
-            // alexa.dynamoDBTableName = 'YourTableName'; // creates new table for userid:session.attributes
+        alexa.registerHandlers(handlers);
+        alexa.execute();
+    };
 
-            alexa.registerHandlers(handlers);
-            alexa.execute();
-        };
+    var handlers = {
+        'LaunchRequest': function () {
+            this.emit('MyIntent');
+        },
 
-        var handlers = {
-            'LaunchRequest': function () {
-                this.emit('MyIntent');
-            },
+        'MyIntent': function () {
+            this.emit(':tell', 'Hello World from Alexa!');
+        }
+    };
+    ```
 
-            'MyIntent': function () {
-                this.emit(':tell', 'Hello World from Alexa!');
-            }
-        };
-```
-
-1. Just below the code editor, create or re-use an execution role, such as ```lambda_basic_execution```
-1. Click Next and create the function.
-1. Make note of the Lambda ARN, shown near the top right, such as
- *  ``` arn:aws:lambda:us-east-1:333304287777:function:HelloWorld ```
+1. Just below the code editor, create or re-use an execution role, such as `lambda_basic_execution`.
+1. Click **Next** and create the function.
+1. Make note of the Lambda ARN, shown near the top right, which looks something like:
+   ```
+   arn:aws:lambda:us-east-1:333304287777:function:HelloWorld
+   ```
 
 
 #### Skill
-1. Login to [developer.amazon.com](https://developer.amazon.com) and click Alexa, then Alexa Skills Kit
-1. Create a new Skill called HelloWorld with invocation name ```hello world```.
+1. Login to [developer.amazon.com](https://developer.amazon.com) and click **Alexa**, then **Alexa Skills Kit**.
+1. Create a new skill called `HelloWorld` with invocation name ```hello world```.
 1. Paste in the [IntentSchema.json](./speechAssets/IntentSchema.json) :
-
-```
-{
-  "intents": [
+    ```
     {
-      "intent": "MyIntent",  "slots":[]
-    },
-
-    {
-      "intent": "AMAZON.HelpIntent"
-    },
-    {
-      "intent": "AMAZON.StopIntent"
-    },
-    {
-      "intent": "AMAZON.CancelIntent"
+      "intents": [
+        {
+          "intent": "MyIntent",  "slots":[]
+        },
+    
+        {
+          "intent": "AMAZON.HelpIntent"
+        },
+        {
+          "intent": "AMAZON.StopIntent"
+        },
+        {
+          "intent": "AMAZON.CancelIntent"
+        }
+      ]
     }
-  ]
-}
+    
+    ```
 
-```
+1. Paste in [SampleUtterances.txt](speechAssets/SampleUtterances.txt):
+    ```
+    MyIntent hello
+    ```
 
-1. Paste in the [SampleUtterances.txt](speechAssets/SampleUtterances.txt) :
-
-```
-MyIntent hello
-```
-
-1. Configure the skill endpoint with the AWS Lambda ARN previously created.
+1. Configure the skill endpoint with the previously noted AWS Lambda ARN.
 
 #### Test
 * Type or say "open hello world" and Alexa should reply with "hello world from Alexa"
@@ -89,45 +86,48 @@ MyIntent hello
 
 ## Lab 1 - New Intents
 
-This lab will have you extend your skill by adding new Intents.  First we will add the intent to the skill definition.
+This lab will have you extend your skill by adding new Intents.
+First we will add the intent to the skill definition.
 
-1. Within the [Dev Portal](https://developer.amazon.com/edw/home.html#/skills/list) skill definition, click on the Interaction Model page.
-1. Review the Intent Schema panel, notice the three lines that define the MyIntent schema.
-1. Create a new intent definition, similar to MyIntent called WhatsUpIntent
-1. Within the Sample Utterances box, add a sample for the new intent, such as ```WhatsUpIntent what is up```
+1. Within the [Dev Portal](https://developer.amazon.com/edw/home.html#/skills/list) skill definition, click on the **Interaction Model** page.
+1. Review the Intent Schema panel, notice the three lines that define the **MyIntent** schema.
+1. Create a new intent definition, similar to **MyIntent** called **WhatsUpIntent**.
+1. Within the **Sample Utterances** box, add a sample for the new intent, such as ```WhatsUpIntent what is up```
 
 Next, we will add a handler to the AWS Lambda function
 
-1. Within the AWS Lambda Console console, review your function code
-1. Within the handlers section, notice the three lines of code that handle the MyIntent event.
-1. Create a new handler function for the WhatsUpIntent (hint: copy & paste the MyIntent function and change MyIntent to WhatsUpIntent)
-1. Customize the message Alexa will say
-1. Change the emit from a :tell to an :ask. This :ask will keep the session open after Alexa responds.
-1. Test your new skill by opening the skill and saying "what is up"
+1. Within the AWS Lambda Console console, review your function code.
+1. Within the handlers section, notice the three lines of code that handle the **MyIntent** event.
+1. Create a new handler function for the WhatsUpIntent (hint: copy and paste the **MyIntent** function and change **MyIntent** to **WhatsUpIntent**).
+1. Customize the message Alexa will say.
+1. Change the `emit` from a `:tell` to an `:ask`.
+   This `:ask` will keep the session open after Alexa responds.
+1. Test your new skill by opening the skill and asking "what is up"?
 
-Finally, we will add handlers for default requests such as Help, Stop, and Cancel
+Finally, we will add handlers for default requests such as `Help`, `Stop`, and `Cancel`:
 
 1. Within the Lambda code, add handlers for each of the following three events:
- + ```AMAZON.HelpIntent```  ```AMAZON.StopIntent```  ```AMAZON.CancelIntent```
+   `AMAZON.HelpIntent`,  `AMAZON.StopIntent` and `AMAZON.CancelIntent`.
 
-1. Customize the say message in each handler.
-1. Ensure the Help handler action is ```:ask```, while the Cancel and Stop handlers are ```:tell```.
-
-* ```:tell``` will stop the skill after Alexa speaks.  ```:ask``` will cause Alexa to listen again for the next question or command. *
-Feel free to add additional intents and handlers to make your skill unique.
+1. Customize the `say` message in each handler.
+1. Ensure the `Help` handler action is ```:ask```, while the `Cancel` and `Stop` handlers are ```:tell```.
+   ```:tell``` stops the skill after Alexa speaks.
+   ```:ask``` causes Alexa to listen again for the next question or command.
+1. Feel free to add additional intents and handlers to make your skill unique.
 
 ## Lab 2 - Intents with Slots
 
 This lab will have you add Intents with Slots.
-Click to your skill's Interaction Model, Intent Schema box.
-Review your existing Intent Schema.  The final two characters in this JSON are ```] }```
-Click your cursor just before these two characters.  Type a comma, then press Enter three times.
+Click in your skill's Interaction Model / Intent Schema box.
+Review your existing Intent Schema.
+The final two characters in this JSON are `] }`.
+Click your cursor just before these two characters.
+Type a comma, then press Enter three times.
 
-We will add a new Intent called ```MyNameIsIntent``` and define a slot with the intent.
+Now we will add a new Intent called `MyNameIsIntent` and define a slot with the intent.
 
-Copy and paste in the following new Intent definition:
-
-```
+1. Copy and paste in the following new Intent definition:
+    ```
     {
       "intent": "MyNameIsIntent",
       "slots":[
@@ -137,44 +137,49 @@ Copy and paste in the following new Intent definition:
         }
       ]
     }
-```
+    ```
 
-Also add the following line to your Sample Utterances:  ```MyNameIsIntent my name is {firstname}```
+1. Add the following line to **Sample Utterances**:
+    ```
+    MyNameIsIntent my name is {firstname}
+    ```
 
- * Create another handler within your AWS Lambda function for MyNameIsIntent that stores the firstname slot value in a local variable:
- * Be sure this line of code exists *inside* the scope of this new Intent Handler.
-
-```var myName = this.event.request.intent.slots.firstname.value;```
-
- * Repeat the name back to the user as part of the MyNameIsIntent handler.
-
- For example, you could have the MyNameIsIntent handler do this :
-
- ``` this.emit(':ask', 'hello, ' + myName, 'try again');  ```
+1. Create another handler within your AWS Lambda function for `MyNameIsIntent` that stores the `firstname` slot value in a local variable.
+Be sure this line of code exists *inside* the scope of this new Intent Handler.
+    ```
+    var myName = this.event.request.intent.slots.firstname.value;
+    ```
+    
+1. Repeat the name back to the user as part of the MyNameIsIntent handler.
+   For example, you could have the `MyNameIsIntent` handler do this :
+ ```
+ this.emit(':ask', 'hello, ' + myName, 'try again');
+ ```
 
 ## Lab 3 - Session Attributes
 
 Add session attributes to your skill to remember things.
 
-Based on your work in the previous lab, your lambda function now has a MyNameIsIntent handler.
+In the previous lab you created a lambda function / handler called `MyNameIsIntent`.
 
-Add the following line of code after you have retrieved the firstname slot value into the myName variable:
+1. Add the following line of code after you have retrieved the `firstname` slot value into the myName variable:
+    ```
+    this.attributes['name'] = myName;
+    ```
 
-```this.attributes['name'] = myName;```
+1. Locate the handler for the AMAZON.StopIntent that you defined in Lab 1.
+   Within this handler, replace the code with the following:
+    ```
+    var myName = '';
+    if (this.attributes['name']) {
+        myName = this.attributes['name'];
+    }
+    this.emit(':tell', 'goodbye, ' + myName, 'try again');
+    ```
 
-Now, locate the handler for the AMAZON.StopIntent that you defined in Lab 1.
-Within this handler, replace the code with the following:
-
-```
-var myName = '';
-if (this.attributes['name']) {
-    myName = this.attributes['name'];
-}
-this.emit(':tell', 'goodbye, ' + myName, 'try again');
-
-```
-
-Test your skill.  Say "my name is sam".  Then say "stop".  You should hear a personalized goodbye message.
+1. Test your skill:
+    1. Say "my name is sam".  
+    1. Say "stop".  You should hear a personalized goodbye message.
 
 ## Lab 4 - Calling Web Services
 Your skill can make calls to external web services, APIs and REST services.
@@ -182,36 +187,31 @@ Your skill can make calls to external web services, APIs and REST services.
 Read and follow the tutorial in the [external-calls/httpsGet](../../external-calls/httpsGet) folder, to create a starter skill that calls a web service.
 
 Once you have this skill working:
- + Review the Lambda code.
- + Change the value of the myRequest from 'Florida' to 'California' or any other state.
- + Recalling what you have learned so far, try to add an Intent and Slot so that the user can say which state they want.
+1. Review the Lambda code.
+1. Change the value of the `myRequest` from "Florida" to "California" or any other state.
+1. Using what you have learned so far, try to add an Intent and Slot so that the user can say which state they want.
+   For example, you can repeat the steps from Lab 2, to add a new Intent to the Intent Schema, with the following slot:
+   ```
+   {
+       "name":"usstate",
+       "type":"AMAZON.US_STATE"
+   }
+   ```
+1. Be sure to add a corresponding **Sample Utterance** line, such as:
+    ```
+    NewIntent go to {usstate}
+    ```
 
-
-For example, you can repeat the steps from Lab 2, to add a new Intent to the Intent Schema, with the following slot:
-
-```
-        {
-          "name":"usstate",
-          "type":"AMAZON.US_STATE"
-        }
-```
-
-Be sure to add a corresponding Sample Utterance line, such as:
-
-```NewIntent go to {usstate}```
-
-Then, within your Lambda code, you can get the value of the slot via:
-
-```var myState = this.event.request.intent.slots.usstate.value;```
-
+1. Within your Lambda code, obtain the value of the slot via:
+    ```
+    var myState = this.event.request.intent.slots.usstate.value;
+    ```
 
 ## Lab 5 - SSML Audio
 
 Add short MP3 audio clips to your output via SSML.
-
 SSML markup tags can be interspersed directly within normal speech output text.
-
-You can test these within the **Voice Simulator** textbox, just above the Service Simulator textbox on the skill TEST page.
+You can test these within the **Voice Simulator** textbox, just above the **Service Simulator** textbox on the skill **Test** page.
 
 
 Examples:
@@ -285,7 +285,6 @@ Review the [Lab 3 solution](https://gist.github.com/robm26/aec28e68137e776aea972
 
 Within your Lambda function's ```exports.handler``` block, add one new line:
 
-
 ```
 exports.handler = function(event, context, callback) {
     var alexa = Alexa.handler(event, context);
@@ -340,13 +339,12 @@ Setup Account Linking to "Login with Amazon" as in the blog post.  Welcome the u
 
 ## Lab 10
 
-Using the **alexa-sdk**
+Using the **alexa-sdk**:
 
-1. Search the internet for ```npm alexa sdk```
-1. Click the first link to open the alexa-sdk node module project page
+1. Search the internet for `npm alexa sdk`.
+1. Click the first link to open the `alexa-sdk` node module project page.
 1. Read and scroll through the documentation and try out the code snippets in your skill.
 1. See if you can implement the Hi-Low guessing game described in the documentation.
 
 
-
-[Back](../../README.md#title) - [Cookbook Home Page](../../README.md#title)
+[Back](../../README.md#title) &bull; [Cookbook Home Page](../../README.md#title)

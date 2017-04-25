@@ -33,9 +33,8 @@ See the [IAM Policies](../IAM_POLICIES.md) page for more details.
 }
 ```
 
- *You can learn more about S3 from the [Getting Started with S3](http://docs.aws.amazon.com/AmazonS3/latest/gsg/GetStartedWithS3.html) documentation.*
-
+*You can learn more about S3 from the [Getting Started with S3](http://docs.aws.amazon.com/AmazonS3/latest/gsg/GetStartedWithS3.html) documentation.*
 
 <hr />
-Back to the [Home Page](../../README.md#title)
 
+Back to the [Home Page](../../README.md#title)

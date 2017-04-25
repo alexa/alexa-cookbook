@@ -2,7 +2,6 @@
 ### Alexa Skill Building Cookbook
 ## Labs <a id="title"></a>
 
-
 #### Welcome! <a id="intro"></a>
 
 These Labs are a series of exercises you can follow to accompany your training in Alexa skills.

@@ -1,0 +1,14 @@
+*.sublime*
+Notepad++/
+*.log
+.idea*
+*.iml
+.cache
+.classpath
+.project
+.settings
+.target
+.history
+*~
+.DS_Store
+__MACOSX

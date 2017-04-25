@@ -19,9 +19,7 @@
 
 
 #### Continue to the next step
-
-
- * [Part 4 - Connect your skill to Lambda](./PAGE4.md#title)
+[Part 4 - Connect your skill to Lambda](./PAGE4.md#title)
 
 
 <hr />
