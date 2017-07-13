@@ -36,19 +36,19 @@ In the [first step of this guide](https://github.com/alexa/alexa-cookbook/blob/m
 
     <img src="https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/general/2-7-configure-your-function._TTH_.png" />
 
-8.  **Upload the [provided code](https://github.com/alexa/alexa-cookbook/tree/master/handling-responses/dialog-directive-delegate/src)** We have provided the code for this skill on [GitHub](https://github.com/alexa/alexa-cookbook/tree/master/handling-responses/dialog-directive-delegate/src).  
+8.  **Upload the provided code.** We have provided the code for this skill on [GitHub](https://github.com/alexa/alexa-cookbook/archive/master.zip).  
   8.1. From the Code entry type box, choose "Upload a .ZIP file"
 
   8.2. Clone the project and package the skill
 
-    8.2.1. go to https://github.com/alexa/alexa-cookbook
+   8.2.1. go to https://github.com/alexa/alexa-cookbook
 
-    8.2.2. clone or download the zip file and extract the files. This sample makes use of the [delegate directive](https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/dialog-interface-reference#directives) and you can learn more about it's [states and dialog flow](https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/dialog-interface-reference#details) in the documentation
+   8.2.2. clone or download the zip file and extract the files. This sample makes use of the [delegate directive](https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/dialog-interface-reference#directives) and you can learn more about its [states and dialog flow](https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/dialog-interface-reference#details) in the documentation
 
-    8.2.3. from the command prompt or terminal:
+   8.2.3. from the command prompt or terminal:
       navigate to the \handling-responses\dialog-directive-delegate\src folder and type ```npm install```
 
-    8.2.4. zip the files in the src folder (DO NOT include the parent src folder itself)
+   8.2.4. zip the files in the src folder (DO NOT include the parent src folder itself)
 
   8.3. Back on AWS.Amazon.com, click the upload button and upload your zip file.
 
