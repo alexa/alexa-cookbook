@@ -216,25 +216,6 @@ var practiceHandlers = Alexa.CreateStateHandler(states.PRACTICE, {
     'NewSession': function () {
         this.emit('NewSession'); // Uses the handler in newSessionHandlers
     },
-    'AMAZON.YesIntent': function() {  // Yes, I want to start the practice
-
-        var say = '';
-
-        this.attributes['currentQuestionIndex'] = 0;
-
-        if (this.attributes['wrongList'].length > 0) {  // we have taken the practice already and need to repeat
-            this.attributes['sessionQuestionList'] = randomizeArray(this.attributes['wrongList']);  // only practice those answered wrong
-            this.attributes['wrongList'] = [];
-            this.attributes['wrongCount'] = 0;
-            this.attributes['correctCount'] = 0;
-        } else {
-            this.attributes['sessionQuestionList'] = randomizeArray(this.attributes['questionList']);
-        }
-        say = 'First question of ' + this.attributes['sessionQuestionList'].length + ', '
-        say += 'Where is ' + this.attributes['sessionQuestionList'][0].question + '?';
-
-        this.emit(':ask',  say, say);
-    },
 
     'AnswerIntent': function() {
         var myState = '';
@@ -284,22 +265,6 @@ var practiceHandlers = Alexa.CreateStateHandler(states.PRACTICE, {
 var quizHandlers = Alexa.CreateStateHandler(states.QUIZ, {
     'NewSession': function () {
         this.emit('NewSession'); // Uses the handler in newSessionHandlers
-    },
-    'AMAZON.YesIntent': function () {
-
-        var say = '';
-
-        this.attributes['currentQuestionIndex'] = 0;
-
-        this.attributes['wrongCount'] = 0;
-        this.attributes['correctCount'] = 0;
-
-        this.attributes['sessionQuestionList'] = randomizeArray(this.attributes['questionList'], options.QUESTIONS_PER_QUIZ);
-
-        say = 'where is ' + this.attributes['sessionQuestionList'][0].question + '?';
-
-        this.emit(':ask', 'First question, ' + say);
-
     },
     'AnswerIntent': function() {
         var myState = '';
