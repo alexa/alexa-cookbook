@@ -247,8 +247,12 @@ var practiceHandlers = Alexa.CreateStateHandler(states.PRACTICE, {
 
     },
 
+    "AMAZON.CancelIntent": function() {
+        this.handler.state = states.START;
+        this.emit(':tell', "Goodbye!");
+    },
     'AMAZON.StopIntent': function () {
-
+        this.handler.state = states.START;
         this.emit(':tell', 'Goodbye' );
     },
     'AMAZON.HelpIntent': function () {  // practice help
@@ -257,7 +261,7 @@ var practiceHandlers = Alexa.CreateStateHandler(states.PRACTICE, {
     },
 
     'Unhandled': function() {  // if we get any intents other than the above
-        this.emit(':ask', 'Sorry, I didn\'t get that.', 'Try again');
+        this.emit(':ask', 'Sorry, I didn\'t get that.  Try again.', 'Try again');
     }
 });
 
@@ -294,11 +298,17 @@ var quizHandlers = Alexa.CreateStateHandler(states.QUIZ, {
             });
         }
     },
-    'AMAZON.NoIntent': function() {
-        this.emit(':tell', 'Okay, see you next time, goodbye!');
+    "AMAZON.CancelIntent": function() {
+        this.handler.state = states.START;
+        this.emit(':tell', "Okay, see you next time, goodbye!");
     },
     'AMAZON.StopIntent': function() {
+        this.handler.state = states.START;
         this.emit(':tell', 'Okay, see you next time, goodbye!');
+    },
+    'AMAZON.HelpIntent': function () {  // practice help
+
+        this.emit(':ask', 'please say the name of a U.S. State, such as Florida.' );
     },
     'Unhandled': function() {
         this.emit(':ask', 'Sorry, I didn\'t get that. Try again.', 'Try again.');
@@ -326,6 +336,10 @@ var recapPracticeHandlers = Alexa.CreateStateHandler(states.RECAP_PRACTICE, {
                         + ' you got wrong to the Alexa app on your phone. ';
             say += ' Would you like to practice this list again now? ';
 
+            // TO DO: 
+            // Could be an issue below if say you have 42 questions wrong out of 44 which could cause the character count 
+            // on the card to go over the 8000 limit.
+
             var cardText = '';
             var wrongList = this.attributes['wrongList'];
             for (var i = 0; i < wrongList.length; i++) {
@@ -337,6 +351,15 @@ var recapPracticeHandlers = Alexa.CreateStateHandler(states.RECAP_PRACTICE, {
         }
 
     },
+    "PracticeIntent": function() {
+        this.handler.state = states.PRACTICE;
+        this.emit(':ask', this.t("WELCOME_PRACTICE", questionList.length));
+    },
+    "QuizIntent": function() {
+        this.handler.state = states.QUIZ;
+        this.emit(':ask', this.t("WELCOME_QUIZ", options.QUESTIONS_PER_QUIZ ));
+    },
+
     'AMAZON.YesIntent': function () {
         if (this.attributes['wrongCount'] == 0) {
             this.handler.state = states.QUIZ;
@@ -352,8 +375,19 @@ var recapPracticeHandlers = Alexa.CreateStateHandler(states.RECAP_PRACTICE, {
         var say = 'Okay, see you next time, goodbye!';
         this.emit(':tell', say);
     },
+    "AMAZON.CancelIntent": function() {
+        this.handler.state = states.START;
+        this.emit(':tell', "Okay, see you next time, goodbye!");
+    },
+    'AMAZON.StopIntent': function() {
+        this.handler.state = states.START;
+        this.emit(':tell', 'Okay, see you next time, goodbye!');
+    },
+    "AMAZON.HelpIntent": function() {
+        this.emit(':ask', this.t("HELP_MESSAGE", questionList.length, options.QUESTIONS_PER_QUIZ));
+    },
     'Unhandled': function() {
-        this.emit(':ask', 'Sorry, I didn\'t get that. Try again.', 'Try again.');
+        this.emit(':ask', 'Sorry, I didn\'t get that. You can say practice to Practice all the cards, or say Quiz to take a quiz.', 'Try again.');
     }
 });
 
@@ -387,6 +421,14 @@ var recapQuizHandlers = Alexa.CreateStateHandler(states.RECAP_QUIZ, {
             options.TITLE +  ' Flash Cards - Quiz Result',
             scoreSummary);
     },
+    "PracticeIntent": function() {
+        this.handler.state = states.PRACTICE;
+        this.emit(':ask', this.t("WELCOME_PRACTICE", questionList.length));
+    },
+    "QuizIntent": function() {
+        this.handler.state = states.QUIZ;
+        this.emit(':ask', this.t("WELCOME_QUIZ", options.QUESTIONS_PER_QUIZ ));
+    },
 
     'AMAZON.YesIntent': function () {
         if (this.attributes['wrongCount'] == 0) {
@@ -404,8 +446,19 @@ var recapQuizHandlers = Alexa.CreateStateHandler(states.RECAP_QUIZ, {
         var say = 'Okay, see you next time, goodbye!';
         this.emit(':tell', say);
     },
+    "AMAZON.CancelIntent": function() {
+        this.handler.state = states.START;
+        this.emit(':tell', "Okay, see you next time, goodbye!");
+    },
+    'AMAZON.StopIntent': function() {
+        this.handler.state = states.START;
+        this.emit(':tell', 'Okay, see you next time, goodbye!');
+    },
+    "AMAZON.HelpIntent": function() {
+        this.emit(':ask', this.t("HELP_MESSAGE", questionList.length, options.QUESTIONS_PER_QUIZ));
+    },
     'Unhandled': function() {
-        this.emit(':ask', 'Sorry, I didn\'t get that. Try again.', 'Try again.');
+        this.emit(':ask', 'Sorry, I didn\'t get that. You can say practice to Practice all the cards, or say Quiz to take a quiz.', 'Try again.');
     }
 });
 
