@@ -79,7 +79,10 @@ var states = {
     START:           "_START",
 
     PRACTICE:        "_PRACTICE",
+    PRACTICE_START:  "_PRACTICE_START",
+
     QUIZ:            "_QUIZ",
+    QUIZ_START:      "_QUIZ_START",
 
     RECAP_PRACTICE:  "_RECAP_PRACTICE",
     RECAP_QUIZ:      "_RECAP_QUIZ",
@@ -103,11 +106,11 @@ var startSessionHandlers = Alexa.CreateStateHandler(states.START, {
 
     },
     "PracticeIntent": function() {
-        this.handler.state = states.PRACTICE;
+        this.handler.state = states.PRACTICE_START;
         this.emit(':ask', this.t("WELCOME_PRACTICE", questionList.length));
     },
     "QuizIntent": function() {
-        this.handler.state = states.QUIZ;
+        this.handler.state = states.QUIZ_START;
         this.emit(':ask', this.t("WELCOME_QUIZ", options.QUESTIONS_PER_QUIZ ));
     },
     "AMAZON.HelpIntent": function() {
@@ -118,8 +121,95 @@ var startSessionHandlers = Alexa.CreateStateHandler(states.START, {
     },
     "AMAZON.StopIntent": function() {
         this.emit(':tell', "Goodbye!");
+    },
+    'Unhandled': function() {  // if we get any intents other than the above
+        this.emit(':ask', 'Sorry, I didn\'t get that. You can say practice to Practice all the cards, or say Quiz to take a quiz.', 'Try again');
     }
 
+});
+
+var practiceStartHandlers = Alexa.CreateStateHandler(states.PRACTICE_START, {
+     
+    'AMAZON.YesIntent': function() {  // Yes, I want to start the practice
+        this.handler.state = states.PRACTICE;
+
+        var say = '';
+
+        this.attributes['currentQuestionIndex'] = 0;
+
+        if (this.attributes['wrongList'].length > 0) {  // we have taken the practice already and need to repeat
+            this.attributes['sessionQuestionList'] = randomizeArray(this.attributes['wrongList']);  // only practice those answered wrong
+            this.attributes['wrongList'] = [];
+            this.attributes['wrongCount'] = 0;
+            this.attributes['correctCount'] = 0;
+        } else {
+            this.attributes['sessionQuestionList'] = randomizeArray(this.attributes['questionList']);
+        }
+        say = 'First question of ' + this.attributes['sessionQuestionList'].length + ', '
+        say += 'Where was ' + this.attributes['sessionQuestionList'][0].question + ' born?';
+
+        this.emit(':ask',  say, say);
+    },
+
+    'AMAZON.NoIntent': function () { 
+        this.handler.state = states.START;
+        var say = 'Okay, see you next time, goodbye!';
+        this.emit(':tell', say);
+    },
+    "AMAZON.CancelIntent": function() {
+        this.handler.state = states.START;
+        this.emit(':tell', "Goodbye!");
+    },
+    'AMAZON.StopIntent': function () {
+        this.handler.state = states.START;
+        this.emit(':tell', 'Goodbye' );
+    },
+    'AMAZON.HelpIntent': function () {  // practice help
+
+        this.emit(':ask', 'You can say Yes to practice all the flash cards or No to start over' );
+    },
+    'Unhandled': function() {
+        this.emit(':ask', 'Sorry, I didn\'t get that. Try again.', 'Try again.');
+    }
+});
+
+var quizStartHandlers = Alexa.CreateStateHandler(states.QUIZ_START, {
+     
+    'AMAZON.YesIntent': function () {
+        this.handler.state = states.QUIZ;
+        var say = '';
+
+        this.attributes['currentQuestionIndex'] = 0;
+
+        this.attributes['wrongCount'] = 0;
+        this.attributes['correctCount'] = 0;
+
+        this.attributes['sessionQuestionList'] = randomizeArray(this.attributes['questionList'], options.QUESTIONS_PER_QUIZ);
+
+        say = 'where was ' + this.attributes['sessionQuestionList'][0].question + ' born?';
+
+        this.emit(':ask', 'First question, ' + say);
+
+    },
+    'AMAZON.NoIntent': function() {
+        this.handler.state = states.START;
+        this.emit(':tell', 'Okay, see you next time, goodbye!');
+    },
+    "AMAZON.CancelIntent": function() {
+        this.handler.state = states.START;
+        this.emit(':tell', "Goodbye!");
+    },
+    'AMAZON.StopIntent': function () {
+        this.handler.state = states.START;
+        this.emit(':tell', 'Goodbye' );
+    },
+    'AMAZON.HelpIntent': function () {  // quiz help
+
+        this.emit(':ask', 'You can say Yes to practice all the flash cards or No to start over' );
+    },
+    'Unhandled': function() {
+        this.emit(':ask', 'Sorry, I didn\'t get that. Try again.', 'Try again.');
+    }
 });
 
 var practiceHandlers = Alexa.CreateStateHandler(states.PRACTICE, {
