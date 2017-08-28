@@ -1,6 +1,8 @@
 #### Ingredients
 ## Amazon IOT <a id="title"></a>
 
+1. [Setup Thing](./step-1.md#title) || 2. [Create The Skill](./step-2.md#title) || 3. [Create The Lambda Function](./step-3.md#title) || 4. [Connect Skill To Lambda & Add IOT Permissions](./step-4.md#title) || 5. [Webapp-Thing](./step-5.md#title)
+
 #### What you will learn
 
 Amazon [AWS IoT](https://aws.amazon.com/iot), or Internet of Things, is a set of services to interact with physical things.
@@ -13,9 +15,9 @@ The virtual Thing is known as a "thing shadow".  Read more on the [AWS IOT Thing
 ### Table of Contents (setup steps)
 Follow these three steps to build a skill that can update an IOT thing.  Step 3 has you configure a web browser page in place of a real thing.  Once configured, the page will load images of the city you ask for.
 
-1. [setup-thing](setup-thing#title)
-1. [update-shadow](update-shadow#title)
-1. [webapp-thing](webapp-thing#title)
+1. Part 1: [setup-thing](./step-1.md#title)
+1. Part 2: [update-shadow](./step-2.md#title) (steps 2 through 4)
+1. Part 3: [webapp-thing](./step-5.md#title)
 
 
 
@@ -32,8 +34,6 @@ config.IOT_THING_NAME           = "thing1";
 
 ```
 
+To get started, go to [Step 1](./step-1.md#title).
 
-
-<hr />
-Back to the [Home Page](../../README.md#title)
-
+Back to the [Home Page](./README.md#title)

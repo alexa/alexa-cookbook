@@ -14,7 +14,4 @@ The user will say: ```go to London``` and the skill will update the IOT Device S
  * [Part 2 - Create the skill](./PAGE2.md#title)
 
 
-<hr />
-
 Back to the [Home Page](../../README.md#title)
-
