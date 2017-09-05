@@ -1,10 +1,10 @@
-## Update Shadow <a id="title"></a>
+# Update Shadow <a id="title"></a>
 
 1. [Setup Thing](./step-1.md#title) || 2. [Create The Skill](./step-2.md#title) || 3. [Create The Lambda Function](./step-3.md#title) || 4. [Connect Skill To Lambda & Add IOT Permissions](./step-4.md#title) || 5. [Webapp-Thing](./step-5.md#title)
 
-This skill includes an Intent called ```CityIntent``` with a slot called ```city```, that is of type ```AMAZON.EUROPE_CITY```.
+This skill includes an Intent called `CityIntent` with a slot called `city`, that is of type `AMAZON.EUROPE_CITY`.
 
-The user will say: ```go to London``` and the skill will update the IOT Device Shadow with the name of the city.
+The user will say: `go to London` and the skill will update the IOT Device Shadow with the name of the city.
 
 #### Instructions for deploying this sample skill
 
@@ -42,7 +42,7 @@ There are two parts to an Alexa skill.  The first part is the [Voice User Interf
 
     3.  **Name** This is the name that will be shown in the Alexa Skills Store, and the name your users will refer to. Name this skill **city browser**.
 
-    4.  **Invocation Name** This is the name that your users will need to say to start your skill.  We have provided some common issues developers encounter in the list below, but you should also review the entire [Invocation Name Requirements](https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/choosing-the-invocation-name-for-an-alexa-skill). We'd recommend giving this skill the invocation name ```city browser```.
+    4.  **Invocation Name** This is the name that your users will need to say to start your skill.  We have provided some common issues developers encounter in the list below, but you should also review the entire [Invocation Name Requirements](https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/choosing-the-invocation-name-for-an-alexa-skill). We'd recommend giving this skill the invocation name `city browser`.
 
         | Invocation Name Requirements | Examples of incorrect invocation names |
         | ---------------------------- | -------------------------------------- |
