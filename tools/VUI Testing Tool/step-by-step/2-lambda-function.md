@@ -27,22 +27,23 @@ For this step, we will be creating an AWS Lambda function using [Amazon Web Serv
 7.  **Configure your function.** This screen is where we will enter the important parts of our Lambda function.  These values will only ever be visible to you, but make sure that you name your function something meaningful.  
 ![Lambda function configuration](https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/general/2-7-configure-your-function._TTH_.png)
 
-8.  **Upload the [provided code](https://github.com/Alexa/alexa-cookbook/tree/master/tools/VUI-Testing/src)** We have provided the code for this skill on [GitHub](https://github.com/Alexa/alexa-cookbook/tree/master/tools/VUI-Testing/src).  
+8.  **Upload the [provided code](https://github.com/alexa/alexa-cookbook/tree/master/tools/VUI%20Testing%20Tool/src/index.js)** We have provided the code for this skill on [GitHub](https://github.com/alexa/alexa-cookbook/tree/master/tools/VUI%20Testing%20Tool).  
   8.1. From the Code entry type box, choose "Edit Code Inline"
 
-  8.2. Copy the [provided code](https://github.com/alexa/alexa-cookbook/blob/master/tools/VUI%20Testing%20Tool/src/index.js)
+  8.2. Copy the [provided code](https://github.com/alexa/alexa-cookbook/tree/master/tools/VUI%20Testing%20Tool/src/index.js)
 
   8.3 Replace the code with the one you just copied.
 
   8.4 **Optional** If you want to create your own zip follow this steps
-    8.4.1. go to https://github.com/alexa/alexa-cookbook
+  
+   8.4.1. go to https://github.com/alexa/alexa-cookbook
 
-    8.4.2. clone the repo or download the zip file and extract the files
+   8.4.2. clone the repo or download the zip file and extract the files
 
-    8.4.3. from the command prompt or terminal:
+   8.4.3. from the command prompt or terminal:
       navigate to the \handling-responses\dialog-directive-delegate\src folder and type ```npm install```
 
-    8.4.4. zip the files in the src folder (DO NOT include the parent src folder itself)
+   8.4.4. zip the files in the src folder (DO NOT include the parent src folder itself)
 
   8.3. on AWS.Amazon.com, click the upload button and upload your zip file.
 
