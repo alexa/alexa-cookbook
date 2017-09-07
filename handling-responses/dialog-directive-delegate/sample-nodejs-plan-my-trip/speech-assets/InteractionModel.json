@@ -27,7 +27,6 @@
           "type": "AMAZON.US_CITY",
           "samples": [
             "i'd like to go to {toCity} ",
-            "{toCity} ",
             "I'd like to visit {toCity} ",
             "we're going to {toCity} ",
             "i will leave on {travelDate} ",
@@ -38,7 +37,6 @@
           "name": "fromCity",
           "type": "AMAZON.US_CITY",
           "samples": [
-            "{fromCity} ",
             "leaving from {fromCity} ",
             "from {fromCity} ",
             "my trip starts in {fromCity} "
@@ -48,7 +46,6 @@
           "name": "travelDate",
           "type": "AMAZON.DATE",
           "samples": [
-            "{travelDate} ",
             "my trips starts {travelDate} ",
             "leaving on {travelDate} "
           ]
