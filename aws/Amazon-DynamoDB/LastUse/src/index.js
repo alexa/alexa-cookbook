@@ -65,18 +65,19 @@ var handlers = {
         }
 
 
-
-        this.emit(':ask', introSay + ' what can I help you with?', 'try again');
+        this.response.speak(introSay + ' what can I help you with?').listen('try again');
+        this.emit(':responseReady');
     },
     'WhatsUpIntent': function () {
-
-        this.emit(':ask', 'hey friend, how are you today?', 'try again');
+        this.response.speak('hey friend, how are you today?', 'try again');
+        this.emit(':responseReady');
 
     },
     'MyNameIsIntent': function () {
         var myName = this.event.request.intent.slots.firstname.value;
         this.attributes['name'] = myName;
-        this.emit(':ask', 'hello, ' + myName, 'try again');
+        this.response.speak('hello, ' + myName).listen('try again');
+        this.emit(':responseReady');
 
     },
     'AMAZON.HelpIntent': function () {
@@ -100,12 +101,13 @@ var handlers = {
             }
         }
 
-
-        this.emit(':ask', introSay + ' here is the help for you, ' + myName, 'try again');
+        this.response.speak(introSay + ' here is the help for you, ' + myName).listen('try again');
+        this.emit(':responseReady');
 
     },
     'AMAZON.CancelIntent': function () {
-        this.emit(':tell', 'you asked to Cancel, goodbye', 'try again');
+        this.response.speak('you asked to Cancel, goodbye').listen('try again');
+        this.emit(':responseReady');
     },
     'AMAZON.StopIntent': function () {
 
@@ -113,7 +115,8 @@ var handlers = {
         if (this.attributes['name']) {
             myName = this.attributes['name'];
         }
-        this.emit(':tell', 'goodbye, ' + myName, 'try again');
+        this.response.speak('goodbye, ' + myName);
+        this.emit(':responseReady');
     },
 };
 

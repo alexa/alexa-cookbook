@@ -27,7 +27,7 @@ See the [IAM Policies](../IAM_POLICIES.md) page for more details.
         "s3:PutObject",
         "s3:GetObject"
       ],
-      "Resource":["arn:aws:s3:::mysuperbucket/*"],
+      "Resource":["arn:aws:s3:::mysuperbucket/*"]
     }
   ]
 }

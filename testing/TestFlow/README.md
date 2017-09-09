@@ -5,7 +5,7 @@ You have probably seen how session attributes are set and get to allow the skill
 Sometimes it is difficult to visualize how your skill behaves as a "state machine" through many sequences of events.
 It can get tedious to verbally test a skill with several steps.
 
-In the main [testing](../testing) folder, we see several examples of how to test your code with one specific, discrete event.
+In the main [testing](../) folder, we see several examples of how to test your code with one specific, discrete event.
 This is useful if you have a specific test state you need to reproduce and debug.
 
 A skill may prompt the user for inputs early in the conversation, store the responses in session attributes, and use the values to look up data or perform an action.

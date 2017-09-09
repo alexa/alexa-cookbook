@@ -1,4 +1,5 @@
-var Alexa = require('alexa-sdk');
+'use strict';
+const Alexa = require('alexa-sdk');
 
 exports.handler = function(event, context, callback){
 
@@ -11,10 +12,11 @@ exports.handler = function(event, context, callback){
 
 };
 
-var handlers = {
+const handlers = {
     'LaunchRequest': function () {
         var say = 'Welcome to the Alexa skill!';
-        this.emit(':ask', say, 'try again');
+        this.response.speak(say).listen('try again');
+        this.emit(':responseReady');
     },
 
     'StateRequestIntent': function() {
@@ -35,7 +37,8 @@ var handlers = {
             say = 'I did not hear the name of the state.'
         }
 
-        this.emit(':ask', say, 'try again');
+        this.response.speak(say).listen('try again');
+        this.emit(':responseReady');
 
     },
     'MyNameIsIntent': function() {
@@ -53,7 +56,8 @@ var handlers = {
         }
         //this.event.request.intent.slots.myName.value;
 
-        this.emit(':ask', say, 'try again');
+        this.response.speak(say).listen('try again');
+        this.emit(':responseReady');
     },
     'ISeeIntent': function() {
         var say = '';
@@ -65,7 +69,8 @@ var handlers = {
             say = 'You saw a ' + myColor + ' ' + myAnimal;
         }
 
-        this.emit(':ask', say, 'try again');
+        this.response.speak(say).listen('try again');
+        this.emit(':responseReady');
 
     },
     'RecapIntent': function() {
@@ -80,15 +85,20 @@ var handlers = {
 
         var say = 'Your list has the following ' + stateCount + ' states. ' + stateList;
 
-
-        this.emit(':ask', say, 'try again');
+        this.response.speak(say).listen('try again');
+        this.emit(':responseReady');
     },
 
     'AMAZON.HelpIntent': function () {
-        this.emit(':ask', 'Say the name of a U.S. State, for example, say, go to Florida.', 'try again');
+        var helpText = 'Say the name of a U.S. State, for example, say, go to Florida.';
+        var reprompt = 'try again'
+
+        this.response.speak(helpText, reprompt);
+        this.emit(':responseReady');
     },
     'AMAZON.CancelIntent': function () {
-        this.emit(':tell', 'Goodbye');
+        this.response.speak('Goodbye');
+        this.emit(':responseReady');
 
     },
     'AMAZON.StopIntent': function () {
@@ -99,11 +109,14 @@ var handlers = {
         }
         say = 'Goodbye, ' + myName;
 
-        this.emit(':tell', say );
+        this.response.speak(say);
+        this.emit(':responseReady');
     },
     'Unhandled': function() {
-
-        this.emit(':ask', 'Sorry, unhandled intent ' + JSON.stringify(this.event.request) + ' error. Try again?', 'Please try again?');
+        var speechOutput = 'Sorry, unhandled intent ' + JSON.stringify(this.event.request) + ' error.';
+        var reprompt = 'Try again?';
+        this.response.speak(speechOutput + ' ' + reprompt).listen(reprompt);
+        this.emit(':responseReady');
 
     }
 };

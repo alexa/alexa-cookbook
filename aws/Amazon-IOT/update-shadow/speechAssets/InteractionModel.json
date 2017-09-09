@@ -1,0 +1,37 @@
+{
+  "intents": [
+    {
+      "name": "AMAZON.CancelIntent",
+      "samples": []
+    },
+    {
+      "name": "AMAZON.HelpIntent",
+      "samples": []
+    },
+    {
+      "name": "AMAZON.StopIntent",
+      "samples": []
+    },
+    {
+      "name": "CityIntent",
+      "samples": [
+        "go to {city}",
+        "i am from {city}"
+      ],
+      "slots": [
+        {
+          "name": "city",
+          "type": "AMAZON.EUROPE_CITY",
+          "samples": []
+        }
+      ]
+    },
+    {
+      "name": "MyIntent",
+      "samples": [
+        "hello"
+      ],
+      "slots": []
+    }
+  ]
+}

@@ -102,7 +102,10 @@ const handlers = {
     'LaunchRequest': function () {
         const speechOutput = this.t('LAUNCH_MESSAGE');
         const repromptOutput = this.t('LAUNCH_MESSAGE_REPROMPT');
-        this.emit(':askWithCard', speechOutput, repromptOutput, this.t('SKILL_NAME'), removeSSML(speechOutput));
+
+        this.response.cardRenderer(this.t('SKILL_NAME'), removeSSML(speechOutput));
+        this.response.speak(speechOutput).listen(repromptOutput);
+        this.emit(':responseReady');
     },
     'GetNewFactIntent': function () {
         this.emit('GetFact');
@@ -116,7 +119,10 @@ const handlers = {
 
         // Create speech output
         const speechOutput = this.t('GET_FACT_MESSAGE') + randomFact;
-        this.emit(':tellWithCard', speechOutput, this.t('SKILL_NAME'), removeSSML(speechOutput));
+
+        this.response.cardRenderer(this.t('SKILL_NAME'), removeSSML(speechOutput));
+        this.response.speak(speechOutput);
+        this.emit(':responseReady');
     },
     'GetTravelTime': function () {
         // Use this.t() to get corresponding language data
@@ -172,7 +178,9 @@ const handlers = {
             speechOutput += " to travel from " +planetDB[departingPlanet].PrintName+ " to " + planetDB[arrivalPlanet].PrintName + " " + speedDB[vehicle].string + ".";
 
             // Create speech output
-            this.emit(':tellWithCard', speechOutput, this.t('SKILL_NAME'), removeSSML(speechOutput));
+            this.response.cardRenderer(this.t('SKILL_NAME'), removeSSML(speechOutput));
+            this.response.speak(speechOutput);
+            this.emit(':responseReady');
         }
     },
     'GetWeather': function () {
@@ -197,7 +205,10 @@ const handlers = {
             if (planetDB[planet] != undefined) {
                 // Create speech output
                 const speechOutput = "The forecast for "+planetDB[planet].PrintName+" is "+ planetDB[planet].Weather;
-                this.emit(':tellWithCard', speechOutput, this.t('SKILL_NAME'), removeSSML(speechOutput));
+
+                this.response.cardRenderer(this.t('SKILL_NAME'), removeSSML(speechOutput));
+                this.response.speak(speechOutput);
+                this.emit(':responseReady');
             }
         }
     },
@@ -208,21 +219,27 @@ const handlers = {
 
         // Create speech output
         const speechOutput = randomJoke;
-        this.emit(':tellWithCard', speechOutput, this.t('SKILL_NAME'), removeSSML(speechOutput));
+        this.response.cardRenderer(this.t('SKILL_NAME'), removeSSML(speechOutput));
+        this.response.speak(speechOutput);
+        this.emit(':responseReady');
     },
     'AMAZON.HelpIntent': function () {
         const speechOutput = this.t('HELP_MESSAGE');
         const reprompt = this.t('HELP_MESSAGE');
-        this.emit(':ask', speechOutput, reprompt);
+        this.response.speak(speechOutput).listen(reprompt);
+        this.emit(':responseReady');
     },
     'AMAZON.CancelIntent': function () {
-        this.emit(':tell', this.t('STOP_MESSAGE'));
+        this.response.speak(this.t('STOP_MESSAGE'));
+        this.emit(':responseReady');
     },
     'AMAZON.StopIntent': function () {
-        this.emit(':tell', this.t('STOP_MESSAGE'));
+        this.response.speak(this.t('STOP_MESSAGE'));
+        this.emit(':responseReady');
     },
     'SessionEndedRequest': function () {
-        this.emit(':tell', this.t('STOP_MESSAGE'));
+        this.response.speak(this.t('STOP_MESSAGE'));
+        this.emit(':responseReady');
     }
 };
 
@@ -232,7 +249,7 @@ function removeSSML (s) {
 
 exports.handler = (event, context) => {
     const alexa = Alexa.handler(event, context);
-    alexa.APP_ID = APP_ID;
+    alexa.appId = APP_ID;
     // To enable string internationalization (i18n) features, set a resources object.
     alexa.resources = languageStrings;
     alexa.registerHandlers(handlers);

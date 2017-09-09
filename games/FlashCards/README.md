@@ -37,7 +37,7 @@ Alexa prompts the user to say the name of a U.S. state as the answer format, how
 The game has four main modes, Practice, Quiz, Practice Recap, and Quiz Recap.
 Users typically start by saying "Practice" and then Alexa will guide them through each and every card.
 There is a special function called ```rateAnswer``` that decides if the answer is correct, and if not, appends the question to the ```wrongList``` session attribute, for the user to re-practice.
-This wrongList is returned to the user via ```this.emit(":askWithCard", ... )``` so that the user can see and review all wrong answered questions on their Alexa app or via the cards shown on (https://alexa.amazon.com)[https://alexa.amazon.com].
+This wrongList is returned to the user via ```this.emit(":askWithCard", ... )``` so that the user can see and review all wrong answered questions on their Alexa app or via the cards shown on [alexa.amazon.com](https://alexa.amazon.com).
 
 #### Get Started
 Install the skill via the /speechAssets files and link it to a new AWS Lambda function created from the /src/index.js file.

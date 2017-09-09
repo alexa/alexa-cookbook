@@ -1,10 +1,10 @@
 'use strict';
 
-var Alexa = require('alexa-sdk');
-var constants = require('./constants');
+const Alexa = require('alexa-sdk');
+const constants = require('./constants');
 
 // Binding audio handlers to PLAY_MODE State since they are expected only in this mode.
-var audioEventHandlers = Alexa.CreateStateHandler(constants.states.PLAY_MODE, {
+const audioEventHandlers = Alexa.CreateStateHandler(constants.states.PLAY_MODE, {
     'PlaybackStarted' : function () {
         /*
          * AudioPlayer.PlaybackStarted Directive received.
@@ -53,7 +53,7 @@ var audioEventHandlers = Alexa.CreateStateHandler(constants.states.PLAY_MODE, {
              */
             return this.context.succeed(true);
         }
-        
+
         var enqueueIndex = this.attributes['index'];
         enqueueIndex +=1;
         // Checking if  there are any items to be enqueued.
@@ -74,7 +74,7 @@ var audioEventHandlers = Alexa.CreateStateHandler(constants.states.PLAY_MODE, {
         var podcast = audioData[this.attributes['playOrder'][enqueueIndex]];
         var expectedPreviousToken = this.attributes['token'];
         var offsetInMilliseconds = 0;
-        
+
         this.response.audioPlayerPlay(playBehavior, podcast.url, enqueueToken, expectedPreviousToken, offsetInMilliseconds);
         this.emit(':responseReady');
     },

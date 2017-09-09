@@ -36,7 +36,8 @@ var handlers = {
                 console.log("sent     : " + myRequest);
                 console.log("received : " + myResult);
 
-                this.emit(':tell', 'The population of ' + myRequest + ' is ' + myResult );
+                this.response.speak('The population of ' + myRequest + ' is ' + myResult);
+                this.emit(':responseReady');
 
             }
         );
@@ -96,5 +97,3 @@ function httpsGet(myData, callback) {
     req.end();
 
 }
-
-

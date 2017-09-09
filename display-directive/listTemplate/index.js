@@ -7,7 +7,7 @@ const Alexa = require('alexa-sdk');
 
 //Replace with your app ID (OPTIONAL).  You can find this value at the top of your skill's page on http://developer.amazon.com.
 //Make sure to enclose your value in quotes, like this:  var APP_ID = "amzn1.ask.skill.bb4045e6-b3e8-4133-b650-72923c5980f1";
-var APP_ID = undefined;
+const APP_ID = undefined;
 
 //This function returns a descriptive sentence about your data.  Before a user starts a quiz, they can ask about a specific data element,
 //like "Ohio."  The skill will speak the sentence from this function, pulling the data values from the appropriate record in your data.
@@ -61,29 +61,29 @@ function getAnswer(property, item)
 
 //This is a list of positive speechcons that this skill will use when a user gets a correct answer.  For a full list of supported
 //speechcons, go here: https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/speechcon-reference
-var speechConsCorrect = ["Booya", "All righty", "Bam", "Bazinga", "Bingo", "Boom", "Bravo", "Cha Ching", "Cheers", "Dynomite",
+const speechConsCorrect = ["Booya", "All righty", "Bam", "Bazinga", "Bingo", "Boom", "Bravo", "Cha Ching", "Cheers", "Dynomite",
 "Hip hip hooray", "Hurrah", "Hurray", "Huzzah", "Oh dear.  Just kidding.  Hurray", "Kaboom", "Kaching", "Oh snap", "Phew",
 "Righto", "Way to go", "Well done", "Whee", "Woo hoo", "Yay", "Wowza", "Yowsa"];
 
 //This is a list of negative speechcons that this skill will use when a user gets an incorrect answer.  For a full list of supported
 //speechcons, go here: https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/speechcon-reference
-var speechConsWrong = ["Argh", "Aw man", "Blarg", "Blast", "Boo", "Bummer", "Darn", "D'oh", "Dun dun dun", "Eek", "Honk", "Le sigh",
+const speechConsWrong = ["Argh", "Aw man", "Blarg", "Blast", "Boo", "Bummer", "Darn", "D'oh", "Dun dun dun", "Eek", "Honk", "Le sigh",
 "Mamma mia", "Oh boy", "Oh dear", "Oof", "Ouch", "Ruh roh", "Shucks", "Uh oh", "Wah wah", "Whoops a daisy", "Yikes"];
 
 //This is the welcome message for when a user starts the skill without a specific intent.
-var WELCOME_MESSAGE = "Welcome to the United States Quiz Game!  You can ask me about any of the fifty states and their capitals, or you can ask me to start a quiz.  What would you like to do?";
+const WELCOME_MESSAGE = "Welcome to the United States Quiz Game!  You can ask me about any of the fifty states and their capitals, or you can ask me to start a quiz.  What would you like to do?";
 
 //This is the message a user will hear when they start a quiz.
-var START_QUIZ_MESSAGE = "OK.  I will ask you 10 questions about the United States.";
+const START_QUIZ_MESSAGE = "OK.  I will ask you 10 questions about the United States.";
 
 //This is the message a user will hear when they try to cancel or stop the skill, or when they finish a quiz.
-var EXIT_SKILL_MESSAGE = "Thank you for playing the United States Quiz Game!  Let's play again soon!";
+const EXIT_SKILL_MESSAGE = "Thank you for playing the United States Quiz Game!  Let's play again soon!";
 
 //This is the message a user will hear after they ask (and hear) about a specific data element.
-var REPROMPT_SPEECH = "Which other state or capital would you like to know about?";
+const REPROMPT_SPEECH = "Which other state or capital would you like to know about?";
 
 //This is the message a user will hear when they ask Alexa for help in your skill.
-var HELP_MESSAGE = "I know lots of things about the United States.  You can ask me about a state or a capital, and I'll tell you what I know.  You can also test your knowledge by asking me to start a quiz.  What would you like to do?";
+const HELP_MESSAGE = "I know lots of things about the United States.  You can ask me about a state or a capital, and I'll tell you what I know.  You can also test your knowledge by asking me to start a quiz.  What would you like to do?";
 
 
 //This is the response a user will receive when they ask about something we weren't expecting.  For example, say "pizza" to your
@@ -101,7 +101,7 @@ function getFinalScore(score, counter) { return "Your final score is " + score +
 
 //If you don't want to use cards in your skill, set the USE_IMAGES_FLAG to false.  If you set it to true, you will need an image for each
 //item in your data.
-var USE_IMAGES_FLAG = true;
+const USE_IMAGES_FLAG = true;
 
 //This is what your card title will be.  For our example, we use the name of the state the user requested.
 function getCardTitle(item) { return item.StateName;}
@@ -119,7 +119,7 @@ function getBackgroundImage(item) { return "https://m.media-amazon.com/images/G/
 //=========================================================================================================================================
 //TODO: Replace this data with your own.
 //=========================================================================================================================================
-var data = [
+const data = [
                 {StateName: "Alabama",        Abbreviation: "AL", Capital: "Montgomery",     StatehoodYear: 1819, StatehoodOrder: 22 },
                 {StateName: "Alaska",         Abbreviation: "AK", Capital: "Juneau",         StatehoodYear: 1959, StatehoodOrder: 49 },
                 {StateName: "Arizona",        Abbreviation: "AZ", Capital: "Phoenix",        StatehoodYear: 1912, StatehoodOrder: 48 },
@@ -178,7 +178,7 @@ var data = [
 
 var counter = 0;
 
-var states = {
+const states = {
     START: "_START",
     QUIZ: "_QUIZ"
 };
@@ -197,7 +197,8 @@ const handlers = {
         this.emitWithState("AnswerIntent");
     },
     "AMAZON.HelpIntent": function() {
-        this.emit(":ask", HELP_MESSAGE, HELP_MESSAGE);
+        this.response.speak(HELP_MESSAGE).listen(HELP_MESSAGE);
+        this.emit(":responseReady");
     },
     "Unhandled": function() {
         this.handler.state = states.START;
@@ -213,15 +214,16 @@ const handlers = {
     }
 };
 
-var startHandlers = Alexa.CreateStateHandler(states.START,{
+const startHandlers = Alexa.CreateStateHandler(states.START,{
     "Start": function() {
-        this.emit(":ask", WELCOME_MESSAGE, HELP_MESSAGE);
+        this.response.speak(WELCOME_MESSAGE).listen(HELP_MESSAGE);
+        this.emit(":responseReady");
     },
     "AnswerIntent": function() {
        console.log("Answer Intent event: "+JSON.stringify(this.event));
         var item = getItem(this.event.request.intent.slots);
 
-        if (item[Object.getOwnPropertyNames(data[0])[0]] !== undefined) {
+        if (item && item[Object.getOwnPropertyNames(data[0])[0]] !== undefined) {
             if (supportsDisplay.call(this)||isSimulator.call(this)) {
               //this device supports a display
 
@@ -251,16 +253,15 @@ var startHandlers = Alexa.CreateStateHandler(states.START,{
               if (USE_IMAGES_FLAG) {
                 //we have images so produce a card
                 var imageObj = {smallImageUrl: getSmallImage(item), largeImageUrl: getLargeImage(item)};
-                this.emit(":askWithCard", getSpeechDescription(item), REPROMPT_SPEECH, getCardTitle(item), getTextDescription(item), imageObj);
-
-              } else {
-                //no images so voice only
-                this.emit(":ask", getSpeechDescription(item), REPROMPT_SPEECH);
+                this.response.cardRenderer(getCardTitle(item), getTextDescription(item), imageObj);
               }
+              this.response.speak(getSpeechDescription(item)).listen(REPROMPT_SPEECH);
+              this.emit(":responseReady");
             }
 
         } else {
-            this.emit(":ask", getBadAnswer(item), getBadAnswer(item));
+            this.response.speak(getBadAnswer(item)).listen(getBadAnswer(item));
+            this.emit(":responseReady");
         }
     },
     "QuizIntent": function() {
@@ -271,27 +272,33 @@ var startHandlers = Alexa.CreateStateHandler(states.START,{
         this.emitWithState("Quiz");
     },
     "AMAZON.StopIntent": function() {
-        this.emit(":tell", EXIT_SKILL_MESSAGE);
+        this.response.speak(EXIT_SKILL_MESSAGE);
+        this.emit(':responseReady');
     },
     "AMAZON.CancelIntent": function() {
-        this.emit(":tell", EXIT_SKILL_MESSAGE);
+        this.response.speak(EXIT_SKILL_MESSAGE);
+        this.emit(':responseReady');
     },
     "AMAZON.HelpIntent": function() {
-        this.emit(":ask", HELP_MESSAGE, HELP_MESSAGE);
+        this.response.speak(HELP_MESSAGE).listen(HELP_MESSAGE);
+        this.emit(":responseReady");
     },
     "Unhandled": function() {
-        this.emit(":ask", HELP_MESSAGE, HELP_MESSAGE);
+        this.response.speak(HELP_MESSAGE).listen(HELP_MESSAGE);
+        this.emit(":responseReady");
     },
     "AMAZON.PreviousIntent": function() {
-        this.emit(":ask", HELP_MESSAGE, HELP_MESSAGE);
+        this.response.speak(HELP_MESSAGE).listen(HELP_MESSAGE);
+        this.emit(":responseReady");
     },
     "AMAZON.NextIntent": function() {
-        this.emit(":ask", HELP_MESSAGE, HELP_MESSAGE);
+        this.response.speak(HELP_MESSAGE).listen(HELP_MESSAGE);
+        this.emit(":responseReady");
     }
 });
 
 
-var quizHandlers = Alexa.CreateStateHandler(states.QUIZ,{
+const quizHandlers = Alexa.CreateStateHandler(states.QUIZ,{
     "Quiz": function() {
         this.attributes["response"] = "";
         this.attributes["counter"] = 0;
@@ -376,7 +383,8 @@ var quizHandlers = Alexa.CreateStateHandler(states.QUIZ,{
 
 
         } else {
-            this.emit(":ask", speech, question);
+            this.response.speak(speech).listen(question);
+            this.emit(":responseReady");
         }
 
     },
@@ -432,7 +440,8 @@ var quizHandlers = Alexa.CreateStateHandler(states.QUIZ,{
 
           } else {
 
-            this.emit(":tell", response + " " + EXIT_SKILL_MESSAGE);
+            this.response.speak(response + " " + EXIT_SKILL_MESSAGE);
+            this.emit(":responseReady");
           }
         }
     },
@@ -440,13 +449,16 @@ var quizHandlers = Alexa.CreateStateHandler(states.QUIZ,{
         this.emitWithState("Quiz");
     },
     "AMAZON.StopIntent": function() {
-        this.emit(":tell", EXIT_SKILL_MESSAGE);
+        this.response.speak(EXIT_SKILL_MESSAGE);
+        this.emit(":responseReady");
     },
     "AMAZON.CancelIntent": function() {
-        this.emit(":tell", EXIT_SKILL_MESSAGE);
+        this.response.speak(EXIT_SKILL_MESSAGE);
+        this.emit(":responseReady");
     },
     "AMAZON.HelpIntent": function() {
-        this.emit(":ask", HELP_MESSAGE, HELP_MESSAGE);
+        this.response.speak(HELP_MESSAGE).listen(HELP_MESSAGE);
+        this.emit(":responseReady");
     },
     "Unhandled": function() {
         this.emitWithState("AnswerIntent");
@@ -807,10 +819,11 @@ function renderTemplate (content) {
               response["response"]["directives"][0]["template"]["backgroundImage"]["sources"]=sources;
             }
             console.log("ready to respond (MultipleChoiceList): "+JSON.stringify(response));
-          this.context.succeed(response);
+           this.context.succeed(response);
            break;
        default:
-           this.emit(':tell', "Thanks for playing, goodbye");
+          this.response.speak("Thanks for playing, goodbye");
+          this.emit(':responseReady');
    }
 
 }

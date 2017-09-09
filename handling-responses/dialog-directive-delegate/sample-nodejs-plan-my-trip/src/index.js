@@ -13,11 +13,11 @@
  // 1. Text strings =====================================================================================================
  //    Modify these strings and messages to change the behavior of your Lambda function
 
- var speechOutput;
- var reprompt;
- var welcomeOutput = "Let's plan a trip. Where would you like to go?";
- var welcomeReprompt = "Let me know where you'd like to go or when you'd like to go on your trip";
- var tripIntro = [
+ const speechOutput;
+ const reprompt;
+ const welcomeOutput = "Let's plan a trip. Where would you like to go?";
+ const welcomeReprompt = "Let me know where you'd like to go or when you'd like to go on your trip";
+ const tripIntro = [
    "This sounds like a cool trip. ",
    "This will be fun. ",
    "Oh, I like this trip. "
@@ -28,12 +28,13 @@
  // 2. Skill Code =======================================================================================================
 
 'use strict';
-var Alexa = require('alexa-sdk');
-var APP_ID = undefined;  // TODO replace with your app ID (OPTIONAL).
+const Alexa = require('alexa-sdk');
+const APP_ID = undefined;  // TODO replace with your app ID (OPTIONAL).
 
-var handlers = {
+const handlers = {
     'LaunchRequest': function () {
-      this.emit(':ask', welcomeOutput, welcomeReprompt);
+      this.response.speak(welcomeOutput).listen(welcomeReprompt);
+      this.emit(':responseReady');
     },
     'PlanMyTrip': function () {
         //delegate to Alexa to collect all the required slot values
@@ -63,30 +64,35 @@ var handlers = {
         }
 
         //say the results
-        this.emit(":tell",speechOutput);
+        this.response.speak(speechOutput);
+        this.emit(":responseReady");
     },
     'AMAZON.HelpIntent': function () {
         speechOutput = "";
         reprompt = "";
-        this.emit(':ask', speechOutput, reprompt);
+        this.response.speak(speechOutput).listen(reprompt);
+        this.emit(':responseReady');
     },
     'AMAZON.CancelIntent': function () {
         speechOutput = "";
-        this.emit(':tell', speechOutput);
+        this.response.speak(speechOutput);
+        this.emit(':responseReady');
     },
     'AMAZON.StopIntent': function () {
         speechOutput = "";
-        this.emit(':tell', speechOutput);
+        this.response.speak(speechOutput);
+        this.emit(':responseReady');
     },
     'SessionEndedRequest': function () {
         var speechOutput = "";
-        this.emit(':tell', speechOutput);
+        this.response.speak(speechOutput);
+        this.emit(':responseReady');
     },
 };
 
 exports.handler = (event, context) => {
     var alexa = Alexa.handler(event, context);
-    alexa.APP_ID = APP_ID;
+    alexa.appId = APP_ID;
     // To enable string internationalization (i18n) features, set a resources object.
     //alexa.resources = languageStrings;
     alexa.registerHandlers(handlers);

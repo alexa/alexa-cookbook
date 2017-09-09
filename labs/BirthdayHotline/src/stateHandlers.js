@@ -1,10 +1,10 @@
 'use strict';
 
-var Alexa = require('alexa-sdk');
-var audioData = require('./getRecordings.js');
-var constants = require('./constants');
+const Alexa = require('alexa-sdk');
+const audioData = require('./getRecordings.js');
+const constants = require('./constants');
 
-var stateHandlers = {
+const stateHandlers = {
     startModeIntentHandlers : Alexa.CreateStateHandler(constants.states.START_MODE, {
         /*
          *  All Intent Handlers for state : START_MODE
@@ -177,7 +177,7 @@ var stateHandlers = {
 
 module.exports = stateHandlers;
 
-var controller = function () {
+const controller = function () {
     return {
         play: function () {
             /*

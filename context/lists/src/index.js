@@ -15,7 +15,7 @@ exports.handler = function(event, context, callback) {
     alexa.execute();
 };
 
-/**                                                                                                                                                                                                      
+/**
  * Called when the session starts.
  */
 const newSessionRequestHandler = function() {
@@ -35,27 +35,31 @@ const newSessionRequestHandler = function() {
 const launchRequestHandler = function() {
     console.log("Starting launchRequestHandler");
     var speechOutput = "Welcome. You can say, top todo";
-    this.emit(":tell", speechOutput);
+
+    this.response.speak(speechOutput);
+    this.emit(":responseReady");
     console.log("Ending launchRequestHandler");
 };
 
-/**                                                                                                                                              
+/**
  * This is the handler for the SessionEnded event.
  */
 const sessionEndedRequestHandler = function() {
     console.log("Starting sessionEndedRequestHandler");
     var speechOutput = "Goodbye";
-    this.emit(":tell", speechOutput);
+    this.response.speak(speechOutput);
+    this.emit(":responseReady");
     console.log("Ending sessionEndedRequestHandler");
 };
 
-/**                                                                                                                                              
- * This is the handler for the Unhandled event. 
+/**
+ * This is the handler for the Unhandled event.
  */
 const unhandledRequestHandler = function() {
     console.log("Starting unhandledRequestHandler");
     var speechOutput = "This request is not supported.";
-    this.emit(":ask", speechOutput, speechOutput);
+    this.response.speak(speechOutput).listen(speechOutput);
+    this.emit(":responseReady");
     console.log("Ending unhandledRequestHandler");
 };
 
@@ -65,7 +69,8 @@ const unhandledRequestHandler = function() {
 const amazonHelpHandler = function() {
     console.log("Starting amazonHelpHandler");
     var speechOutput = "You can say top todo or todo list size or cancel top todo.";
-    this.emit(":tell", speechOutput);
+    this.response.speak(speechOutput);
+    this.emit(":responseReady");
     console.log("Ending amazonHelpHandler");
 };
 
@@ -75,7 +80,8 @@ const amazonHelpHandler = function() {
 const amazonCancelHandler = function() {
     console.log("Starting amazonCancelHandler");
     var speechOutput = "Goodbye";
-    this.emit(":tell", speechOutput);
+    this.response.speak(speechOutput);
+    this.emit(":responseReady");
     console.log("Ending amazonCancelHandler");
 };
 
@@ -85,7 +91,8 @@ const amazonCancelHandler = function() {
 const amazonStopHandler = function() {
     console.log("Starting amazonStopHandler");
     var speechOutput = "Goodbye";
-    this.emit(":tell", speechOutput);
+    this.response.speak(speechOutput);
+    this.emit(":responseReady");
     console.log("Ending amazonStopHandler");
 };
 
@@ -100,15 +107,16 @@ const topToDoHandler = function() {
     getTopToDoItem(this.event.session, function(itemName) {
         if(!itemName) {
             speechOutput = "Alexa List permissions are missing. You can grant permissions within the Alexa app.";
-	    var permissions = ["read::alexa:household:list"];
-	    that.emit(":tellWithPermissionCard", speechOutput, permissions);
-        }
-        else if(itemName === list_is_empty) {
+            var permissions = ["read::alexa:household:list"];
+            that.emit(":tellWithPermissionCard", speechOutput, permissions);
+        } else if(itemName === list_is_empty) {
             speechOutput = "Your todo list is empty.";
-            that.emit(":tell", speechOutput);
+            that.response.speak(speechOutput);
+            that.emit(':responseReady');
         } else {
             speechOutput = "Your top todo is " + itemName;
-            that.emit(":tell", speechOutput);
+            that.response.speak(speechOutput)
+            that.emit(":responseReady");
         }
     });
     console.log("Ending top todo handler");
@@ -123,21 +131,22 @@ const clearTopToDoHandler = function() {
     console.info("Starting clear top todo handler");
     clearTopToDoAction(this.event.session, function(status) {
         if(!status) {
-	    speechOutput = "Alexa List permissions are missing. You can grant permissions within the Alexa app.";
+            speechOutput = "Alexa List permissions are missing. You can grant permissions within the Alexa app.";
             var permissions = ["write::alexa:household:list"];
-	    that.emit(":tellWithPermissionCard", speechOutput, permissions);
-	}
-        else if(status === list_is_empty) {
+            that.emit(":tellWithPermissionCard", speechOutput, permissions);
+        } else if(status === list_is_empty) {
             speechOutput = "I could not delete your top todo. Your todo list is empty.";
-            that.emit(":tell", speechOutput);
-	}
-        else if(status === 200 ) {
-	    speechOutput = "I successfully deleted your top todo.";
-	    that.emit(":tell", speechOutput);
-	} else {
-	    speechOutput = "I could not delete the todo. The developers are debugging response code " + status;
-	    that.emit(":tell", speechOutput);
-	}
+            that.response.speak(speechOutput);
+            that.emit(":responseReady");
+        } else if(status === 200 ) {
+            speechOutput = "I successfully deleted your top todo.";
+            this.response.speak(speechOutput);
+            that.emit(":responseReady");
+        } else {
+          speechOutput = "I could not delete the todo. The developers are debugging response code " + status;
+          this.response.speak(speechOutput);
+          that.emit(":responseReady");
+        }
     });
     console.info("Ending clear top todo handler");
 };
@@ -165,7 +174,7 @@ const getListsMetadata = function(session, callback) {
             'Content-Type': 'application/json'
         }
     }
-    
+
     var req = https.request(options, (res) => {
         console.log('STATUS: ', res.statusCode);
         console.log('HEADERS: ', JSON.stringify(res.headers));
@@ -175,7 +184,7 @@ const getListsMetadata = function(session, callback) {
             callback(null);
             return;
         }
-        
+
         var body = [];
         res.on('data', function(chunk) {
             body.push(chunk);
@@ -183,7 +192,7 @@ const getListsMetadata = function(session, callback) {
             body = Buffer.concat(body).toString();
             callback(body);
         });
-        
+
         res.on('error', (e) => {
             console.log(`Problem with request: ${e.message}`);
         });
@@ -201,7 +210,7 @@ const getToDoList = function(session, callback) {
     }
     consent_token = session.user.permissions.consentToken;
     console.log("Starting get todo list call.");
-    
+
     getListsMetadata(session, function(returnValue) {
         if(!returnValue) {
             console.log("permissions are not defined");
@@ -219,7 +228,7 @@ const getToDoList = function(session, callback) {
 		    }
 		}
                 break;
-	    }  
+	    }
 	}
 
         var options = {
@@ -236,7 +245,7 @@ const getToDoList = function(session, callback) {
         var req = https.request(options, (res) => {
            console.log('STATUS: ', res.statusCode);
            console.log('HEADERS: ', JSON.stringify(res.headers));
-           
+
            if(res.statusCode === 403) {
              console.log("permissions are not granted");
              callback(null);
@@ -288,7 +297,7 @@ const clearTopToDoAction = function(session, callback) {
 	    callback(list_is_empty);
 	    return;
 	}
-       
+
 	if(!session.user.permissions) {
 	    console.log("permissions are not defined");
 	    callback(null);
@@ -310,17 +319,17 @@ const clearTopToDoAction = function(session, callback) {
 		'Content-Type': 'application/json'
 	    }
 	}
-    
+
 	var req = https.request(options, (res) => {
 		console.log('STATUS: ', res.statusCode);
 		console.log('HEADERS: ', JSON.stringify(res.headers));
-           
+
 		if(res.statusCode === 403) {
 		    console.log("permissions are not granted");
 		    callback(null);
 		    return;
 		}
-            
+
 		var body = [];
 		res.on('data', function(chunk) {
 		    body.push(chunk);
@@ -328,11 +337,11 @@ const clearTopToDoAction = function(session, callback) {
 		    body = Buffer.concat(body).toString();
 		    callback(res.statusCode);
 		});
-        
+
 		res.on('error', (e) => {
 		    console.log(`Problem with request: ${e.message}`);
 		});
-        
+
 	    }).end();
 	});
 };

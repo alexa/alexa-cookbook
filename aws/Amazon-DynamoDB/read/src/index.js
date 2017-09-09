@@ -8,9 +8,9 @@
 // 1. Text strings =====================================================================================================
 //    Modify these strings and messages to change the behavior of your Lambda function
 
-var AWSregion = 'us-east-1';  // us-east-1
+const AWSregion = 'us-east-1';  // us-east-1
 
-var params = {
+const params = {
     TableName: 'yesno',
     Key:{ "id": '0'  }
 };
@@ -18,8 +18,8 @@ var params = {
 
 // 2. Skill Code =======================================================================================================
 
-var Alexa = require('alexa-sdk');
-var AWS = require('aws-sdk');
+const Alexa = require('alexa-sdk');
+const AWS = require('aws-sdk');
 
 AWS.config.update({
     region: AWSregion
@@ -35,9 +35,10 @@ exports.handler = function(event, context, callback) {
     alexa.execute();
 };
 
-var handlers = {
+const handlers = {
     'LaunchRequest': function () {
-        this.emit(':ask', 'welcome to magic answers.  ask me a yes or no question.', 'try again');
+        this.response.speak('welcome to magic answers.  ask me a yes or no question.').listen('try again');
+        this.emit(':responseReady');
     },
 
     'MyIntent': function () {
@@ -51,20 +52,23 @@ var handlers = {
             say = myResult;
 
             say = 'you asked, ' + MyQuestion + '. The answer is: ' + myResult;
-
-            this.emit(':ask', say, 'try again');
+            this.response.speak(say).listen('try again');
+            this.emit(':responseReady');
 
         });
 
     },
     'AMAZON.HelpIntent': function () {
-        this.emit(':ask', 'ask me a yes or no question.', 'try again');
+        this.response.speak('ask me a yes or no question.').listen('try again');
+        this.emit(':responseReady');
     },
     'AMAZON.CancelIntent': function () {
-        this.emit(':tell', 'Goodbye!');
+        this.response.speak('Goodbye!');
+        this.emit(':responseReady');
     },
     'AMAZON.StopIntent': function () {
-        this.emit(':tell', 'Goodbye!');
+        this.response.speak('Goodbye!');
+        this.emit(':responseReady');
     }
 };
 

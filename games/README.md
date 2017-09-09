@@ -6,12 +6,12 @@
 #### Welcome! <a id="intro"></a>
 
 Gaming skills are a fun and engaging way to interact with Alexa.
-You may be familiar with popular skills such as the [Jeopardy skill](https://www.amazon.com/Sony-Pictures-Television-Jeopardy/dp/B019G0M2WS/ref=sr_1_1?s=digital-skills&ie=UTF8&qid=1497841510&sr=1-1&keywords=jeopardy] or the [Animal Game](https://www.amazon.com/Alex-Rublinetsky-Animal-Game/dp/B017OBYNZU/ref=sr_1_1?s=digital-skills&ie=UTF8&qid=1497841561&sr=1-1&keywords=game).
+You may be familiar with popular skills such as the [Jeopardy skill](https://www.amazon.com/Sony-Pictures-Television-Jeopardy/dp/B019G0M2WS/ref=sr_1_1?s=digital-skills&ie=UTF8&qid=1497841510&sr=1-1&keywords=jeopardy) or the [Animal Game](https://www.amazon.com/Alex-Rublinetsky-Animal-Game/dp/B017OBYNZU/ref=sr_1_1?s=digital-skills&ie=UTF8&qid=1497841561&sr=1-1&keywords=game).
 
 While games are easy to play, building a new game skill may require significant design and development work.
 
 A key concept for game skills is the use of session attributes, to set and get the state of gameplay.
-In a simple case, a user's score might be incremented by 1 point various times during the play:
+In a simple case, a user's score might be incremented by 1 point at various times during the play:
 
 ```
 this.attributes["score"] = this.attributes["score"] + 1;

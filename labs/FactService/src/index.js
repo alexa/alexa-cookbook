@@ -1,4 +1,4 @@
-var Alexa = require('alexa-sdk');
+const Alexa = require('alexa-sdk');
 
 exports.handler = function(event, context, callback) {
     var alexa = Alexa.handler(event, context);
@@ -16,19 +16,23 @@ var handlers = {
 
     'GetNewFactIntent': function () {
         var say = 'Here is your fact. ' + getFact();
-        this.emit(':tell', say );
+        this.response.speak(say);
+        this.emit(':responseReady');
     },
 
     // 'AMAZON.HelpIntent': function () {
-    //     this.emit(':ask', 'you can ask for a fact by saying, tell me a fact.', 'try again');
+    //     this.response.speak('you can ask for a fact by saying, tell me a fact.');
+    //     this.response.listen('try again');
     // },
-
+    //
     // 'AMAZON.CancelIntent': function () {
-    //     this.emit(':tell', 'Goodbye');
+    //     this.response.speak('Goodbye')
+    //     this.emit(':responseReady');
     // },
-
+    //
     // 'AMAZON.StopIntent': function () {
-    //     this.emit(':tell', 'Goodbye');
+    //     this.response.speak('Goodbye');
+    //     this.emit(':responseReady');
     // }
 };
 

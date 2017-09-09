@@ -1,4 +1,4 @@
-var Alexa = require('alexa-sdk');
+const Alexa = require('alexa-sdk');
 
 exports.handler = function(event, context, callback) {
     var alexa = Alexa.handler(event, context);
@@ -11,13 +11,13 @@ exports.handler = function(event, context, callback) {
     alexa.execute();
 };
 
-var handlers = {
+const handlers = {
     'LaunchRequest': function () {
         this.emit('MyIntent');
     },
 
     'MyIntent': function () {
-        this.emit(':tell', 'Hello World from Alexa');
+        this.response.speak('Hello World from Alexa');
+        this.emit(':responseReady')
     }
 };
-

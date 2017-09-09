@@ -37,7 +37,7 @@ const params = {
 // 2. Skill Code =======================================================================================================
 
 
-var Alexa = require('alexa-sdk');
+const Alexa = require('alexa-sdk');
 
 exports.handler = function(event, context, callback) {
     var alexa = Alexa.handler(event, context);
@@ -59,11 +59,10 @@ var handlers = {
         sendTxtMessage(params, myResult=>{
 
             var say = myResult;
-            this.emit(':ask', say, 'try again');
+            this.response.speak(say).listen('try again');
+            this.emit(':responseReady');
 
         });
-
-
     }
 };
 
@@ -87,4 +86,3 @@ function sendTxtMessage(params, callback) {
 
     });
 }
-

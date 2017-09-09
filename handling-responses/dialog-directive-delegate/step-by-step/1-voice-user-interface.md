@@ -65,15 +65,15 @@ There are two parts to an Alexa skill.  The first part is the [Voice User Interf
 
       >(F) Return to the rest of the pages on the developer portal to configure, test, and publish your skill.
 
-    7.1. *OPTIONAL:* You can choose to upload a file to fill out your interaction model. To do that for this sample click on the ```</> Code Editor``` tab and drag your JSON file from the [dialog-directive-delegate sample in the Alexa cookbook](https://github.com/alexa/alexa-cookbook/blob/master/handling-responses/dialog-directive-delegate/speech-assets/InteractionModel.json) to the cloud upload icon. Once you're done, click ```Apply Changes```. From this point you can follow along with the rest of step 7 to see how things work or move onto step 8.
+    7.1. *OPTIONAL:* You can choose to upload a file to fill out your interaction model. To do that for this sample click on the `</> Code Editor` tab and drag your JSON file from the [dialog-directive-delegate sample in the Alexa cookbook](https://github.com/alexa/alexa-cookbook/blob/master/handling-responses/dialog-directive-delegate/speech-assets/InteractionModel.json) to the cloud upload icon. Once you're done, click `Apply Changes`. From this point you can follow along with the rest of step 7 to see how things work or move onto step 8.
 
     Here are the steps to build out your interaction model by hand.  
 
-    7.2. **Add an Intent** An intent defines the actions that we want our users to be able to take ([learn more](https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/ask-define-the-vui-with-gui#about-intents-slots-and-dialogs)). From the left navigation, click the ```ADD+``` button for Intents to open the Add Intent page.
+    7.2. **Add an Intent** An intent defines the actions that we want our users to be able to take ([learn more](https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/ask-define-the-vui-with-gui#about-intents-slots-and-dialogs)). From the left navigation, click the `ADD+` button for Intents to open the Add Intent page.
 
-    7.3.  **Create a new custom intent** Type ```PlanMyTrip``` into the ```Create a new custom intent``` field. With the skill builder you can also choose from over 100 built-in Intents. Whenever one of these intents fits your scenario it's best to use one of these because the utterances and slots are already trained for you. For this example, we'll show you how to create a custom intent.
+    7.3.  **Create a new custom intent** Type `PlanMyTrip` into the `Create a new custom intent` field. With the skill builder you can also choose from over 100 built-in Intents. Whenever one of these intents fits your scenario it's best to use one of these because the utterances and slots are already trained for you. For this example, we'll show you how to create a custom intent.
 
-    7.4. **Sample Utterances** Add a list of phrases that people would say to invoke your new PlanMyTrip intent. Notice how we gather responses like the city we're going to by using ```{ }``` to create a slot. Enter any phrases people might say to start planning a trip.
+    7.4. **Sample Utterances** Add a list of phrases that people would say to invoke your new PlanMyTrip intent. Notice how we gather responses like the city we're going to by using `{ }` to create a slot. Enter any phrases people might say to start planning a trip.
     ```
     Plan a trip
     I'd like to plan a trip
@@ -85,13 +85,12 @@ There are two parts to an Alexa skill.  The first part is the [Voice User Interf
     I want to travel from {fromCity} to {toCity} on {travelDate}
     I'm going to {toCity} to {activity}
     There's a {activity} in {toCity}
-    {toCity}
     ```
-    click ```Save Model```
+    click `Save Model`
 
-    7.5. **Choose Slot Types** On the right, notice the ```Intent Slots``` panel with all of the new slots that you created while adding utterances. Tick the ```toCity, fromCity, and travelDate checkboxes``` to indicate that these are required slots. Click ```choose a slot type``` and select AMAZON.US_CITY for fromCity and toCity. Select AMAZON.DATE for travelDate so that people can say things like "next tuesday" or "March 5th" and you'll get a date value back.
+    7.5. **Choose Slot Types** On the right, notice the `Intent Slots` panel with all of the new slots that you created while adding utterances. Tick the `toCity, fromCity, and travelDate checkboxes` to indicate that these are required slots. Click `choose a slot type` and select AMAZON.US_CITY for fromCity and toCity. Select AMAZON.DATE for travelDate so that people can say things like "next tuesday" or "March 5th" and you'll get a date value back.
 
-    7.6. **Add Slot Types** Whenever possible choose from one of the built in slot types like we did for city and date. Those are already trained for you. To create a custom slot type, look for the ```Slot Types``` section on the right navigation and choose ```ADD+``` to bring up the Add Slot Type page. Type ```LIST_OF_ACTIVITIES``` and enter slot values like:
+    7.6. **Add Slot Types** Whenever possible choose from one of the built in slot types like we did for city and date. Those are already trained for you. To create a custom slot type, look for the `Slot Types` section on the right navigation and choose `ADD+` to bring up the Add Slot Type page. Type `LIST_OF_ACTIVITIES` and enter slot values like:
     ```
     swimming
     hiking
@@ -102,15 +101,15 @@ There are two parts to an Alexa skill.  The first part is the [Voice User Interf
     visit my relatives
     visit my friends
     ```
-    click ```Save Model```
+    click `Save Model`
 
-    7.7. **Set the slot type for activity to LIST_OF_ACTIVITIES** from the left navigation, choose ```PlanMyTrip``` then from the right panel, ```choose a slot type``` for activity and pick ```LIST_OF_ACTIVITIES```.
+    7.7. **Set the slot type for activity to LIST_OF_ACTIVITIES** from the left navigation, choose `PlanMyTrip` then from the right panel, `choose a slot type` for activity and pick `LIST_OF_ACTIVITIES`.
 
     Next we'll add prompts and utterances for each of the required cities. To learn more see the [required slots](https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/ask-define-the-vui-with-gui#id-required-slots) section of the documentation.
 
-    7.8. **Add Prompts and Utterances for toCity** In the left navigation choose ```toCity```.
+    7.8. **Add Prompts and Utterances for toCity** In the left navigation choose `toCity`.
 
-    Set the ```is this slot required to fulfill the intent``` option to ```YES```.
+    Set the `is this slot required to fulfill the intent` option to `YES`.
 
     Add prompts that Alexa will use to request the toCity from users.
     ```
@@ -121,7 +120,6 @@ There are two parts to an Alexa skill.  The first part is the [Voice User Interf
     ```
     I'd like to go to {toCity}
     I'd like to go {activity} in {toCity}
-    {toCity}
     I'd like to visit {toCity}
     we're going to {toCity}
     I will leave on {travelDate}
@@ -130,11 +128,11 @@ There are two parts to an Alexa skill.  The first part is the [Voice User Interf
     ```
     Leave Slot Confirmation set to NO. You'd use this if you'd want Alexa to say something like "are you sure" after gathering the slot value.
 
-    click ```Save Model```
+    click `Save Model`
 
-    7.9. **Add Prompts and Utterances for fromCity** In the left navigation choose ```fromCity```.
+    7.9. **Add Prompts and Utterances for fromCity** In the left navigation choose `fromCity`.
 
-    Set the ```is this slot required to fulfill the intent``` option to ```YES```.
+    Set the `is this slot required to fulfill the intent` option to `YES`.
 
     Add prompts that Alexa will use to request the fromCity from users.
     ```
@@ -143,18 +141,17 @@ There are two parts to an Alexa skill.  The first part is the [Voice User Interf
     ```
     and add a list of utterances that users might respond with
     ```
-    {fromCity}
     leaving from {fromCity}
     from {fromCity}
     my trip starts in {fromCity}
     ```
     Leave Slot Confirmation set to NO. You'd use this if you'd want Alexa to say something like "are you sure" after gathering the slot value.
 
-    click ```Save Model```
+    click `Save Model`
 
-    7.10. **Add Prompts and Utterances for travelDate** In the left navigation choose ```travelDate```.
+    7.10. **Add Prompts and Utterances for travelDate** In the left navigation choose `travelDate`.
 
-    Set the ```is this slot required to fulfill the intent``` option to ```YES```.
+    Set the `is this slot required to fulfill the intent` option to `YES`.
 
     Add prompts that Alexa will use to request the travelDate from users.
     ```
@@ -163,17 +160,16 @@ There are two parts to an Alexa skill.  The first part is the [Voice User Interf
     ```
     and add a list of utterances that users might respond with
     ```
-    {travelDate}
     leaving on {travelDate}
     my trip starts {travelDate}
     ```
     Leave Slot Confirmation set to NO. You'd use this if you'd want Alexa to say something like "are you sure" after gathering the slot value.
 
-    click ```Save Model```
+    click `Save Model`
 
-8. **Build Model** Now you've created a new PlanMyTrip Intent with three required slots, toCity, fromCity, and travelDate as well as an optional activities slot. You've also created the related prompts Alexa will use and the utterances people will respond with. Now it's time to prepare all this information for use in your Alexa skill. click the ```Build Model``` button from the top navigation.
+8. **Build Model** Now you've created a new PlanMyTrip Intent with three required slots, toCity, fromCity, and travelDate as well as an optional activities slot. You've also created the related prompts Alexa will use and the utterances people will respond with. Now it's time to prepare all this information for use in your Alexa skill. click the `Build Model` button from the top navigation.
 
-If your interaction model builds successfully, click ```Configuration``` to move on to Configuration.  In our next step of this guide, we will be creating our Lambda function in the AWS developer console, but keep this browser tab open, because we will be returning here on [Page #3: Connect VUI to Code](https://github.com/alexa/alexa-cookbook/tree/master/handling-responses/dialog-directive-delegate/blob/master/step-by-step/3-connect-vui-to-code.md).
+If your interaction model builds successfully, click `Configuration` to move on to Configuration.  In our next step of this guide, we will be creating our Lambda function in the AWS developer console, but keep this browser tab open, because we will be returning here on [Page #3: Connect VUI to Code](https://github.com/alexa/alexa-cookbook/tree/master/handling-responses/dialog-directive-delegate/blob/master/step-by-step/3-connect-vui-to-code.md).
 
 
 <br/><br/>

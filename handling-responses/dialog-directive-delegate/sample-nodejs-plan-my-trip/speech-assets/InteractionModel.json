@@ -18,10 +18,8 @@
         "I'm going on a trip {travelDate} ",
         "i want to visit {toCity} ",
         "I want to travel from {fromCity} to {toCity} {travelDate} ",
-        "{toCity} ",
         "Plan a trip",
-        "I'll go to {toCity} on the {travelDate} ",
-        "this is a {newSlot}"
+        "I'll go to {toCity} on the {travelDate} "
       ],
       "slots": [
         {
@@ -68,113 +66,157 @@
       "name": "LIST_OF_ACTIVITIES",
       "values": [
         {
+          "id": null,
           "name": {
-            "value": "bicycling"
+            "value": "bicycling",
+            "synonyms": []
           }
         },
         {
+          "id": null,
           "name": {
-            "value": "bike"
+            "value": "bike",
+            "synonyms": []
           }
         },
         {
+          "id": null,
           "name": {
-            "value": "biking"
+            "value": "biking",
+            "synonyms": []
           }
         },
         {
+          "id": null,
           "name": {
-            "value": "camp"
+            "value": "camp",
+            "synonyms": []
           }
         },
         {
+          "id": null,
           "name": {
-            "value": "camping"
+            "value": "camping",
+            "synonyms": []
           }
         },
         {
+          "id": null,
           "name": {
-            "value": "hike"
+            "value": "hike",
+            "synonyms": []
           }
         },
         {
+          "id": null,
           "name": {
-            "value": "hiking"
+            "value": "hiking",
+            "synonyms": []
           }
         },
         {
+          "id": null,
           "name": {
-            "value": "race"
+            "value": "race",
+            "synonyms": []
           }
         },
         {
+          "id": null,
           "name": {
-            "value": "run"
+            "value": "run",
+            "synonyms": []
           }
         },
         {
+          "id": null,
           "name": {
-            "value": "shop"
+            "value": "shop",
+            "synonyms": []
           }
         },
         {
+          "id": null,
           "name": {
-            "value": "shopping"
+            "value": "shopping",
+            "synonyms": []
           }
         },
         {
+          "id": null,
           "name": {
-            "value": "ski"
+            "value": "ski",
+            "synonyms": []
           }
         },
         {
+          "id": null,
           "name": {
-            "value": "skiing"
+            "value": "skiing",
+            "synonyms": []
           }
         },
         {
+          "id": null,
           "name": {
-            "value": "surf"
+            "value": "surf",
+            "synonyms": []
           }
         },
         {
+          "id": null,
           "name": {
-            "value": "surfing"
+            "value": "surfing",
+            "synonyms": []
           }
         },
         {
+          "id": null,
           "name": {
-            "value": "swim"
+            "value": "swim",
+            "synonyms": []
           }
         },
         {
+          "id": null,
           "name": {
-            "value": "swimming"
+            "value": "swimming",
+            "synonyms": []
           }
         },
         {
+          "id": null,
           "name": {
-            "value": "visit relatives"
+            "value": "visit relatives",
+            "synonyms": []
           }
         },
         {
+          "id": null,
           "name": {
-            "value": "visit with friends"
+            "value": "visit with friends",
+            "synonyms": []
           }
         },
         {
+          "id": null,
           "name": {
-            "value": "visit with my relatives"
+            "value": "visit with my relatives",
+            "synonyms": []
           }
         },
         {
+          "id": null,
           "name": {
-            "value": "concert"
+            "value": "concert",
+            "synonyms": []
           }
         },
         {
+          "id": null,
           "name": {
-            "value": "play"
+            "value": "play",
+            "synonyms": []
           }
         }
       ]

@@ -141,25 +141,31 @@ const handlers = {
           renderTemplate.call(this, content);
         } else {
         // Just use a card if the device doesn't support a card.
-          this.emit(':tellWithCard', speechOutput, this.t('SKILL_NAME'), randomFact);
+          this.response.cardRenderer(this.t('SKILL_NAME'), randomFact);
+          this.response.speak(speechOutput);
+          this.emit(':responseReady');
         }
     },
     'AMAZON.HelpIntent': function () {
         const speechOutput = this.t('HELP_MESSAGE');
         const reprompt = this.t('HELP_MESSAGE');
-        this.emit(':ask', speechOutput, reprompt);
+        this.response.speak(speechOutput).listen(reprompt);
+        this.emit(':responseReady');
     },
     'AMAZON.CancelIntent': function () {
-        this.emit(':tell', this.t('STOP_MESSAGE'));
+        const reprompt = this.t('STOP_MESSAGE');
+        this.response.speak(speechOutput).listen(reprompt);
+        this.emit(':responseReady');
     },
     'AMAZON.StopIntent': function () {
-        this.emit(':tell', this.t('STOP_MESSAGE'));
+        this.response.speak(this.t('STOP_MESSAGE'));
+        this.emit(':responseReady');
     },
 };
 
 exports.handler = function (event, context) {
     const alexa = Alexa.handler(event, context);
-    alexa.APP_ID = APP_ID;
+    alexa.appId = APP_ID;
     // To enable string internationalization (i18n) features, set a resources object.
     alexa.resources = languageStrings;
     alexa.registerHandlers(handlers);
@@ -253,7 +259,8 @@ function renderTemplate (content) {
            break;
 
        default:
-           this.emit(':tell', "Thanks for chatting, goodbye");
+          this.response.speak("Thanks for chatting, goodbye");
+          this.emit(':responseReady');
    }
 
 }

@@ -8,14 +8,14 @@
 // 1. Text strings =====================================================================================================
 //    Modify these strings and messages to change the behavior of your Lambda function
 
-var AWSregion = 'us-east-1';  // eu-west-1
+const AWSregion = 'us-east-1';  // eu-west-1
 
-var subject = 'Hello email for you' ;
-var bodyText = 'Hello! \n'
+const subject = 'Hello email for you' ;
+const bodyText = 'Hello! \n'
     + 'Here is your link:  \n'
     + 'https://youtu.be/dQw4w9WgXcQ';
 
-var params = {
+const params = {
 
     Source: 'robm26@cookbook.com',
     Destination: { ToAddresses: ['robm26@cookbook.com'] },
@@ -29,7 +29,7 @@ var params = {
 
 // 2. Skill Code =======================================================================================================
 
-var Alexa = require('alexa-sdk');
+const Alexa = require('alexa-sdk');
 
 exports.handler = function(event, context, callback) {
     var alexa = Alexa.handler(event, context);
@@ -41,7 +41,7 @@ exports.handler = function(event, context, callback) {
     alexa.execute();
 };
 
-var handlers = {
+const handlers = {
     'LaunchRequest': function () {
         this.emit('MyIntent');
     },
@@ -52,7 +52,8 @@ var handlers = {
             console.log('sending message to ' + params.Destination.ToAddresses.toString() + ', status: ' );
             var say = 'sent the msg';
 
-            this.emit(':ask', say, 'try again');
+            this.response.speak(say).listen('try again');
+            this.emit(':responseReady');
         });
 
     }

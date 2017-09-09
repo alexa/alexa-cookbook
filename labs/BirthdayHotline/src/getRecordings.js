@@ -1,11 +1,11 @@
 // Minimized client.recordings.list function
 // This works beautifully as well
 
-var config = require('./twilio-config.js')
-var accountSid = config.accountSid
-var authToken = config.authToken
+const config = require('./twilio-config.js')
+const accountSid = config.accountSid
+const authToken = config.authToken
 
-var client = require('twilio')(accountSid, authToken);
+const client = require('twilio')(accountSid, authToken);
 var arr =[];
 
 module.exports = {

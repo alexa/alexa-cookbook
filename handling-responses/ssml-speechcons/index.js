@@ -8,12 +8,12 @@
 // 1. Text strings =====================================================================================================
 //    Modify these strings and messages to change the behavior of your Lambda function
 
-var speechOutput = "aha, this is a phrase with speechcons, well done.";  // Array of items
+const speechOutput = "aha, this is a phrase with speechcons, well done.";  // Array of items
 
 // 2. Skill Code =======================================================================================================
 
 
-var Alexa = require('alexa-sdk');
+const Alexa = require('alexa-sdk');
 
 exports.handler = function(event, context, callback) {
     var alexa = Alexa.handler(event, context);
@@ -23,11 +23,12 @@ exports.handler = function(event, context, callback) {
     alexa.execute();
 };
 
-var handlers = {
+const handlers = {
     'LaunchRequest': function () {
         //add SSML tags to any speechcons in the string
-        speechOutput=addSpeehconSSML(speechOutput);
-        this.emit(':tell', speechOutput);
+        speechOutput = addSpeehconSSML(speechOutput);
+        this.response.speak(speechOutput);
+        this.emit(':responseReady');
     },
     'Unhandled': function () {
         this.emit('LaunchRequest');
@@ -49,7 +50,7 @@ function addSpeehconSSML (text) {
 }
 
 //list of valid speechcons
-var speechcons = ["abracadabra","achoo","aha","ahem","ahoy","all righty","aloha",
+const speechcons = ["abracadabra","achoo","aha","ahem","ahoy","all righty","aloha",
 "aooga","argh","arrivederci","as you wish","au revoir","aw man","baa",
 "bada bing bada boom","bah humbug","bam","bang","batter up","bazinga",
 "beep beep","bingo","blah","blarg","blast","boing","bon appetit","bonjour",

@@ -9,12 +9,12 @@
 //    Modify these strings and messages to change the behavior of your Lambda function
 
 // from the lambda, choose Action > Configure Test Event > Alexa Intent - Recipe
-var slotName = "Item";
+const slotName = "Item";
 
 
 // 2. Skill Code =======================================================================================================
 
-var Alexa = require('alexa-sdk');
+const Alexa = require('alexa-sdk');
 
 exports.handler = function(event, context, callback) {
     var alexa = Alexa.handler(event, context);
@@ -24,9 +24,11 @@ exports.handler = function(event, context, callback) {
     alexa.execute();
 };
 
-var handlers = {
+const handlers = {
     'LaunchRequest': function () {
-        this.emit(':ask', "try saying an utterance with a slot value to test this.");
+        var speechOutput = "try saying an utterance with a slot value to test this.";
+        this.response.speak(speechOutput).listen(speechOutput);
+        this.emit(':responseReady');
     },
     'Unhandled': function () {
         var speechOutput;
@@ -40,7 +42,8 @@ var handlers = {
             //no valid slot
             speechOutput="Intent " + intent + ", did not get a value for " + slotName;
         }
-        this.emit(':tell', speechOutput);
+        this.response.speak(speechOutput);
+        this.emit(':responseReady');
     }
 };
 

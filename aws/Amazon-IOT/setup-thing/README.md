@@ -1,6 +1,9 @@
 #### Ingredients
 ## Amazon IOT Setup Thing <a id="title"></a>
 
+1. [Setup Thing](.//README.md#title) || 2. [Create The Skill](../update-shadow/PAGE2.md#title) || 3. [Create The Lambda Function](../update-shadow/PAGE3.md#title) || 4. [Connect Skill To Lambda & Add IOT Permissions](../update-shadow/PAGE4.md#title) || 5. [Webapp-Thing](../webapp-thing/README.md#title)
+
+
 #### What you will learn
 
 It is simple to create a new virtual "Thing" in the AWS IOT Thing Registry.
@@ -11,24 +14,26 @@ It is simple to create a new virtual "Thing" in the AWS IOT Thing Registry.
 1. Verify your Region on the top right, such as ```Ireland``` or ```N. Virginia```
 1. On the left panel, locate and click on the "Registry" link
 1. A sub-menu appears. Click on the "Things" link
-1. Click on the blue "Create" button
-1. Give your Thing a name, such as ```waterPump``` and click "Create"
+1. Click on the "Create" button
+1. Give your Thing a name, such as ```thing1``` and click "Create"
 1. On the next page, you will see thing details.  Click the "Interact" item on the left menu.
 1. Record the HTTPS Rest API Endpoint you see, such as ```a2eshrcp6u0000.iot.us-east-1.amazonaws.com```
 
 
-You can stop at this point and begin writing Lambda code to update this device.  Continue on to the [update-shadow](../update-shadow/README.md#title) page.
+You can stop at this point and begin writing Lambda code to update this device.  
+
+Continue on to the [update-shadow](../update-shadow/README.md#title) page.
 
 
 #### Full Thing Setup Guide
 
- * See the [Register Device](http://docs.aws.amazon.com/iot/latest/developerguide/register-device.html) guide for the full device setup steps, including the process to configure your physical device, if desired.
-
+ * See the [Register Device](http://docs.aws.amazon.com/iot/latest/developerguide/register-device.html)
+ guide for the full device setup steps, including the process to configure your physical device, if desired.
 
 
  *You can learn more from the [Getting Started with AWS IOT](https://aws.amazon.com/iot-platform/getting-started/) documentation.*
 
+Next, go to the [Update Shadow](../update-shadow/README.md#title) section.
 
-<hr />
-Back to the [Home Page](../../README.md#title)
 
+Back to the [Home Page](../README.md#title)

@@ -41,7 +41,8 @@ var handlers = {
                 console.log("sent     : " + JSON.stringify(myParams));
                 console.log("received : " + myResult);
 
-                this.emit(':tell', 'The S 3 file says, ' + myResult );
+                this.response.speak('The S 3 file says, ' + myResult );
+                this.emit(':responseReady');
 
             }
         );
@@ -49,13 +50,21 @@ var handlers = {
     },
 
     'AMAZON.HelpIntent': function () {
-        this.emit(':ask', 'ask me a yes or no question.', 'try again');
+        var reprompt = 'Say hello or write a file to S 3.';
+        this.response.speak('Welcome to s3 file whisperer. ' + reprompt).listen(reprompt);
+        this.emit(':responseReady');
     },
     'AMAZON.CancelIntent': function () {
-        this.emit(':tell', 'Goodbye!');
+        this.response.speak('Goodbye!');
+        this.emit(':responseReady');
     },
     'AMAZON.StopIntent': function () {
-        this.emit(':tell', 'Goodbye!');
+        this.response.speak('Goodbye!');
+        this.emit(':responseReady');
+    },
+    'SessionEndedRequest': function () {
+        console.log('session ended!');
+        this.emit('AMAZON.StopIntent');
     }
 
 };
@@ -69,8 +78,6 @@ function S3read(params, callback) {
     var AWS = require('aws-sdk');
     var s3 = new AWS.S3();
 
-
-
     s3.getObject(params, function(err, data) {
         if(err) { console.log(err, err.stack); }
         else {
@@ -78,8 +85,6 @@ function S3read(params, callback) {
             var fileText = data.Body.toString();  // this is the complete file contents
 
             callback(fileText);
-
         }
     });
 }
-

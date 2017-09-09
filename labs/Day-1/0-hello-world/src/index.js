@@ -4,7 +4,7 @@
  **/
 
 // Include the Alexa Library.
-var Alexa = require('alexa-sdk');
+const Alexa = require('alexa-sdk');
 
 // This is the function that AWS Lambda calls every time Alexa uses your skill.
 exports.handler = function(event, context, callback) {
@@ -21,6 +21,7 @@ var handlers = {
   },
 
   'HelloWorldIntent': function () {
-      this.emit(':tell', 'Hello World from Alexa!');
+      this.response.speak('Hello World from Alexa!')
+      this.emit(':responseReady');
   }
 };

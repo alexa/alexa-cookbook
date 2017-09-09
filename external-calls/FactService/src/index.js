@@ -54,20 +54,24 @@ var handlers = {
 
             var say = '';
             say = 'here is your fact, ' +  randomPhrase(JSON.parse(myResult)); // array
-            this.emit(':tell', say, 'try again');
+            this.response.speak(say).listen('try again');
+            this.emit(':responseReady');
 
         });
 
 
     },
     'AMAZON.HelpIntent': function () {
-        this.emit(':ask', 'just say, tell me a fact', 'try again');
+        this.response.speak('just say, tell me a fact').listen('try again');
+        this.emit(':responseReady');
     },
     'AMAZON.CancelIntent': function () {
-        this.emit(':tell', 'Goodbye!');
+        this.response.speak('Goodbye!');
+        this.emit(':responseReady');
     },
     'AMAZON.StopIntent': function () {
-        this.emit(':tell', 'Goodbye!');
+        this.response.speak('Goodbye!')
+        this.emit(':responseReady');
     }
 };
 
