@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fact List</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous"></script>
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <script>
+        var serviceurl = "https://1fzfdjhc2l.execute-api.us-east-1.amazonaws.com/prod/list";
+        var service = '';
+
+
+        function init() {
+            console.log('init()');
+            document.getElementById('appId').value = 'amzn1.ask.skill.6a4c4aac-c3ad-49c7-982b-975617496442';
+            document.getElementById('factlist').value = '';
+            service = serviceurl + '?appId=' + document.getElementById('appId').value;
+
+            document.getElementById('serviceurl').innerHTML = '<a href="' + service + '" >' + service + '</a>';
+
+        }
+        function loadData(appId) {
+            document.getElementById('status').innerHTML = 'loading...';
+            document.getElementById('status').className = 'statuslookup';
+
+            service = serviceurl + '?appId=' + document.getElementById('appId').value;
+            document.getElementById('serviceurl').innerHTML = '<a href="' + service + '" >' + service + '</a>';
+
+
+            // console.log('loading appId ' + appId);
+            document.getElementById('factlist').value = '';
+
+            var url = serviceurl + "?appId=" + appId;
+
+            var xhttp = new XMLHttpRequest({mozSystem: true});
+
+            xhttp.open("GET", url, true);
+            xhttp.setRequestHeader('Content-Type', 'application/json');
+
+            xhttp.onreadystatechange = function() {
+                if (xhttp.readyState == 4 && xhttp.status == 200) {
+                    var data = JSON.parse(xhttp.responseText);
+                    var myList = JSON.parse(xhttp.responseText);
+                    for (var i=0; i<myList.length; i++) {
+                        console.log(myList[i]);
+                        document.getElementById('factlist').value += myList[i] + '\n';
+                    }
+                    document.getElementById('factlist').value = document.getElementById('factlist').value.replace(/\n$/, "");
+                    document.getElementById('status').innerHTML = 'status: ready';
+                    document.getElementById('status').className = 'statusnormal';
+
+                }
+            }
+            xhttp.send();
+            // xhttp.send(JSON.stringify(payload));
+
+        }
+        function saveData(appId) {
+            document.getElementById('status').innerHTML = 'saving...';
+            document.getElementById('status').className = 'statussaving';
+
+            service = serviceurl + '?appId=' + document.getElementById('appId').value;
+            document.getElementById('serviceurl').innerHTML = '<a href="' + service + '" >' + service + '</a>';
+
+            var newList = document.getElementById('factlist').value.replace(/\n$/, "");
+            var listArray = [];
+            listArray = newList.split('\n');
+            // alert(typeof listArray);
+            // alert(listArray);
+
+            var url = serviceurl;
+
+            var xhttp = new XMLHttpRequest({mozSystem: true});
+
+            xhttp.open("POST", url, true);
+
+            var post_data = {
+                "appId": appId,
+                "list":  listArray
+            };
+            console.log('post_data');
+            console.log(post_data);
+
+            xhttp.setRequestHeader('Content-Type', 'application/json');
+
+            xhttp.onreadystatechange = function() {
+                if (xhttp.readyState == 4 && xhttp.status == 200) {
+                    var data = JSON.parse(xhttp.responseText);
+//
+                    console.log('saved it for you, response: ' + data);
+                    document.getElementById('status').innerHTML = 'status: saved';
+                    document.getElementById('status').className = 'statusnormal';
+
+                }
+            };
+
+            console.log(JSON.stringify(post_data));
+            xhttp.send(JSON.stringify(post_data));
+
+        }
+        function clearText() {
+            document.getElementById('factlist').value = '';
+        }
+
+    </script>
+
+    <style>
+        .statusnormal {background-color:gainsboro; padding:5px; float:right}
+        .serviceurl {text-decoration:underline; font-size:11pt; }
+        .arn {font-family:"Courier New"; background-color:gainsboro}
+
+    </style>
+</head>
+<body onLoad="init();">
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <form>
+            <div class="form-group">
+                <label for="appId">Application Id:</label>
+                <input type="appId" class="form-control" id="appId">
+            </div>
+
+            <button type="button" class="btn " onClick="loadData(document.getElementById('appId').value);">LOAD</button>
+            <button type="button" class="btn " onClick="clearText();">CLEAR</button>
+            <button type="button" class="btn btn-primary" onClick="saveData(document.getElementById('appId').value);">SAVE</button>
+            <span id="status" class="statusnormal">status: ready</span>
+            <br/>
+        </form>
+    </div>
+    <div class="panel-body">
+
+        <div class="form-group">
+            <label for="factlist">Fact List (one fact per line)</label>
+            <textarea class="form-control" rows="12" id="factlist"></textarea>
+
+        </div>
+
+    </div>
+
+    <div class="panel-footer">
+        <span>
+            Paste in your skill's App Id and press LOAD.  Add to or modify the fact list. Press SAVE.<br />
+            Your skill can call this same web service and pass in its event.appId as appId to return fact items.
+        </span>
+        <br/>
+
+        <span id="serviceurl" class="serviceurl">
+        </span>
+        <br />
+
+        <div>
+            Source code for the skill and API are on the <a href="https://github.com/alexa/alexa-cookbook/tree/master/external-calls/FactService">alexa-cookbook</a>
+            <br />
+            Your skill may use a pre-built Lambda function that handles the <b>GetNewFactIntent</b> intent.  Use the following Lambda ARN:
+            <br/>
+            <span class="arn">arn:aws:lambda:us-east-1:589662381973:function:FactService</span>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

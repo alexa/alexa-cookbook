@@ -1,0 +1,23 @@
+{
+  "name": "dialog-directive-delegate",
+  "version": "1.0.0",
+  "description": "Delegate Dialog Directive Sample Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "alexa",
+    "skill",
+    "settings"
+  ],
+  "author": "Amazon.com",
+  "license": "SEE LICENSE IN LICENSE.txt",
+  "dependencies": {
+    "alexa-sdk": "^1.0.9"
+  },
+  "repository" : {
+    "type" : "git",
+    "url" : ""
+  }
+}

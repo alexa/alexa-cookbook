@@ -8,12 +8,12 @@
 // 1. Text strings =====================================================================================================
 //    Modify these strings and messages to change the behavior of your Lambda function
 
-var config = {};
+const config = {};
 config.IOT_BROKER_ENDPOINT      = "a3npzlqqmmzqo.iot.us-east-1.amazonaws.com";  // also called the REST API endpoint
 config.IOT_BROKER_REGION        = "us-east-1";  // eu-west-1 corresponds to the Ireland Region.  Use us-east-1 for the N. Virginia region
-config.IOT_THING_NAME           = "waterPump";
+config.IOT_THING_NAME           = "thing1";
 
-var SkillMessagesUS = {
+const SkillMessagesUS = {
     'welcome'       :'welcome.  you can say things like, go to london or go to berlin',
     'cityresponse'  :'you asked for',
     'help'          :'you can say things like, go to london or go to berlin',
@@ -21,7 +21,7 @@ var SkillMessagesUS = {
     'stop'          :'goodbye'
 };
 
-var SkillMessagesDE = {
+const SkillMessagesDE = {
     'welcome'       :'hallo.  sagen so was, reisen nach london oder reisen nach berlin',
     'cityresponse'  :'sie haben gefragt',
     'help'          :'sagen so was, reisen nach london oder reisen nach berlin',
@@ -32,7 +32,7 @@ var SkillMessagesDE = {
 // 2. Skill Code =======================================================================================================
 
 
-var Alexa = require('alexa-sdk');
+const Alexa = require('alexa-sdk');
 var SkillMessages = {};
 
 exports.handler = function(event, context, callback) {
@@ -63,8 +63,8 @@ var handlers = {
     },
 
     'MyIntent': function () {
-        this.emit(':ask', SkillMessages.welcome, 'try again');
-
+        this.response.speak(SkillMessages.welcome).listen('try again');
+        this.emit(':responseReady');
     },
 
     'CityIntent': function () {
@@ -82,24 +82,32 @@ var handlers = {
         newState = {'city':myCity};
 
         updateShadow(newState, status => {
-
-            this.emit(':ask', say, say);
-
+            this.response.speak(say).listen(say);
+            this.emit(':responseReady');
         });
 
     },
     'AMAZON.HelpIntent': function () {
-        this.emit(':ask', SkillMessages.help, SkillMessages.help);
+        this.response.speak(SkillMessages.help).listen(SkillMessages.help);
+        this.emit(':responseReady');
 
     },
     'AMAZON.StopIntent': function () {
-        this.emit(':tell', SkillMessages.stop, SkillMessages.stop);
+        this.response.speak(SkillMessages.stop);
+        this.emit(':responseReady');
 
     },
     'AMAZON.CancelIntent': function () {
-        this.emit(':tell', SkillMessages.cancel, SkillMessages.cancel);
-
+        this.response.speak(SkillMessages.cancel);
+        this.emit(':responseReady');
     },
+    'SessionEndedRequest': function() {
+        this.emit('AMAZON.StopIntent');
+    },
+    'Unhandled': function() {
+        this.response.speak(SkillMessages.help).listen(welcomeRepromt);
+        this.emit(':responseReady');
+    }
 
 };
 
@@ -139,8 +147,4 @@ function updateShadow(desiredState, callback) {
 
     });
 
-
-
-
 }
-

@@ -1,0 +1,318 @@
+{
+  "intents": [
+    {
+      "name": "AMAZON.CancelIntent",
+      "samples": []
+    },
+    {
+      "name": "AMAZON.HelpIntent",
+      "samples": []
+    },
+    {
+      "name": "AMAZON.StopIntent",
+      "samples": []
+    },
+    {
+      "name": "PlanMyTrip",
+      "samples": [
+        "I'm going on a trip {travelDate} ",
+        "i want to visit {toCity} ",
+        "I want to travel from {fromCity} to {toCity} {travelDate} ",
+        "Plan a trip",
+        "I'll go to {toCity} on the {travelDate} "
+      ],
+      "slots": [
+        {
+          "name": "toCity",
+          "type": "AMAZON.US_CITY",
+          "samples": [
+            "i'd like to go to {toCity} ",
+            "{toCity} ",
+            "I'd like to visit {toCity} ",
+            "we're going to {toCity} ",
+            "i will leave on {travelDate} ",
+            "I will go to {toCity}  on {travelDate} "
+          ]
+        },
+        {
+          "name": "fromCity",
+          "type": "AMAZON.US_CITY",
+          "samples": [
+            "{fromCity} ",
+            "leaving from {fromCity} ",
+            "from {fromCity} ",
+            "my trip starts in {fromCity} "
+          ]
+        },
+        {
+          "name": "travelDate",
+          "type": "AMAZON.DATE",
+          "samples": [
+            "{travelDate} ",
+            "my trips starts {travelDate} ",
+            "leaving on {travelDate} "
+          ]
+        },
+        {
+          "name": "activity",
+          "type": "LIST_OF_ACTIVITIES",
+          "samples": []
+        }
+      ]
+    }
+  ],
+  "types": [
+    {
+      "name": "LIST_OF_ACTIVITIES",
+      "values": [
+        {
+          "id": null,
+          "name": {
+            "value": "bicycling",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "bike",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "biking",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "camp",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "camping",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "hike",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "hiking",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "race",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "run",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "shop",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "shopping",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "ski",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "skiing",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "surf",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "surfing",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "swim",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "swimming",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "visit relatives",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "visit with friends",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "visit with my relatives",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "concert",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "play",
+            "synonyms": []
+          }
+        }
+      ]
+    }
+  ],
+  "prompts": [
+    {
+      "id": "Elicit.Intent-PlanMyTrip.IntentSlot-toCity",
+      "promptVersion": "1.0",
+      "definitionVersion": "1.0",
+      "variations": [
+        {
+          "type": "PlainText",
+          "value": "Where are you going?"
+        },
+        {
+          "type": "PlainText",
+          "value": "which city are you going to?"
+        }
+      ]
+    },
+    {
+      "id": "Elicit.Intent-PlanMyTrip.IntentSlot-fromCity",
+      "promptVersion": "1.0",
+      "definitionVersion": "1.0",
+      "variations": [
+        {
+          "type": "PlainText",
+          "value": "What city are you leaving from?"
+        },
+        {
+          "type": "PlainText",
+          "value": "where are you starting your trip?"
+        }
+      ]
+    },
+    {
+      "id": "Elicit.Intent-PlanMyTrip.IntentSlot-travelDate",
+      "promptVersion": "1.0",
+      "definitionVersion": "1.0",
+      "variations": [
+        {
+          "type": "PlainText",
+          "value": "When will you start this trip?"
+        },
+        {
+          "type": "PlainText",
+          "value": "what date are you flying out?"
+        }
+      ]
+    }
+  ],
+  "dialog": {
+    "version": "1.0",
+    "intents": [
+      {
+        "name": "PlanMyTrip",
+        "confirmationRequired": false,
+        "prompts": {},
+        "slots": [
+          {
+            "name": "toCity",
+            "type": "AMAZON.US_CITY",
+            "elicitationRequired": true,
+            "confirmationRequired": false,
+            "prompts": {
+              "elicit": "Elicit.Intent-PlanMyTrip.IntentSlot-toCity"
+            }
+          },
+          {
+            "name": "fromCity",
+            "type": "AMAZON.US_CITY",
+            "elicitationRequired": true,
+            "confirmationRequired": false,
+            "prompts": {
+              "elicit": "Elicit.Intent-PlanMyTrip.IntentSlot-fromCity"
+            }
+          },
+          {
+            "name": "travelDate",
+            "type": "AMAZON.DATE",
+            "elicitationRequired": true,
+            "confirmationRequired": false,
+            "prompts": {
+              "elicit": "Elicit.Intent-PlanMyTrip.IntentSlot-travelDate"
+            }
+          },
+          {
+            "name": "activity",
+            "type": "LIST_OF_ACTIVITIES",
+            "elicitationRequired": false,
+            "confirmationRequired": false,
+            "prompts": {}
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "intents": [
+    {
+      "intent": "PracticeIntent",
+      "slots":[]
+    },
+    {
+      "intent": "QuizIntent",
+      "slots":[]
+    },
+    {
+      "intent": "AnswerIntent",
+      "slots":[
+      {
+        "name":"usstate",
+        "type":"AMAZON.US_STATE"
+      }
+    ]
+    },
+    {
+      "intent": "AMAZON.YesIntent"
+    },
+    {
+      "intent": "AMAZON.NoIntent"
+    },
+    {
+      "intent": "AMAZON.HelpIntent"
+    },
+    {
+      "intent": "AMAZON.StopIntent"
+    },
+    {
+      "intent": "AMAZON.CancelIntent"
+    }
+  ]
+}

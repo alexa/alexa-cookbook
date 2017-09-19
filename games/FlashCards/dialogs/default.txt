@@ -1,0 +1,15 @@
+LaunchRequest
+PracticeIntent
+AMAZON.YesIntent
+AnswerIntent usstate=Rhode%20Island
+AnswerIntent usstate=Washington
+? AnswerIntent usstate=Massachusetts
+? AnswerIntent usstate=Pennsylvania
+AMAZON.YesIntent
+? AnswerIntent usstate=Washington
+? AnswerIntent usstate=Washington
+AMAZON.YesIntent
+AnswerIntent usstate=Washington
+? AnswerIntent usstate=Washington
+? AnswerIntent usstate=Washington
+AMAZON.NoIntent

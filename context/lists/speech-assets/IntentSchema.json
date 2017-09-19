@@ -1,0 +1,19 @@
+{
+  "intents": [
+    {
+      "intent": "TopToDoIntent"
+    },
+    {
+      "intent": "ClearTopToDoIntent"
+    },
+    {
+      "intent": "AMAZON.CancelIntent"
+    },
+    {
+      "intent": "AMAZON.HelpIntent"
+    },
+    {
+      "intent": "AMAZON.StopIntent"
+    }
+  ]
+}

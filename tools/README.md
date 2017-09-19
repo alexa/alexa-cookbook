@@ -35,7 +35,8 @@ You may want to develop from a project folder on your local laptop for a number 
 #### Download from GitHub
 You can download the entire Cookbook to your local hard drive in one of two ways:
 * Click the green **Clone or download** button from the home page, and download the zip file.  Be sure to extract everything to a new folder.
-* If you have [GIT](https://git-scm.com/downloads) installed, open a command prompt and run : ```git clone https://github.com/alexa/Cookbook```
+* If you have [GIT](https://git-scm.com/downloads) installed, open a command prompt and run :
+  * ```git clone https://github.com/alexa/alexa-cookbook```
 
 You can also create a new skill function from scratch.  Create an empty folder, and add a file called ```index.js```
 

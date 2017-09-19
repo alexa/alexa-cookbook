@@ -5,9 +5,6 @@
 ##  or copy & paste section #3, the helper function, to the bottom of your existing Lambda code.
 
 
-
-
-
 ## 1. Text strings =====================================================================================================
 ##    Modify these strings and messages to change the behavior of your Lambda function
 
@@ -71,9 +68,9 @@ import requests
 def httpsGet(myData):
 
     global myUrl
-    myUrl = myUrl + urllib2.quote(myData)
+    myLocalUrl = myUrl + urllib2.quote(myData)
 
-    r = requests.get(myUrl)
+    r = requests.get(myLocalUrl)
 
     myJs = r.json()
 

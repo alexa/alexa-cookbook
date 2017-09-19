@@ -1,0 +1,81 @@
+{
+  "session": {
+    "sessionId": "SessionId.92bd323a-e319-48a1-be59-fd1ba7332a12",
+    "application": {
+      "applicationId": "amzn1.ask.skill.2bd3cce3-5117-49ce-9223-2ed03151c1ad"
+    },
+    "attributes": {
+      "sessionQuestionList": [
+        {
+          "question": "Drexel",
+          "answer": [
+            "Washington"
+          ]
+        },
+        {
+          "question": "Brown",
+          "answer": [
+            "Washington"
+          ]
+        },
+        {
+          "question": "Duke",
+          "answer": [
+            "Washington"
+          ]
+        }
+      ],
+      "currentQuestionIndex": 2,
+      "correctCount": 2,
+      "wrongCount": 0,
+      "wrongList": [],
+      "STATE": "_QUIZ",
+      "questionList": [
+        {
+          "question": "Drexel",
+          "answer": [
+            "Washington"
+          ]
+        },
+        {
+          "question": "Brown",
+          "answer": [
+            "Washington"
+          ]
+        },
+        {
+          "question": "Duke",
+          "answer": [
+            "Washington"
+          ]
+        },
+        {
+          "question": "Gonzaga",
+          "answer": [
+            "Washington"
+          ]
+        }
+      ]
+    },
+    "user": {
+      "userId": "amzn1.ask.account.AFEKIKDTHNLL6Y5G76OR4LFEDONBUWANUBGM2YETWDTAUEX64DJOMHGIDPSOVMHLK4CVIFB2YXND7JUEG2IF5VLTD45AZ6KBDTTC2TSL2QZ7PVBRWIIX3NZ5PESQVFEUVVO4RP66HWNYDKMPQVRDOOHQGR5TZOO5ZZWQA375I6CFAOSCXOAVO7KTRE5VUEZXIP5DUK2ZILBBMQA"
+    },
+    "new": false
+  },
+  "request": {
+    "type": "IntentRequest",
+    "requestId": "EdwRequestId.58733391-a922-4c60-a2f1-5b947a3e38b5",
+    "locale": "en-US",
+    "timestamp": "2017-06-02T03:51:32Z",
+    "intent": {
+      "name": "AnswerIntent",
+      "slots": {
+        "usstate": {
+          "name": "usstate",
+          "value": "Washington"
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}

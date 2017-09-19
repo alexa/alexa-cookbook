@@ -8,12 +8,12 @@
 // 1. Text strings =====================================================================================================
 //    Modify these strings and messages to change the behavior of your Lambda function
 
-var myRequest = ['hello','howdy','hi', 'good day'];  // Array of items
+const myRequest = ['hello','howdy','hi', 'good day'];  // Array of items
 
 // 2. Skill Code =======================================================================================================
 
 
-var Alexa = require('alexa-sdk');
+const Alexa = require('alexa-sdk');
 
 exports.handler = function(event, context, callback) {
     var alexa = Alexa.handler(event, context);
@@ -32,7 +32,8 @@ var handlers = {
 
     'MyIntent': function () {
 
-        this.emit(':tell', 'the welcome message is, ' + randomPhrase(myRequest) );
+        this.response.speak('the welcome message is, ' + randomPhrase(myRequest))
+        this.emit(':responseReady');
 
 
     }
@@ -52,5 +53,3 @@ function randomPhrase(myData) {
 
     return(myData[i]);
 }
-
-

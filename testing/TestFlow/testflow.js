@@ -3,13 +3,15 @@
 // node testflow
 // node testflow staterequest.txt
 
-
 // Toggle on or off various debugging outputs
 const options = {
     speechOutput : true,
     slots        : true,
-    attributes   : true,
-    stdout       : true  // standard output  / console.log() in your code
+    attributes   : true, // true, false, or a string with the name of an attribute
+    stdout       : false,    // standard output  / console.log() in your code
+    requestEvent : false,    // show the full request JSON sent to your code
+    reprompt     : false,
+    delay        : 1.0    // seconds between requests
 };
 
 var locale = 'en-US';
@@ -18,20 +20,27 @@ var fs = require("fs");
 var MyLambdaFunction = require('./src/index.js'); // Your Lambda source with exports.handler
 
 var MyDialog = './dialogs/default.txt';
+var appId = ''; // 'amzn1.ask.skill.d60ceb98-befe-4f49-a627-1f20f6e98d94';
 
 if (process.argv[2]) {
     MyDialog = './dialogs/' + process.argv[2];
-} 
+}
 
+console.log();
+console.log('================================================================================');
 console.log('Running test sequence from dialog file : ', MyDialog);
 console.log();
 
 const OriginalConsoleLog = console.log;
 
-
 var slotname = '';
 var slotvalue = '';
 var sa = {};
+var current_line = 1;
+var lineArray = [];
+var Intent = '';
+var prompt = false;
+
 
 var context = {
     'succeed': function (data) {
@@ -42,11 +51,27 @@ var context = {
             sa = data.sessionAttributes;
         }
 
-        if (options.attributes) {
-            console.log = OriginalConsoleLog;
-            console.log('\x1b[35m%s\x1b[0m ', JSON.stringify(sa));  // JSON.stringify(sa, null, 2)); for formatted JSON
-        }
+        if (typeof options.attributes == 'boolean') {
 
+            if (options.attributes) {
+                console.log = OriginalConsoleLog;
+                console.log('\x1b[35m%s\x1b[0m ', JSON.stringify(sa, null, 2)); // for formatted JSON
+            }
+        } else {  // you can define an attribute to display by setting options.attribute to a string, such as 'STATE'
+            var printAttributeObject = {};
+            console.log = OriginalConsoleLog;
+            var printAttributeName = options.attributes.toString();
+            var printAttribute = sa[printAttributeName];
+            if (!printAttribute) {
+                printAttribute = '';
+            } else if (typeof printAttribute == 'object') {
+                printAttributeObject = printAttribute;
+            } else {
+                printAttributeObject = JSON.parse('{"' + printAttributeName + '":"' + printAttribute + '"}');
+            }
+            console.log('\x1b[35m%s\x1b[0m ', JSON.stringify(printAttributeObject)); // , null, 2)); // for formatted JSON
+
+        }
 
         var textToSay = data.response.outputSpeech.ssml;
         textToSay = textToSay.replace('<speak>', '    ');
@@ -55,6 +80,46 @@ var context = {
         if (options.speechOutput) {
             console.log = OriginalConsoleLog;
             console.log('\x1b[36m%s\x1b[0m ', textToSay);
+        }
+
+        if (data.response.reprompt && data.response.reprompt.outputSpeech && data.response.reprompt.outputSpeech.ssml) {
+
+            var textReprompt = data.response.reprompt.outputSpeech.ssml;
+            textReprompt = textReprompt.replace('<speak>', '    ');
+            textReprompt = textReprompt.replace('</speak>', '');
+
+            if (options.reprompt) {
+                console.log = OriginalConsoleLog;
+
+                // console.log('%s \x1b[33m\x1b[1m%s\x1b[0m \x1b[2m%s\x1b[0m', currentLine+1, Intent, sdkState);
+
+                console.log('\x1b[36m \x1b[2m%s\x1b[0m ', textReprompt);
+            }
+        }
+
+
+        if (data.response.shouldEndSession) {
+            // console.log('================ Session Ended');
+        }
+
+
+        // =====================
+
+        if (current_line < lineArray.length ) {
+
+            // blocking pause
+            var waitTill = new Date(new Date().getTime() + options.delay * 1000);
+            while(waitTill > new Date()){}
+
+            console.log();
+
+            runSingleTest(lineArray, current_line++, sa);
+
+        } else {
+            console.log('');
+
+            process.exit();
+
         }
 
     },
@@ -67,104 +132,213 @@ var context = {
 
 fs.readFile(MyDialog, function (err, data) {  // open dialog sequence file and read Intents
 
-    var newSession = true;
+    // var newSession = true;
     var request = {};
 
-    var lineArray = data.toString().split('\n');
+    lineArray = cleanArray(data.toString().split('\n')); // remove empty or comment lines (# or //)
 
-    for (var i = 0; i < lineArray.length; i++) {
+    runSingleTest(lineArray, 0, {});
+
+});
 
 
-        if (i > 0) {
-            newSession = false;
+function runSingleTest(myLineArray, currentLine, sa) {
+
+    // console.log('--------------------------------------------------------------------------------');
+    // console.log('testing line ', currentLine);
+    // console.log('testing line values ', myLineArray[currentLine]);
+
+    prompt = false;
+    var newSession = true;
+    if (currentLine > 0) {
+        newSession = false;
+    }
+
+    var tokenArray = myLineArray[currentLine].split(' ');
+
+    if (tokenArray[0].replace('\r','') == '?') {  // pause and prompt the user to confirm
+        prompt = true;
+        // console.log(' ----------------- > prompt');
+        tokenArray.shift();  // removes first item
+    }
+
+    var requestType = tokenArray[0].replace('\r','');
+    tokenArray.shift();
+
+    if (requestType == 'stop') {
+        console.log('');
+        process.exit();
+    }
+
+    if (requestType =='LaunchRequest') {
+        request =  {
+            "type": requestType,
+            "locale": locale
+        };
+
+        // console.log(' ========== %s. Request  \x1b[31m\x1b[1m%s\x1b[0m', currentLine+1, requestType);
+        console.log('%s \x1b[31m\x1b[1m%s\x1b[0m', currentLine+1, requestType);
+
+        prepareTestRequest(sa, newSession, request);
+
+    } else {
+
+        Intent = requestType;
+        slotArray = [];
+
+        var sdkState = '';
+
+        if(sa['STATE']){
+            sdkState = sa['STATE'];
         }
 
-        var tokenArray = lineArray[i].split(' ');
+        console.log('%s \x1b[33m\x1b[1m%s\x1b[0m \x1b[2m%s\x1b[0m', currentLine+1, Intent, sdkState);
 
-        var requestType = tokenArray[0].replace('\r','');
+        processArray(tokenArray, function(request) {
+            prepareTestRequest(sa, newSession, request);
+
+        });
 
 
-        if (requestType =='LaunchRequest'
+    }
 
-           ) {
-            request =  {
-                    "type": requestType,
-                    "locale": locale
-            };
 
-            console.log(' ===== Request %s \x1b[31m\x1b[1m%s\x1b[0m', i+1, requestType);
+}
 
-        } else {
-            var Intent = requestType;
-            slotArray = [];
-            console.log(' ====== Intent %s \x1b[33m\x1b[1m%s\x1b[0m', i+1, Intent);
+slotArray = [];
 
-            for(j = 1; j < tokenArray.length; j++) {
+function processArray(arr, cb) {
 
-                var equalsPosition = tokenArray[j].indexOf('=');
-                slotname = tokenArray[j].substr(0, equalsPosition);
-                slotvalue = decodeURI(tokenArray[j].substr(equalsPosition+1, 300)).replace('\r','');
+    if(arr.length > 0) {
 
-                if (options.slots) {
-                    console.log('\x1b[34m%s :\x1b[0m\x1b[32m %s\x1b[0m ', slotname,  slotvalue  );
-                }
+        var equalsPosition = arr[0].indexOf('=');
+        slotname = arr[0].substr(0, equalsPosition);
+        slotvalue = decodeURI(arr[0].substr(equalsPosition+1, 300)).replace('\r','');
 
-                if (slotvalue != '') {
-                    slotArray.push('"' + slotname + '": {"name":"' + slotname + '","value":"' + slotvalue + '"}');
+        promptForSlot(prompt, slotname, slotvalue, (newValue) => {
 
-                }
+            // console.log('slotname, slotvalue, newValue');
+            // console.log(slotname, slotvalue, newValue);
 
+            var answer = newValue.toString().trim();
+
+            // console.log('answer = ' + answer);
+
+            if(answer == '') {
+                answer = slotvalue;
             }
 
-            var slotArrayString = '{' + slotArray.toString() + '}';
 
-            var slotObj = JSON.parse(slotArrayString);
+            if (answer != '') {
+                slotArray.push('"' + slotname + '": {"name":"' + slotname + '","value":"' + answer + '"}');
+            }
 
-            request =  {
-                "type": "IntentRequest",
-                "intent": {
-                    "name": Intent,
-                    "slots" : slotObj
+            arr.shift();
+            processArray(arr, cb);  // RECURSION
+
+        });
+
+
+
+    } else {  // nothing left in slot array
+
+
+        var slotArrayString = '{' + slotArray.toString() + '}';
+
+        var slotObj = JSON.parse(slotArrayString);
+
+        var req =  {
+            "type": "IntentRequest",
+            "intent": {
+                "name": Intent,
+                "slots" : slotObj
+            },
+            "locale": locale
+        };
+
+        cb(req);
+        // process.exit();
+
+    }
+
+}
+
+function prepareTestRequest(sa, newSession, request){
+
+    var eventJSON =
+        {
+            "session": {
+                "sessionId": "SessionId.f9e6dcbb-b7da-4b47-905c.etc.etc",
+                "application": {
+                    "applicationId": appId
                 },
-                "locale": locale
-            };
-
-        }
-
-        var eventJSON =
-            {
-                "session": {
-                    "sessionId": "SessionId.f9e6dcbb-b7da-4b47-905c.etc.etc",
-                    "application": {
-                        "applicationId": "amzn1.echo-sdk-ams.app.1234"
-                    },
-                    "attributes": sa,
-                    "user": {
-                        "userId": "amzn1.ask.account.VO3PVTGF563MOPBY.etc.etc"
-                    },
-                    "new": newSession
+                "attributes": sa,
+                "user": {
+                    "userId": "amzn1.ask.account.VO3PVTGF563MOPBY.etc.etc"
                 },
-                 request,
-                "version": "1.0"
-            };
+                "new": newSession
+            },
+            request,
+            "version": "1.0"
+        };
 
-        // call the function
-        if (options.stdout) {
-            MyLambdaFunction['handler'] (eventJSON, context, callback);
+    if (options.requestEvent) {
+        console.log(JSON.stringify(request, null, 2));
+    }
 
-        }  else {
+    // blocking pause
+    var waitTill = new Date(new Date().getTime() + options.delay * 1000);
+    while(waitTill > new Date()){}
 
-            console.log = function() {};
-            MyLambdaFunction['handler'] (eventJSON, context, callback);
-            console.log = OriginalConsoleLog;
+    // call the function
+    if (options.stdout) {
+        MyLambdaFunction['handler'] (eventJSON, context, callback);
+
+    }  else {
+        //console.log('setting log to {}');
+        console.log = function() {};
+        //console.log('set log to {}');
+
+        MyLambdaFunction['handler'] (eventJSON, context, callback);
+        console.log = OriginalConsoleLog;
+    }
+
+}
+
+function promptForSlot(prompt, slotname, slotvalue, callback) {
+
+    if (prompt) {
+        process.stdout.write('\x1b[34m' + slotname + ' \x1b[0m\x1b[32m [' + slotvalue + ']\x1b[0m: ');
+
+        // console.log('\x1b[34m%s :\x1b[0m\x1b[32m %s\x1b[0m ', slotname,  slotvalue  );
+
+        process.stdin.once('data', function (data) {
+            var answer = data.toString().trim();
+
+            // console.log(answer);
+
+            if(answer == '') {
+                if(slotvalue == '') {
+                    // no default, user must type something
+                    console.error('Error: No default slot value defined, user must type a slot value.');
+                    process.exit();
+
+                } else {
+                    answer = slotvalue;
+                }
+            }
+
+            callback(answer);
+        });
+
+    } else {
+        if (options.slots) {
+            console.log('\x1b[34m%s :\x1b[0m\x1b[32m %s\x1b[0m ', slotname,  slotvalue  );
         }
 
-        console.log('--------------------------------------------------------------------------------');
-
-        }
-
-    });
-
+        callback(slotvalue);
+    }
+}
 
 function callback(error, data) {
     if(error) {
@@ -174,7 +348,16 @@ function callback(error, data) {
     }
 };
 
+function cleanArray(myArray) {
+    var cleanedArray = [];
 
+    for (var i = 0; i < myArray.length; i++ ) {
+        if(myArray[i] != '' && myArray[i].substring(0,1) != '#'  && myArray[i].substring(0,2) != '//') {
+            cleanedArray.push(myArray[i]);
+        }
+    }
+    return cleanedArray;
+}
 //
 // const fontcolor = {
 //     Reset = "\x1b[0m",

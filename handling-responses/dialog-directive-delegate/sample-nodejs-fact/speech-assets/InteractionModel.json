@@ -1,0 +1,163 @@
+{
+  "intents": [
+    {
+      "name": "AMAZON.CancelIntent",
+      "samples": []
+    },
+    {
+      "name": "AMAZON.HelpIntent",
+      "samples": []
+    },
+    {
+      "name": "AMAZON.StopIntent",
+      "samples": []
+    },
+    {
+      "name": "GetNewFactIntent",
+      "samples": [
+        "Give me a fact",
+        "tell me a fact",
+        "another"
+      ],
+      "slots": []
+    },
+    {
+      "name": "GetTravelTime",
+      "samples": [
+        "calculate travel time",
+        "how long does it take to travel from {DepartingPlanet} to {ArrivingPlanet} "
+      ],
+      "slots": [
+        {
+          "name": "DepartingPlanet",
+          "type": "Planet",
+          "samples": [
+            "I'm starting from {DepartingPlanet} ",
+            "{DepartingPlanet} ",
+            "I'm going from {DepartingPlanet} to {ArrivingPlanet} "
+          ]
+        },
+        {
+          "name": "ArrivingPlanet",
+          "type": "Planet",
+          "samples": [
+            "I'm going to {ArrivingPlanet} ",
+            "{ArrivingPlanet} "
+          ]
+        }
+      ]
+    }
+  ],
+  "types": [
+    {
+      "name": "Planet",
+      "values": [
+        {
+          "name": {
+            "value": "Mercury"
+          }
+        },
+        {
+          "name": {
+            "value": "Venus"
+          }
+        },
+        {
+          "name": {
+            "value": "Earth"
+          }
+        },
+        {
+          "name": {
+            "value": "Mars"
+          }
+        },
+        {
+          "name": {
+            "value": "Jupiter"
+          }
+        },
+        {
+          "name": {
+            "value": "Saturn"
+          }
+        },
+        {
+          "name": {
+            "value": "Uranus"
+          }
+        },
+        {
+          "name": {
+            "value": "Neptune"
+          }
+        },
+        {
+          "name": {
+            "value": "Pluto"
+          }
+        }
+      ]
+    }
+  ],
+  "prompts": [
+    {
+      "id": "Elicit.Intent-GetTravelTime.IntentSlot-DepartingPlanet",
+      "promptVersion": "1.0",
+      "definitionVersion": "1.0",
+      "variations": [
+        {
+          "type": "PlainText",
+          "value": "Which planet are you starting from?"
+        }
+      ]
+    },
+    {
+      "id": "Elicit.Intent-GetTravelTime.IntentSlot-ArrivingPlanet",
+      "promptVersion": "1.0",
+      "definitionVersion": "1.0",
+      "variations": [
+        {
+          "type": "PlainText",
+          "value": "Which planet are you going to?"
+        }
+      ]
+    }
+  ],
+  "dialog": {
+    "version": "1.0",
+    "intents": [
+      {
+        "name": "GetNewFactIntent",
+        "confirmationRequired": false,
+        "prompts": {},
+        "slots": []
+      },
+      {
+        "name": "GetTravelTime",
+        "confirmationRequired": false,
+        "prompts": {},
+        "slots": [
+          {
+            "name": "DepartingPlanet",
+            "type": "Planet",
+            "elicitationRequired": true,
+            "confirmationRequired": false,
+            "prompts": {
+              "elicit": "Elicit.Intent-GetTravelTime.IntentSlot-DepartingPlanet"
+            }
+          },
+          {
+            "name": "ArrivingPlanet",
+            "type": "Planet",
+            "elicitationRequired": true,
+            "confirmationRequired": false,
+            "prompts": {
+              "elicit": "Elicit.Intent-GetTravelTime.IntentSlot-ArrivingPlanet"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

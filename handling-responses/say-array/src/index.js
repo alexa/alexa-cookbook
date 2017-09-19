@@ -8,12 +8,12 @@
 // 1. Text strings =====================================================================================================
 //    Modify these strings and messages to change the behavior of your Lambda function
 
-var myRequest = ['apples', 'oranges', 'strawberries'];  // Array of items
+const myRequest = ['apples', 'oranges', 'strawberries'];  // Array of items
 
 // 2. Skill Code =======================================================================================================
 
 
-var Alexa = require('alexa-sdk');
+const Alexa = require('alexa-sdk');
 
 exports.handler = function(event, context, callback) {
     var alexa = Alexa.handler(event, context);
@@ -25,20 +25,17 @@ exports.handler = function(event, context, callback) {
     alexa.execute();
 };
 
-var handlers = {
+const handlers = {
     'LaunchRequest': function () {
         this.emit('MyIntent');
     },
 
     'MyIntent': function () {
 
-        this.emit(':tell',
-                'the list contains ' + sayArray(myRequest,  'and')
-                +
-                '. please choose either ' +  sayArray(myRequest,  'or')
-        );
-
-
+        var speechOutput = 'the list contains ' + sayArray(myRequest,  'and')
+                    + '. please choose either ' +  sayArray(myRequest,  'or');
+        this.response.speak(speechOutput);
+        this.emit(':responseReady');
     }
 };
 
@@ -78,5 +75,3 @@ function sayArray(myData, andor) {
 
     return(listString);
 }
-
-

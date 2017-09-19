@@ -1,0 +1,55 @@
+{
+  "intents": [
+
+    {
+      "name": "AnswerIntent",
+      "samples": [
+        "{usstate}"
+      ],
+      "slots": [
+        {
+          "name": "usstate",
+          "type": "AMAZON.US_STATE",
+          "samples": []
+        }
+      ]
+    },
+    {
+      "name": "PracticeIntent",
+      "samples": [
+        "practice"
+      ],
+      "slots": []
+    },
+    {
+      "name": "QuizIntent",
+      "samples": [
+        "quiz"
+      ],
+      "slots": []
+    },
+
+    {
+      "name": "AMAZON.HelpIntent",
+      "samples": []
+    },
+    {
+      "name": "AMAZON.StopIntent",
+      "samples": []
+    },
+    {
+      "name": "AMAZON.CancelIntent",
+      "samples": []
+    },
+
+    {
+      "name": "AMAZON.YesIntent",
+      "samples": []
+    },
+    {
+      "name": "AMAZON.NoIntent",
+      "samples": []
+    }
+
+  ]
+}

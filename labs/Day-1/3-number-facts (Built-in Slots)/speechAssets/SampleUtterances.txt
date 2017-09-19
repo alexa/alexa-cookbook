@@ -1,0 +1,6 @@
+GetNewFactIntent a fact
+GetNewFactIntent tell me a fact
+GetNewFactIntent give me a fact
+GetNewFactAboutIntent a fact about {number}
+GetNewFactAboutIntent tell me a fact about {number}
+GetNewFactAboutIntent give me a fact about {number}

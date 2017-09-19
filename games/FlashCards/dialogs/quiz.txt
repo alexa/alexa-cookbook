@@ -1,0 +1,10 @@
+LaunchRequest
+QuizIntent
+AMAZON.YesIntent
+AnswerIntent usstate=Washington
+AnswerIntent usstate=Washington
+? AnswerIntent usstate=Washington
+AMAZON.YesIntent
+PracticeIntent
+AMAZON.YesIntent
+? AnswerIntent usstate=Washington

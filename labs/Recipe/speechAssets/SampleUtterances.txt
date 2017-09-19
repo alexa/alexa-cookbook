@@ -1,0 +1,6 @@
+IngredientsIntent ingredients
+IngredientsIntent shopping list
+
+CookIntent cook
+CookIntent begin
+CookIntent begin cooking

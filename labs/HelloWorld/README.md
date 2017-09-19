@@ -133,7 +133,7 @@ Copy and paste in the following new Intent definition:
       "slots":[
         {
           "name":"firstname",
-          "type":"AMAZON.DE_FIRST_NAME"
+          "type":"AMAZON.US_FIRST_NAME"
         }
       ]
     }

@@ -1,0 +1,96 @@
+<html>
+
+<head>
+    <title> Thing1 : Alexa to AWS IOT to Web Browser</title>
+
+    <script type="text/javascript" src="./bower_components/mqttws/mqttws31.js"></script>
+    <script type="text/javascript" src="./bower_components/moment/moment.js"></script>
+    <script type="text/javascript" src="./bower_components/crypto-js/crypto-js.js"></script>
+    <script type="text/javascript" src="./bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="./bower_components/jquery-color/jquery.color.js"></script>
+    <script type="text/javascript" src="./bower_components/aws-sdk/dist/aws-sdk.min.js"></script>
+
+    <script type="text/javascript" src="./js/aws_config.js"></script>
+
+    <script type="text/javascript" src="./js/aws_sigv4.js"></script>
+    <script type="text/javascript" src="./js/aws_iot.js"></script>
+
+    <script type="text/javascript" src="./js/connectAsThing.js"></script>
+    <script type="text/javascript" src="./js/updateDom.js"></script>
+    <style>
+        .panelclass {
+            margin: auto;
+            width: 400px;
+            height: 200px;
+            font-family: "Courier New";
+            font-size:12pt;
+            background-color:whitesmoke;
+
+        }
+
+        .tableclass{
+            margin:auto;
+            text-align:center;
+        }
+        .aboutclass{
+            margin:auto;
+            text-align:center;
+            font-family: "Arial";
+            font-size:10pt;
+            color:dimgray;
+        }
+
+        .table1 { border:1px gray; table-layout:fixed;  }
+        .tdlabel { background-color: white; color:grey; font-family: "Arial"; font-size:small; padding:5px; border-top:2px solid white; }
+        .tdvalue { background-color: gainsboro; font-family: "Courier New"; padding:5px; border-top:2px solid white; }
+        .tdvaluesmall { background-color: gainsboro; color:black; word-wrap:break-word; font-size:9pt; font-family: "Courier New"; padding:5px; border-top:2px solid white; }
+        .connected { color:green; font-weight:bold; }
+        .disconnected { color:red; font-weight:bold; }
+
+
+    </style>
+
+
+</head>
+
+<body onLoad="console.log('body loaded');"  >
+
+<div class="panelclass" id="panel">
+Welcome!
+</div>
+<div class="panelimgclass" id="panelimg">
+    <img src="" />
+</div>
+
+<br />
+<div class="tableclass" id="table">
+
+    <table class="table1">
+        <tr><td class="tdlabel">Status</td><td class="tdvalue"><span id="MQTTstatus">STOPPED</span></td></tr>
+        <tr><td class="tdlabel">Identity Pool ID</td><td class="tdvaluesmall"><span id="IdentityPoolId"></span></td></tr>
+    </table>
+
+    <table class="table1">
+        <tr><td class="tdlabel">Subscribe Topic</td><td class="tdvaluesmall"><span id="SubscribeTopic"></span></td></tr>
+        <tr><td class="tdlabel">MQTT Endpoint</td><td class="tdvaluesmall"><span id="mqttEndpoint"></span></td></tr>
+    </table>
+    <br />
+    <hr />
+    <input type="button" name="reloader" value="RELOAD PAGE" onClick="reloader()">
+
+</div>
+
+<div class="aboutclass" id="about">
+    <p>This page connects to AWS IOT using the MQTT protocol, and listens for updates.</p>
+    <p>When an update is received, a child browser window will pop with a custom image search URL.</p>
+    <p>Check your browser's address bar for a suppressed popup.  Click on it and allow popups!<br />
+    Check your browser's Developer Tools - Console for any Javascript errors.
+    </p>
+
+</div>
+
+
+</body>
+
+</html>
+

@@ -8,7 +8,7 @@ const REGION         = 'us-east-1';  // eu-west-1
 // 2. Click on Registry, and add a new Thing, such as waterPump
 
 // IOT Thing
-const ThingName      = 'waterPump';
+const ThingName      = 'thing1';
 const SubscribeTopic = '$aws/things/' + ThingName + '/shadow/update/accepted';
 
 // 3. Click on the Interact menu item, to reveal the API Endpoint:

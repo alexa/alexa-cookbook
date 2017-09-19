@@ -19,9 +19,7 @@ var event =
         },
         "request": {
             "type": "LaunchRequest",
-
             "requestId": "request5678",
-
             "locale": "en-US"
         },
         "version": "1.0"
