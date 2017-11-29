@@ -34,7 +34,7 @@ In the [first step of this guide](1-voice-user-interface.md), we built the Voice
 <img src="https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/historybuff/create_function._CB512966722_.png" />
 
 
-8.  **Zip the [provided code](../src/)  and upload into the Lambda function code box.**  We have provided the code for this skill on [GitHub](../src/). In command line, run **npm install**, and then run **gulp**. It will automatically create a *.zip file. In **Code entry type**, choose **Upload a .zip file** created and then upload the *.zip file. Choose **Node.js 6.10** in **RunTime** since this skill is written by Node.js. In **Handler** text box, input index.handler.
+8.  **Zip the [provided code](../lambda/custom/)  and upload into the Lambda function code box.**  We have provided the code for this skill on [GitHub](../lambda/custom/). In command line, run **npm install**, and then run **gulp**. It will automatically create a *.zip file. In **Code entry type**, choose **Upload a .zip file** created and then upload the *.zip file. Choose **Node.js 6.10** in **RunTime** since this skill is written by Node.js. In **Handler** text box, input index.handler.
 
 <img src="https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/historybuff/upload_zip_file._CB1507924290_.png" />
 
