@@ -43,29 +43,26 @@ For the sample dialog model code, instead of using delegateSlotCollection, use t
 ### Code Snippet
 ```
 function delegateSlotCollectionAndSaveSlotInfo() {
-    console.log("in delegateSlotCollection and save information from a dialog");
+    console.log("in delegateSlotCollection and can help you save information from a dialog");
     console.log("current dialogState: " + this.event.request.dialogState);
     if (this.event.request.dialogState === "STARTED") {
         console.log("in Beginning");
 
         var updatedIntent = this.event.request.intent;
-        if (this.event.request.dialogState === "STARTED") {
-            console.log("in Beginning");
-            var updatedIntentSlots = updatedIntent.slots;
+        var updatedIntentSlots = updatedIntent.slots;
 
-            for (var key in updatedIntentSlots) {
-                if (updatedIntentSlots.hasOwnProperty(key)) {
-                    var val = updatedIntentSlots[key];
-                    if (this.attributes[val.name]) {
-                        val.value = this.attributes[val.name];
+        for (var key in updatedIntentSlots) {
+            if (updatedIntentSlots.hasOwnProperty(key)) {
+                var val = updatedIntentSlots[key];
+                if (this.attributes[val.name]) {
+                    val.value = this.attributes[val.name];
                     } else {
-                        this.attributes[val.name] = val.value;
+                    this.attributes[val.name] = val.value;
                     }
                 }
             }
-            console.log(updatedIntent);
-            this.emit(":delegate", updatedIntent);
-        }
+        console.log(updatedIntent);
+        this.emit(":delegate", updatedIntent);
     } else if (this.event.request.dialogState !== "COMPLETED") {
         console.log("in not completed");
         var updatedIntentInProgress = this.event.request.intent;
