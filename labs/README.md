@@ -13,7 +13,7 @@ The Lab topics and content are subject to change in the future without warning.
  + When you get an idea for a new Intent or new skill feature, go ahead and add it to your skill!
 
 #### Ready to begin?
-Click to [LocalGuide](LocalGuide)  or [HelloWorld](HelloWorld), install the skill, and scroll down to follow the series of labs.
+Click to [LocalRecommendations](LocalRecommendations)  or [HelloWorld](HelloWorld), install the skill, and scroll down to follow the series of labs.
 
 
 <hr />
