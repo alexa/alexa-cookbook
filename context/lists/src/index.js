@@ -140,11 +140,11 @@ const clearTopToDoHandler = function() {
             that.emit(":responseReady");
         } else if(status === 200 ) {
             speechOutput = "I successfully deleted your top todo.";
-            this.response.speak(speechOutput);
+            that.response.speak(speechOutput);
             that.emit(":responseReady");
         } else {
           speechOutput = "I could not delete the todo. The developers are debugging response code " + status;
-          this.response.speak(speechOutput);
+          that.response.speak(speechOutput);
           that.emit(":responseReady");
         }
     });
