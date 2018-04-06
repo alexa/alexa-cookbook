@@ -1,4 +1,4 @@
-# Build An Alexa Fact Skill
+# Build An Alexa Recipe Skill
 [![Voice User Interface](https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/navigation/1-locked._TTH_.png)](./1-voice-user-interface.md)[![Lambda Function](https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/navigation/2-on._TTH_.png)](./2-lambda-function.md)[![Connect VUI to Code](https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/navigation/3-off._TTH_.png)](./3-connect-vui-to-code.md)[![Testing](https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/navigation/4-off._TTH_.png)](./4-testing.md)[![Customization](https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/navigation/5-off._TTH_.png)](./5-customization.md)[![Publication](https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/navigation/6-off._TTH_.png)](./6-publication.md)
 
 ## Setting Up A Lambda Function Using Amazon Web Services
@@ -56,7 +56,7 @@ In the [first step of this guide](./1-voice-user-interface.md), we built the Voi
 
 15. Click the **Add** button. Then click the **Save** button in the top right. You should see a green success message at the top of your screen. Now, click the box that has the Lambda icon followed by the name of your function and scroll down to the field called "Function code".
 
-16.  **Copy and paste the [provided code](https://github.com/alexa/skill-sample-nodejs-fact/blob/en-US/lambda/custom/index.js) into the Lambda function code box.**  We have provided the code for this skill on [GitHub](https://github.com/alexa/skill-sample-nodejs-fact/blob/en-US/lambda/custom/index.js).  Delete the contents of the code box, and paste the contents of the new code.
+16.  **Copy and paste the [provided code](../lambda/custom/index.js) into the Lambda function code box.**  We have provided the code for this skill on [GitHub](../lambda/custom/index.js).  Delete the contents of the code box, and paste the contents of the new code.
 Click "Save".
 
 17. **After you're done, the ARN value for this Lambda function should be in the top right corner of the page. Copy this value for use in the next section of the guide.**
