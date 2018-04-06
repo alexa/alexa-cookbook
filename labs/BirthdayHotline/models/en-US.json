@@ -1,0 +1,71 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "birthday hotline",
+            "intents": [
+                {
+                    "name": "PlayAudio",
+                    "slots": [],
+                    "samples": [
+                        "begin greetings",
+                        "begin the greetings",
+                        "begin playing the greetings",
+                        "start greetings",
+                        "start the greetings",
+                        "start playing the greetings",
+                        "play the greetings",
+                        "to play",
+                        "to begin greetings",
+                        "to begin the greetings",
+                        "to begin playing the greetings",
+                        "to start greetings",
+                        "to start the greetings",
+                        "to start playing the greetings",
+                        "to play the greetings"
+                    ]
+                },
+                {
+                    "name": "AMAZON.PauseIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.ResumeIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NextIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.PreviousIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StartOverIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.YesIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NoIntent",
+                    "samples": []
+                }
+            ],
+            "types": []
+        }
+    }
+}
