@@ -1,0 +1,67 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "breakfast sandwich",
+            "intents": [
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NextIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.PreviousIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NoIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.PauseIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.RepeatIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StartOverIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.YesIntent",
+                    "samples": []
+                },
+                {
+                    "name": "CookIntent",
+                    "slots": [],
+                    "samples": [
+                        "cook",
+                        "begin",
+                        "begin cooking"
+                    ]
+                },
+                {
+                    "name": "IngredientsIntent",
+                    "slots": [],
+                    "samples": [
+                        "ingredients",
+                        "shopping list"
+                    ]
+                }
+            ],
+            "types": []
+        }
+    }
+}
