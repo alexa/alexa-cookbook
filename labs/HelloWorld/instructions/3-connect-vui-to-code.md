@@ -3,7 +3,7 @@
 
 ## Connecting Your Voice User Interface To Your Lambda Function
 
-On [page #1](./1-Voice-User-Interface) of this guide, we created a voice user interface for the intents and utterances we expect from our users.  On [page #2](./2-Lambda-Function), we created a Lambda function that contains all of our logic for the skill.  On this page, we need to connect those two pieces together.
+On [page #1](./1-voice-user-interface.md) of this guide, we created a voice user interface for the intents and utterances we expect from our users.  On [page #2](./2-lambda-function.md), we created a Lambda function that contains all of our logic for the skill.  On this page, we need to connect those two pieces together.
 
 1.  **Go back to the [Amazon Developer Portal](https://developer.amazon.com/edw/home.html#/skills/list?&sc_category=Owned&sc_channel=RD&sc_campaign=Evangelism2018&sc_publisher=github&sc_content=Survey&sc_detail=hello-world-nodejs-V2_GUI-3&sc_funnel=Convert&sc_country=WW&sc_medium=Owned_RD_Evangelism2018_github_Survey_hello-world-nodejs-V2_GUI-3_Convert_WW_beginnersdevs&sc_segment=beginnersdevs) and select your skill from the list.** You may still have a browser tab open if you started at the beginning of this tutorial.
 
@@ -17,4 +17,4 @@ On [page #1](./1-Voice-User-Interface) of this guide, we created a voice user in
 
 6. **Click the "Next" button to continue to page #4 of this guide.**
 
-[![Next](https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/general/buttons/button_next_testing._TTH_.png)](./4-Testing)
+[![Next](https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/general/buttons/button_next_testing._TTH_.png)](./4-testing.md)
