@@ -9,26 +9,40 @@
 
 ```
 {
-  "intents": [
-    {
-      "intent": "MyIntent",  "slots":[
-          {
-            "name": "MyQuestion",
-            "type": "AMAZON.US_STATE"
-          }
-      ]
-    },
-
-    {
-      "intent": "AMAZON.HelpIntent"
-    },
-    {
-      "intent": "AMAZON.StopIntent"
-    },
-    {
-      "intent": "AMAZON.CancelIntent"
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "magic answers",
+            "intents": [
+                {
+                    "name": "MyIntent",
+                    "slots": [
+                        {
+                            "name": "MyQuestion",
+                            "type": "AMAZON.US_STATE"
+                        }
+                    ],
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.FallbackIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                }
+            ],
+            "types": []
+        }
     }
-  ]
 }
 ```
 
