@@ -1,0 +1,19 @@
+{
+  "name": "skill-sample-nodejs-birthday-hotline-i18n",
+  "version": "1.0.0",
+  "description": "I18n version of birthday hotline skill.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "hotline",
+    "messages",
+    "birthday"
+  ],
+  "author": "Amazon.com",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "alexa-sdk": "^1.0.12"
+  }
+}

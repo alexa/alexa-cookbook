@@ -94,95 +94,38 @@ Let’s start off by creating our Frontend.
 
 ### 1 - Create the Voice User Interface for our skill
 
-1. Head over to [Amazon Developer Portal](http://developer.amazon.com/). On the top right corner of the screen, click the **Sign In** button.
-2. Once you have signed in, click the **Alexa button** at the top of the screen.
-3. On the Alexa page, choose the **Get Started** button for the Alexa Skills Kit.
-4. Select **Add a New Skill**. This will get you to the first page of your new Alexa skill.
-5. Fill out the Skill Information screen, as below:
+## Setting up Your Alexa Skill in the Developer Portal
+1.  **Go to the [Amazon Developer Portal](http://developer.amazon.com).  In the top-right corner of the screen, click the "Sign In" button.** </br>(If you don't already have an account, you will be able to create a new one for free.)
 
 
-    |   | Description | Example  |
-    | ------------- | ------------- | ------------- |
-    | **Skill Type**  | For this skill, we are creating a skill using the Custom Interaction Model. This is the default choice.  | Custom Interaction Model  |
-    | **Language**  | Choose the first language you want to support.  You can add additional languages in the future, but we need to start with one. (This guide is using U.S. English to start.)  | U.S English  |
-    | **Name**  | This is the name of the skill as it will be displayed in the [Alexa app](http://alexa.amazon.com).  | Birthday Hotline  |
-    | **Invocation Name**  | This is the name spoken by your users to start the skill. We will keep this short and simple.| Birthday Hotline  |
-    | **Audio Player**  | We will be using the [Audio Player API](https://github.com/alexa/skill-sample-nodejs-audio-player) for this skill, so choose Yes. | Yes  |
+2.  Once you have signed in, move your mouse over the **Your Alexa Consoles** text at the top of the screen and Select the **Skills (New)** Link.
 
 
-6. Click on **Save**, and then click **Next** button to move to the Interaction Model.
+3.  From the **Alexa Skills Console (New Console)** select the **Create Skill** button near the top of the screen.
 
-#### Interaction Model Instructions
-Fill out the Interaction Model screen as below:
 
-**Intent Schema**: An intent schema defines the actions that we want our users to be able to take. Copy and paste the code below into the Intent Schema box. ([get this on GitHub](https://github.com/ajot/alexa-birthday-hotline/blob/master/speechAssets/IntentSchema.json))
+4. Give your new skill a **Name**. This is the name that will be shown in the Alexa Skills Store, and the name your users will refer to. Push Next.
 
-```json
-{
-  "intents": [
-    {
-      "intent": "PlayAudio"
-    },
-    {
-      "intent": "AMAZON.PauseIntent"
-    },
-    {
-      "intent": "AMAZON.ResumeIntent"
-    },
-    {
-      "intent": "AMAZON.NextIntent"
-    },
-    {
-      "intent": "AMAZON.PreviousIntent"
-    },
-    {
-      "intent": "AMAZON.HelpIntent"
-    },
-    {
-      "intent": "AMAZON.StopIntent"
-    },
-    {
-      "intent": "AMAZON.CancelIntent"
-    },
-    {
-      "intent": "AMAZON.StartOverIntent"
-    },
-    {
-      "intent": "AMAZON.YesIntent"
-    },
-    {
-      "intent": "AMAZON.NoIntent"
-    }
-  ]
-}
-```
+5. Select the **Custom** model at the top of the page to add to your skill and select the **Create Skill** button at the top right.
 
-**Sample Utterances**: Sample utterances guide Alexa to map what a user says to the Intents that we defined earlier. Copy these sample utterances and paste them into the Sample Utterances box in your browser. ([get this on GitHub](https://github.com/ajot/alexa-birthday-hotline/blob/master/speechAssets/Utterances.txt))
+6. **Build the Interaction Model for your skill**
+	1. On the left hand navigation panel. Select the **Invocation** tab. Enter a **Skill Inovcation Name**. This is the name that your users will need to say to start your skill.
+	2. Next, select the **JSON Editor** tab. In the textfield provided, replace any existing code with the code provided in the [Interaction Model](/models/en-US.json), then click "Build Model".
 
-```
-PlayAudio begin greetings
-PlayAudio begin the greetings
-PlayAudio begin playing the greetings
-PlayAudio start greetings
-PlayAudio start the greetings
-PlayAudio start playing the greetings
-PlayAudio play the greetings
-PlayAudio to play
-PlayAudio to begin greetings
-PlayAudio to begin the greetings
-PlayAudio to begin playing the greetings
-PlayAudio to start greetings
-PlayAudio to start the greetings
-PlayAudio to start playing the greetings
-PlayAudio to play the greetings
-```
+	**Note:** You should notice that **Intents** and **Slot Types** will auto populate based on the JSON Interaction Model that you have now applied to your skill. Feel free to explore the changes here, to learn about **Intents**, **Slots**, and **Utterances** open our [technical documentation in a new tab](https://developer.amazon.com/docs/custom-skills/define-the-interaction-model-in-json-and-text.html).
 
-Click **Save** to verify that your interaction model builds properly without any errors.
+7. **Optional:** Select an intent by expanding the **Intents** from the left side navigation panel. Add some more sample utterances for your newly generated intents. Think of all the different ways that a user could request to make a specific intent happen. A few examples are provided. Be sure to click **Save Model** and **Build Model** after you're done making changes here.
 
-If your interaction model builds successfully, click **Next** to move on to Configuration.
+8. If your interaction model builds successfully, proceed to the next step. If not, you should see an error. Try to resolve the errors. In our next step of this guide, we will be creating our Lambda function in the AWS developer console, but keep this browser tab open, because we will be returning here on [Page #3: Connect VUI to Code](./3-connect-vui-to-code.md).
 
-We are now ready to create our backend using AWS Lambda.
 
+     If you get an error from your interaction model, check through this list:
+
+     *  **Did you copy & paste the provided code correctly?**
+     *  **Did you accidentally add any characters to the Interaction Model or Sample Utterances?**
+
+<br/><br/>
+<a href="./2-lambda-function.md"><img src="https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/general/buttons/button_next_lambda_function._TTH_.png" /></a>
 ### 2 - Setting up our AWS Lambda Function
 
 Now that we have built our Voice User Interface (VUI) for our Alexa skill, we will be creating an AWS Lambda function using [Amazon Web Services](http://aws.amazon.com).  You can [read more about what a Lambda function is](http://aws.amazon.com/lambda), but for the purposes of this guide, what you need to know is that AWS Lambda is where our code lives.  When a user asks Alexa to use our skill, it is our AWS Lambda function that interprets the appropriate interaction, and provides the conversation back to the user.
@@ -258,7 +201,7 @@ We’re now ready to connect our frontend with our backend.
 
 ```
 git clone git@github.com:alexa/alexa-cookbook.git
-cd alexa-cookbook/labs/BirthdayHotline/src
+cd alexa-cookbook/labs/BirthdayHotline/lambda/custom
 ```
 
 2. Install the [Twilio Node helper library](https://www.twilio.com/docs/libraries/node)
@@ -266,8 +209,8 @@ cd alexa-cookbook/labs/BirthdayHotline/src
 ```
 npm install twilio
 ```
-3. Update the src/twilio-config-sample.js with your [Twilio credentials](https://www.twilio.com/console), and then **rename** the file to twilio-config.js
-4. Create the Deployment Package for AWS Lambda by zipping the contents of the /src directory. Your /src directory will now have the following structure:
+3. Update the lambda/custom/twilio-config-sample.js with your [Twilio credentials](https://www.twilio.com/console), and then **rename** the file to twilio-config.js
+4. Create the Deployment Package for AWS Lambda by zipping the contents of the /custom directory. Your /custom directory will now have the following structure:
 
 ```
 |- audioEventHandlers.js
@@ -280,7 +223,7 @@ npm install twilio
 |- node_modules
 ```
 
- So, to zip the contents of the /src directory, run the following from inside the /src directory -
+ So, to zip the contents of the /custom directory, run the following from inside the /custom directory -
 
 ```
 zip -X -r ../index.zip *
