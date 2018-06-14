@@ -1,0 +1,67 @@
+{
+    "_responseObject": {
+        "version": "1.0",
+        "response": {
+            "shouldEndSession": false,
+            "outputSpeech": {
+                "type": "SSML",
+                "ssml": "<speak> This is Body Template 1.  You can see that there is not a main image on this one.  Is there another template you'd like to see? </speak>"
+            },
+            "reprompt": {
+                "outputSpeech": {
+                    "type": "SSML",
+                    "ssml": "<speak> Which template would you like to see? </speak>"
+                }
+            },
+            "card": {
+                "type": "Standard",
+                "title": "BodyTemplate1 Title",
+                "image": {
+                    "smallImageUrl": "https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/display-templates/720x480-small-card._TTH_.png",
+                    "largeImageUrl": "https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/display-templates/1200x800-large-card._TTH_.png"
+                },
+                "text": "BodyTemplate1 Text"
+            },
+            "directives": [
+                {
+                    "type": "Hint",
+                    "hint": {
+                        "type": "PlainText",
+                        "text": "can you tell me how to get to Sesame Street?"
+                    }
+                },
+                {
+                    "type": "Display.RenderTemplate",
+                    "template": {
+                        "type": "BodyTemplate1",
+                        "title": "BodyTemplate1 Display Title",
+                        "token": "TOKEN",
+                        "backgroundImage": {
+                            "sources": [
+                                {
+                                    "url": "https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/display-templates/1200x600-display-background._TTH_.png"
+                                }
+                            ]
+                        },
+                        "textContent": {
+                            "primaryText": {
+                                "text": "BodyTemplate1 Primary Text",
+                                "type": "PlainText"
+                            },
+                            "secondaryText": {
+                                "text": "BodyTemplate1 Secondary Text",
+                                "type": "PlainText"
+                            },
+                            "tertiaryText": {
+                                "text": "BodyTemplate1 Tertiary Text",
+                                "type": "PlainText"
+                            }
+                        },
+                        "backButton": "HIDDEN"
+                    }
+                }
+            ]
+        },
+        "sessionAttributes": {}
+    }
+}
