@@ -44,7 +44,8 @@ const QuizHandler = {
     const item = attributes.quizItem;
     const property = attributes.quizProperty;
 
-    if (supportsDisplay(handlerInput)) {
+    if (supportsDisplay(handlerInput) || isSimulator(handlerInput)) {
+      console.log("This device supports display")
       const title = `Question #${attributes.counter}`;
       const primaryText = new Alexa.RichTextContentHelper().withPrimaryText(getQuestionWithoutOrdinal(property, item)).getTextContent();
       const backgroundImage = new Alexa.ImageHelper().addImageInstance(getBackgroundImage(attributes.quizItem.Abbreviation)).getImage();
@@ -99,12 +100,13 @@ const DefinitionHandler = {
           getLargeImage(item))
       }
 
-      if(supportsDisplay(handlerInput)) {
+      if(supportsDisplay(handlerInput) || isSimulator(handlerInput)) {
+        console.log("This device supports display")
         const image = new Alexa.ImageHelper().addImageInstance(getLargeImage(item)).getImage();
         const title = getCardTitle(item);
         const primaryText = new Alexa.RichTextContentHelper().withPrimaryText(getTextDescription(item, "<br/>")).getTextContent();
         response.addRenderTemplateDirective({
-          type: 'BodyTemplate2',
+          type: 'ListTemplate2',
           backButton: 'visible',
           image,
           title,
@@ -163,7 +165,8 @@ const QuizAnswerHandler = {
       speakOutput += question;
       repromptOutput = question;
 
-      if (supportsDisplay(handlerInput)) {
+      if (supportsDisplay(handlerInput) || isSimulator(handlerInput)) {
+        console.log("This device supports display")
         const title = `Question #${attributes.counter}`;
         const primaryText = new Alexa.RichTextContentHelper().withPrimaryText(getQuestionWithoutOrdinal(attributes.quizProperty, attributes.quizItem)).getTextContent();
         const backgroundImage = new Alexa.ImageHelper().addImageInstance(getBackgroundImage(attributes.quizItem.Abbreviation)).getImage();
@@ -191,11 +194,12 @@ const QuizAnswerHandler = {
     }
     else {
       speakOutput += getFinalScore(attributes.quizScore, attributes.counter) + exitSkillMessage;
-      if(supportsDisplay(handlerInput)) {
+      if(supportsDisplay(handlerInput) || isSimulator(handlerInput)) {
+        console.log("This device supports display")
         const title = 'Thank you for playing';
         const primaryText = new Alexa.RichTextContentHelper().withPrimaryText(getFinalScore(attributes.quizScore, attributes.counter)).getTextContent();
         response.addRenderTemplateDirective({
-          type : 'BodyTemplate1',
+          type : 'ListTemplate1',
           backButton: 'hidden',
           title,
           textContent: primaryText,
@@ -366,7 +370,6 @@ const useCardsFlag = true;
 
 // returns true if the skill is running on a device with a display (show|spot)
 function supportsDisplay(handlerInput) {
-  console.log("Display is supported by this device")
   var hasDisplay =
     handlerInput.requestEnvelope.context &&
     handlerInput.requestEnvelope.context.System &&
@@ -377,7 +380,6 @@ function supportsDisplay(handlerInput) {
 }
 
 function isSimulator(handlerInput) {
-  console.log("This is a simulator")
   var isSimulator = !this.event.context; //simulator doesn't send context
   return false;
 }

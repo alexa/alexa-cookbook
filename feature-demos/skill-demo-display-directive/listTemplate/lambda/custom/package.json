@@ -1,9 +1,11 @@
 {
   "name": "template",
   "version": "1.0.0",
-  "description": "Lambda function for Alexa",
+  "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts":  {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "license": "Apache-2.0",
   "dependencies": {
     "ask-sdk-core": "^2.0.0",
