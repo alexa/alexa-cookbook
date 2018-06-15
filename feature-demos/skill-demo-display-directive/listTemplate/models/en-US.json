@@ -1,7 +1,7 @@
 {
   "interactionModel": {
     "languageModel": {
-      "invocationName": "quiz game",
+      "invocationName": "list template demo",
       "intents": [
         {
           "name": "AMAZON.CancelIntent",
@@ -24,66 +24,24 @@
           "samples": []
         },
         {
-          "name": "AnswerIntent",
+          "name": "HorizontalTemplateIntent",
           "samples": [
-            "{StateName}",
-            "{Capital}",
-            "{StatehoodYear}",
-            "{StatehoodOrder}",
-            "{Abbreviation}",
-            "tell me about {StateName}",
-            "tell me about {Capital}",
-            "tell me about {StatehoodYear}",
-            "tell me about {StatehoodOrder}",
-            "tell me about {Abbreviation}",
-            "what do you know about {StateName}",
-            "what do you know about {Capital}",
-            "what do you know about {StatehoodYear}",
-            "what do you know about {StatehoodOrder}",
-            "what do you know about {Abbreviation}",
-            "{StateName} information",
-            "{Capital} information",
-            "{StatehoodYear} information",
-            "{StatehoodOrder} information",
-            "{Abbreviation} information"
+            "template two",
+            "horizontal template",
+            "horizontal",
+            "show the second template",
+            "show template two"
           ],
-          "slots": [
-            {
-              "name": "StateName",
-              "type": "AMAZON.US_STATE",
-              "samples": []
-            },
-            {
-              "name": "Capital",
-              "type": "AMAZON.US_CITY",
-              "samples": []
-            },
-            {
-              "name": "StatehoodYear",
-              "type": "AMAZON.FOUR_DIGIT_NUMBER",
-              "samples": []
-            },
-            {
-              "name": "Abbreviation",
-              "type": "US_STATE_ABBR",
-              "samples": []
-            },
-            {
-              "name": "StatehoodOrder",
-              "type": "AMAZON.NUMBER",
-              "samples": []
-            }
-          ]
+          "slots": []
         },
         {
-          "name": "QuizIntent",
+          "name": "VerticalTemplateIntent",
           "samples": [
-            "start a quiz",
-            "start a quiz game",
-            "and start a quiz",
-            "and quiz me",
-            "for a quiz",
-            "a quiz"
+            "template one",
+            "vertical template",
+            "vertical",
+            "show the first template",
+            "show template one"
           ],
           "slots": []
         }

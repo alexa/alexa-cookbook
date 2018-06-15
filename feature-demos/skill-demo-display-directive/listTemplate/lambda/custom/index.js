@@ -21,7 +21,7 @@ const LaunchRequestHandler = {
   },
 };
 
-const QuizHandler = {
+const VerticalTemplateHandler = {
   canHandle(handlerInput) {
     const request = handlerInput.requestEnvelope.request;
     console.log("Inside QuizHandler");
@@ -60,6 +60,59 @@ const QuizHandler = {
       });
       response.addRenderTemplateDirective({
         type : 'ListTemplate1',
+        token : 'Question',
+        backButton : 'hidden',
+        backgroundImage,
+        title,
+        listItems : itemList,
+      });
+    }
+
+    return response.speak(speakOutput)
+                   .reprompt(repromptOutput)
+                   .getResponse();
+  },
+};
+
+const HorizontalTemplateHandler = {
+  canHandle(handlerInput) {
+    const request = handlerInput.requestEnvelope.request;
+    console.log("Inside QuizHandler");
+    console.log(JSON.stringify(request));
+    return request.type === "IntentRequest" &&
+           (request.intent.name === "QuizIntent" || request.intent.name === "AMAZON.StartOverIntent");
+  },
+  handle(handlerInput) {
+    console.log("Inside QuizHandler - handle");
+    const attributes = handlerInput.attributesManager.getSessionAttributes();
+    const response = handlerInput.responseBuilder;
+    attributes.state = states.QUIZ;
+    attributes.counter = 0;
+    attributes.quizScore = 0;
+
+    var question = askQuestion(handlerInput);
+    var speakOutput = startQuizMessage + question;
+    var repromptOutput = question;
+
+    const item = attributes.quizItem;
+    const property = attributes.quizProperty;
+
+    if (supportsDisplay(handlerInput) || isSimulator(handlerInput)) {
+      console.log("This device supports display")
+      const title = `Question #${attributes.counter}`;
+      const primaryText = new Alexa.RichTextContentHelper().withPrimaryText(getQuestionWithoutOrdinal(property, item)).getTextContent();
+      const backgroundImage = new Alexa.ImageHelper().addImageInstance(getBackgroundImage(attributes.quizItem.Abbreviation)).getImage();
+      const itemList = [];
+      getAndShuffleMultipleChoiceAnswers(attributes.selectedItemIndex, item, property).forEach((x, i) => {
+        itemList.push(
+          {
+            "token" : x,
+            "textContent" : new Alexa.PlainTextContentHelper().withPrimaryText(x).getTextContent(),
+          }
+        );
+      });
+      response.addRenderTemplateDirective({
+        type : 'ListTemplate2',
         token : 'Question',
         backButton : 'hidden',
         backgroundImage,
@@ -359,11 +412,11 @@ const states = {
   QUIZ: `_QUIZ`,
 };
 
-const welcomeMessage = `Welcome to the United States Quiz Game!  You can ask me about any of the fifty states and their capitals, or you can ask me to start a quiz.  What would you like to do?`;
-const startQuizMessage = `OK.  I will ask you 10 questions about the United States. `;
+const welcomeMessage = `Welcome to the United States Quiz Game!  You can ask me to display a question in a horizontal or vertical list format, just say horizontal or vertical.  What would you like to do?`;
+const startQuizMessage = `OK.  Here is the question in your preferred format. `;
 const exitSkillMessage = `Thank you for playing the United States Quiz Game!  Let's play again soon!`;
-const repromptSpeech = `Which other state or capital would you like to know about?`;
-const helpMessage = `I know lots of things about the United States.  You can ask me about a state or a capital, and I'll tell you what I know.  You can also test your knowledge by asking me to start a quiz.  What would you like to do?`;
+const repromptSpeech = `Which other list template can I show you?`;
+const helpMessage = `I know lots of things about the United States.  You can ask me about a state or a capital, and I'll tell you what I know.  You can see it in a horizontal or vertically scrolling list.  What would you like to do?`;
 const useCardsFlag = true;
 
 /* HELPER FUNCTIONS */
@@ -584,7 +637,8 @@ function shuffle(array) {
 exports.handler = skillBuilder
   .addRequestHandlers(
     LaunchRequestHandler,
-    QuizHandler,
+    VerticalTemplateHandler,
+    HorizontalTemplateHandler,
     // DefinitionHandler,
     // QuizAnswerHandler,
     // RepeatHandler,

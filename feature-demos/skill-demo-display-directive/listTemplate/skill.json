@@ -3,18 +3,18 @@
     "publishingInformation": {
       "locales": {
         "en-US": {
-          "summary": "Test your knowledge of the US states and their capitals.",
+          "summary": "An example of how the listTemplate works.",
           "examplePhrases": [
-            "Alexa, open States Quiz",
-            "Alexa, play States Quiz"
+            "Alexa, open List Template Demo",
+            "Alexa, play List Template Demo"
           ],
           "keywords": [
             "quiz",
             "games",
             "geography"
           ],
-          "name": "States Quiz",
-          "description": "Test your knowledge of the US states and their capitals.\n\nStates Quiz provides a fun way to keep your U.S. geography skills sharp.\n\nTo start, just say \"Alexa, launch States Quiz\" or \"Alexa, open States Quiz\" to start the game\".\n\nAt anytime, you can stop the game by saying \"Alexa, stop\"",
+          "name": "List Template Demo",
+          "description": "A feature demo for the list template.\n\nUses States Quiz as an example of different ways to display lists.\n\nTo start, just say \"Alexa, launch List Template Demo\" or \"Alexa, open List Template Demo\" to see an example\".\n\nAt anytime, you can stop the demo by saying \"Alexa, stop\"",
           "smallIconUri": "https://s3-eu-west-1.amazonaws.com/alexa.maxi80.com/assets/alexa-logo-108.png",
           "largeIconUri": "https://s3-eu-west-1.amazonaws.com/alexa.maxi80.com/assets/alexa-logo-512.png"
         }
