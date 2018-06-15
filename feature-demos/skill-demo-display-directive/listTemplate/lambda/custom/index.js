@@ -24,13 +24,13 @@ const LaunchRequestHandler = {
 const VerticalTemplateHandler = {
   canHandle(handlerInput) {
     const request = handlerInput.requestEnvelope.request;
-    console.log("Inside QuizHandler");
+    console.log("Inside VerticalTemplateHandler");
     console.log(JSON.stringify(request));
     return request.type === "IntentRequest" &&
-           (request.intent.name === "QuizIntent" || request.intent.name === "AMAZON.StartOverIntent");
+           (request.intent.name === "VerticalTemplateIntent" || request.intent.name === "AMAZON.StartOverIntent");
   },
   handle(handlerInput) {
-    console.log("Inside QuizHandler - handle");
+    console.log("Inside VerticalTemplateHandler - handle");
     const attributes = handlerInput.attributesManager.getSessionAttributes();
     const response = handlerInput.responseBuilder;
     attributes.state = states.QUIZ;
@@ -45,7 +45,7 @@ const VerticalTemplateHandler = {
     const property = attributes.quizProperty;
 
     if (supportsDisplay(handlerInput) || isSimulator(handlerInput)) {
-      console.log("This device supports display")
+      console.log("This device supports display");
       const title = `Question #${attributes.counter}`;
       const primaryText = new Alexa.RichTextContentHelper().withPrimaryText(getQuestionWithoutOrdinal(property, item)).getTextContent();
       const backgroundImage = new Alexa.ImageHelper().addImageInstance(getBackgroundImage(attributes.quizItem.Abbreviation)).getImage();
@@ -77,13 +77,13 @@ const VerticalTemplateHandler = {
 const HorizontalTemplateHandler = {
   canHandle(handlerInput) {
     const request = handlerInput.requestEnvelope.request;
-    console.log("Inside QuizHandler");
+    console.log("Inside HorizontalTemplateHandler");
     console.log(JSON.stringify(request));
     return request.type === "IntentRequest" &&
-           (request.intent.name === "QuizIntent" || request.intent.name === "AMAZON.StartOverIntent");
+           (request.intent.name === "HorizontalTemplateIntent" || request.intent.name === "AMAZON.StartOverIntent");
   },
   handle(handlerInput) {
-    console.log("Inside QuizHandler - handle");
+    console.log("Inside HorizontalTemplateHandler - handle");
     const attributes = handlerInput.attributesManager.getSessionAttributes();
     const response = handlerInput.responseBuilder;
     attributes.state = states.QUIZ;
@@ -98,7 +98,7 @@ const HorizontalTemplateHandler = {
     const property = attributes.quizProperty;
 
     if (supportsDisplay(handlerInput) || isSimulator(handlerInput)) {
-      console.log("This device supports display")
+      console.log("This device supports display");
       const title = `Question #${attributes.counter}`;
       const primaryText = new Alexa.RichTextContentHelper().withPrimaryText(getQuestionWithoutOrdinal(property, item)).getTextContent();
       const backgroundImage = new Alexa.ImageHelper().addImageInstance(getBackgroundImage(attributes.quizItem.Abbreviation)).getImage();
@@ -351,7 +351,7 @@ const ErrorHandler = {
 /* CONSTANTS */
 const skillBuilder = Alexa.SkillBuilders.custom();
 const imagePath = "https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/quiz-game/state_flag/{0}x{1}/{2}._TTH_.png";
-const backgroundImagePath = "https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/quiz-game/state_flag/{0}x{1}/{2}._TTH_.png"
+const backgroundImagePath = "https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/quiz-game/state_flag/{0}x{1}/{2}._TTH_.png";
 const speechConsCorrect = ['Booya', 'All righty', 'Bam', 'Bazinga', 'Bingo', 'Boom', 'Bravo', 'Cha Ching', 'Cheers', 'Dynomite', 'Hip hip hooray', 'Hurrah', 'Hurray', 'Huzzah', 'Oh dear.  Just kidding.  Hurray', 'Kaboom', 'Kaching', 'Oh snap', 'Phew','Righto', 'Way to go', 'Well done', 'Whee', 'Woo hoo', 'Yay', 'Wowza', 'Yowsa'];
 const speechConsWrong = ['Argh', 'Aw man', 'Blarg', 'Blast', 'Boo', 'Bummer', 'Darn', "D'oh", 'Dun dun dun', 'Eek', 'Honk', 'Le sigh', 'Mamma mia', 'Oh boy', 'Oh dear', 'Oof', 'Ouch', 'Ruh roh', 'Shucks', 'Uh oh', 'Wah wah', 'Whoops a daisy', 'Yikes'];
 const data = [
@@ -428,7 +428,7 @@ function supportsDisplay(handlerInput) {
     handlerInput.requestEnvelope.context.System &&
     handlerInput.requestEnvelope.context.System.device &&
     handlerInput.requestEnvelope.context.System.device.supportedInterfaces &&
-    handlerInput.requestEnvelope.context.System.device.supportedInterfaces.Display
+    handlerInput.requestEnvelope.context.System.device.supportedInterfaces.Display;
   return hasDisplay;
 }
 
@@ -437,17 +437,17 @@ function isSimulator(handlerInput) {
   return false;
 }
 
-// function getBadAnswer(item) {
-//   return `I'm sorry. ${item} is not something I know very much about in this skill. ${helpMessage}`;
-// }
-//
-// function getCurrentScore(score, counter) {
-//   return `Your current score is ${score} out of ${counter}. `;
-// }
-//
-// function getFinalScore(score, counter) {
-//   return `Your final score is ${score} out of ${counter}. `;
-// }
+function getBadAnswer(item) {
+  return `I'm sorry. ${item} is not something I know very much about in this skill. ${helpMessage}`;
+}
+
+function getCurrentScore(score, counter) {
+  return `Your current score is ${score} out of ${counter}. `;
+}
+
+function getFinalScore(score, counter) {
+  return `Your final score is ${score} out of ${counter}. `;
+}
 
 function getCardTitle(item) {
   return item.StateName;
