@@ -4,25 +4,73 @@
       "invocationName": "list template demo",
       "intents": [
         {
-          "name": "AMAZON.CancelIntent",
-          "samples": []
-        },
-        {
-          "name": "AMAZON.HelpIntent",
-          "samples": []
-        },
-        {
-          "name": "AMAZON.PauseIntent",
-          "samples": []
-        },
-        {
-          "name": "AMAZON.StartOverIntent",
-          "samples": []
-        },
-        {
-          "name": "AMAZON.StopIntent",
-          "samples": []
-        },
+					"name": "AMAZON.CancelIntent",
+					"samples": []
+				},
+				{
+					"name": "AMAZON.HelpIntent",
+					"samples": []
+				},
+				{
+					"name": "AMAZON.MoreIntent",
+					"samples": []
+				},
+				{
+					"name": "AMAZON.NavigateSettingsIntent",
+					"samples": []
+				},
+				{
+					"name": "AMAZON.NextIntent",
+					"samples": []
+				},
+				{
+					"name": "AMAZON.NoIntent",
+					"samples": []
+				},
+				{
+					"name": "AMAZON.PageDownIntent",
+					"samples": []
+				},
+                                {
+					"name": "AMAZON.NavigateHomeIntent",
+					"samples": []
+				},
+				{
+					"name": "AMAZON.PageUpIntent",
+					"samples": []
+				},
+				{
+					"name": "AMAZON.PreviousIntent",
+					"samples": []
+				},
+				{
+					"name": "AMAZON.RepeatIntent",
+					"samples": []
+				},
+				{
+					"name": "AMAZON.ScrollDownIntent",
+					"samples": []
+				},
+				{
+					"name": "AMAZON.ScrollLeftIntent",
+					"samples": []
+				},
+				{
+					"name": "AMAZON.ScrollRightIntent",
+					"samples": []
+				},
+				{
+					"name": "AMAZON.ScrollUpIntent",
+					"samples": []
+				},
+				{
+					"name": "AMAZON.StopIntent",
+					"samples": []
+				},
+				{
+					"name": "AMAZON.YesIntent",
+					"samples": []
+				},
         {
           "name": "HorizontalTemplateIntent",
           "samples": [

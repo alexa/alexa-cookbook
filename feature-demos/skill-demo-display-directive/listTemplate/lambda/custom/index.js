@@ -127,164 +127,6 @@ const HorizontalTemplateHandler = {
   },
 };
 
-// const DefinitionHandler = {
-//   canHandle(handlerInput) {
-//     console.log("Inside DefinitionHandler");
-//     const attributes = handlerInput.attributesManager.getSessionAttributes();
-//     const request = handlerInput.requestEnvelope.request;
-//
-//     return attributes.state !== states.QUIZ &&
-//            request.type === 'IntentRequest' &&
-//            request.intent.name === 'AnswerIntent';
-//   },
-//   handle(handlerInput) {
-//     console.log("Inside DefinitionHandler - handle");
-//     //GRABBING ALL SLOT VALUES AND RETURNING THE MATCHING DATA OBJECT.
-//     const item = getItem(handlerInput.requestEnvelope.request.intent.slots);
-//     const response = handlerInput.responseBuilder;
-//
-//     //IF THE DATA WAS FOUND
-//     if (item && item[Object.getOwnPropertyNames(data[0])[0]] !== undefined) {
-//       if (useCardsFlag) {
-//         response.withStandardCard(
-//           getCardTitle(item),
-//           getTextDescription(item),
-//           getSmallImage(item),
-//           getLargeImage(item))
-//       }
-//
-//       if(supportsDisplay(handlerInput) || isSimulator(handlerInput)) {
-//         console.log("This device supports display")
-//         const image = new Alexa.ImageHelper().addImageInstance(getLargeImage(item)).getImage();
-//         const title = getCardTitle(item);
-//         const primaryText = new Alexa.RichTextContentHelper().withPrimaryText(getTextDescription(item, "<br/>")).getTextContent();
-//         response.addRenderTemplateDirective({
-//           type: 'ListTemplate2',
-//           backButton: 'visible',
-//           image,
-//           title,
-//           textContent: primaryText,
-//         });
-//       }
-//       return response.speak(getSpeechDescription(item))
-//               .reprompt(repromptSpeech)
-//               .getResponse();
-//     }
-//     //IF THE DATA WAS NOT FOUND
-//     else
-//     {
-//       return response.speak(getBadAnswer(item))
-//               .reprompt(getBadAnswer(item))
-//               .getResponse();
-//     }
-//   }
-// };
-//
-// const QuizAnswerHandler = {
-//   canHandle(handlerInput) {
-//     console.log("Inside QuizAnswerHandler");
-//     const attributes = handlerInput.attributesManager.getSessionAttributes();
-//     const request = handlerInput.requestEnvelope.request;
-//
-//     return attributes.state === states.QUIZ &&
-//            request.type === 'IntentRequest' &&
-//            request.intent.name === 'AnswerIntent';
-//   },
-//   handle(handlerInput) {
-//     console.log("Inside QuizAnswerHandler - handle");
-//     const attributes = handlerInput.attributesManager.getSessionAttributes();
-//     const response = handlerInput.responseBuilder;
-//
-//     var speakOutput = ``;
-//     var repromptOutput = ``;
-//     const item = attributes.quizItem;
-//     const property = attributes.quizProperty;
-//     const isCorrect = compareSlots(handlerInput.requestEnvelope.request.intent.slots, item[property]);
-//
-//     if (isCorrect) {
-//       speakOutput = getSpeechCon(true);
-//       attributes.quizScore += 1;
-//       handlerInput.attributesManager.setSessionAttributes(attributes);
-//     } else {
-//       speakOutput = getSpeechCon(false);
-//     }
-//
-//     speakOutput += getAnswer(property, item);
-//     var question = ``;
-//     //IF YOUR QUESTION COUNT IS LESS THAN 10, WE NEED TO ASK ANOTHER QUESTION.
-//     if (attributes.counter < 10) {
-//       speakOutput += getCurrentScore(attributes.quizScore, attributes.counter);
-//       question = askQuestion(handlerInput);
-//       speakOutput += question;
-//       repromptOutput = question;
-//
-//       if (supportsDisplay(handlerInput) || isSimulator(handlerInput)) {
-//         console.log("This device supports display")
-//         const title = `Question #${attributes.counter}`;
-//         const primaryText = new Alexa.RichTextContentHelper().withPrimaryText(getQuestionWithoutOrdinal(attributes.quizProperty, attributes.quizItem)).getTextContent();
-//         const backgroundImage = new Alexa.ImageHelper().addImageInstance(getBackgroundImage(attributes.quizItem.Abbreviation)).getImage();
-//         const itemList = [];
-//         getAndShuffleMultipleChoiceAnswers(attributes.selectedItemIndex, attributes.quizItem, attributes.quizProperty).forEach((x, i) => {
-//           itemList.push(
-//             {
-//               "token" : x,
-//               "textContent" : new Alexa.PlainTextContentHelper().withPrimaryText(x).getTextContent(),
-//             }
-//           );
-//         });
-//         response.addRenderTemplateDirective({
-//           type : 'ListTemplate1',
-//           token : 'Question',
-//           backButton : 'hidden',
-//           backgroundImage,
-//           title,
-//           listItems : itemList,
-//         });
-//       }
-//       return response.speak(speakOutput)
-//       .reprompt(repromptOutput)
-//       .getResponse();
-//     }
-//     else {
-//       speakOutput += getFinalScore(attributes.quizScore, attributes.counter) + exitSkillMessage;
-//       if(supportsDisplay(handlerInput) || isSimulator(handlerInput)) {
-//         console.log("This device supports display")
-//         const title = 'Thank you for playing';
-//         const primaryText = new Alexa.RichTextContentHelper().withPrimaryText(getFinalScore(attributes.quizScore, attributes.counter)).getTextContent();
-//         response.addRenderTemplateDirective({
-//           type : 'ListTemplate1',
-//           backButton: 'hidden',
-//           title,
-//           textContent: primaryText,
-//         });
-//       }
-//       return response.speak(speakOutput).getResponse();
-//     }
-//   },
-// };
-//
-// const RepeatHandler = {
-//   canHandle(handlerInput) {
-//     console.log("Inside RepeatHandler");
-//     const attributes = handlerInput.attributesManager.getSessionAttributes();
-//     const request = handlerInput.requestEnvelope.request;
-//
-//     return attributes.state === states.QUIZ &&
-//            request.type === 'IntentRequest' &&
-//            request.intent.name === 'AMAZON.RepeatHandler';
-//   },
-//   handle(handlerInput) {
-//     console.log("Inside RepeatHandler - handle");
-//     const attributes = handlerInput.attributesManager.getSessionAttributes();
-//     const question = getQuestion(attributes.counter, attributes.quizproperty, attributes.quizitem);
-//
-//     return handlerInput.responseBuilder
-//       .speak(question)
-//       .reprompt(question)
-//       .getResponse();
-//   },
-// };
-
 const HelpHandler = {
   canHandle(handlerInput) {
     console.log("Inside HelpHandler");
@@ -615,7 +457,7 @@ function getMultipleChoiceAnswers(currentIndex, item, property) {
   // remove duplicates from the list.
   answerList = answerList.filter((v, i, a) => a.indexOf(v) === i)
   // take the first three items from the list.
-  answerList = answerList.slice(0, 3);
+  answerList = answerList.slice(0, 5);
   return answerList;
 }
 
@@ -639,9 +481,6 @@ exports.handler = skillBuilder
     LaunchRequestHandler,
     VerticalTemplateHandler,
     HorizontalTemplateHandler,
-    // DefinitionHandler,
-    // QuizAnswerHandler,
-    // RepeatHandler,
     HelpHandler,
     ExitHandler,
     SessionEndedRequestHandler
