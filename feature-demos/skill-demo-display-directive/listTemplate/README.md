@@ -1,9 +1,9 @@
 # Display Interface Skill for Echo Show
 
 # List Events Demo
-This demos how to use capability detection to determine if the requesting device supports Display directives (ex: Echo Show), does not (Echo, Echo dot, Fire TV), or is the simulator.
+This demos how the listTemplate works on devices with display capability. There are two templates for displaying lists, one that scrolls vertically and one horizontally.  
 
-When users with supported devices ask for a quiz to begin, they are able to see the question on their display. When using a device that does not support display, the question is simply asked by Alexa without any errors.
+When you begin this skill it will display the data we have in our skill in a vertical format. Asking for the horizontal list will then display a horizontally-scrolling list.
 
 ## What You Will Need
 *  [Amazon Developer Account](http://developer.amazon.com/alexa)
