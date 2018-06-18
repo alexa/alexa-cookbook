@@ -127,6 +127,59 @@ const HorizontalTemplateHandler = {
   },
 };
 
+const BodyTemplateSelectionHandler = {
+ canHandle(handlerInput) {
+   console.log("Inside BodyTemplateSelectionHandler");
+   const attributes = handlerInput.attributesManager.getSessionAttributes();
+   const request = handlerInput.requestEnvelope.request;
+
+   return request.type === "IntentRequest" &&
+          (request.intent.name === "BodyTemplateSelectionIntent");
+
+ },
+ handle(handlerInput) {
+   console.log("Inside BodyTemplateSelection - handle");
+   //GRABBING ALL SLOT VALUES AND RETURNING THE MATCHING DATA OBJECT.
+   const item = getItem(handlerInput.requestEnvelope.request.intent.slots);
+   const response = handlerInput.responseBuilder;
+
+   //IF THE DATA WAS FOUND
+   if (item && item[Object.getOwnPropertyNames(data[0])[0]] !== undefined) {
+     if (useCardsFlag) {
+       response.withStandardCard(
+         getCardTitle(item),
+         getTextDescription(item),
+         getSmallImage(item),
+         getLargeImage(item))
+     }
+
+     if(supportsDisplay(handlerInput)) {
+       const image = new Alexa.ImageHelper().addImageInstance(getLargeImage(item)).getImage();
+       const title = getCardTitle(item);
+       const bodyTemplate = bodyTemplateChoice(getCardTitle(item));
+       const primaryText = new Alexa.RichTextContentHelper().withPrimaryText(getTextDescription(item, "<br/>")).getTextContent();
+       response.addRenderTemplateDirective({
+         type: bodyTemplate,
+         backButton: 'visible',
+         image,
+         title,
+         textContent: primaryText,
+       });
+     }
+     return response.speak(getSpeechDescription(item))
+             .reprompt(repromptSpeech)
+             .getResponse();
+   }
+   //IF THE DATA WAS NOT FOUND
+   else
+   {
+     return response.speak(getBadAnswer(item))
+             .reprompt(getBadAnswer(item))
+             .getResponse();
+   }
+ }
+};
+
 const HelpHandler = {
   canHandle(handlerInput) {
     console.log("Inside HelpHandler");
@@ -227,6 +280,56 @@ function getStateNames(stateInfo){
   return stateNames;
 };
 
+function bodyTemplateChoice(pStateName) {
+  let templateName;
+
+  switch (pStateName) {
+      case 'Alaska':
+          templateName = 'BodyTemplate1';
+          break;
+      case 'Colorado':
+          templateName = 'BodyTemplate2';
+          break;
+      case 'Minnesota':
+          templateName = 'BodyTemplate3';
+          break;
+      case 'New Mexico':
+          templateName = 'BodyTemplate6';
+          break;
+      case 'Washington':
+          templateName = 'BodyTemplate7';
+          break;
+      default:
+          templateName = 'BodyTemplate1';
+  }
+  return templateName;
+};
+
+
+function bodyTemplateTypePicker(pNum) {
+    var val;
+
+    switch (pNum) {
+        case 1:
+            val = new Alexa.templateBuilders.BodyTemplate1Builder();
+            break;
+        case 2:
+            val = new Alexa.templateBuilders.BodyTemplate2Builder();
+            break;
+        case 3:
+            val = new Alexa.templateBuilders.BodyTemplate3Builder();
+            break;
+        case 6:
+            val = new Alexa.templateBuilders.BodyTemplate6Builder();
+            break;
+        case 7:
+            val = new Alexa.templateBuilders.BodyTemplate7Builder();
+            break;
+        default:
+            val = null;
+    }
+    return val;
+}
 
 function bodyTemplateMaker(pBodyTemplateType, pImg, pTitle, pText1, pText2, pOutputSpeech, pReprompt, pHint, pBackgroundIMG) {
     var bodyTemplate = bodyTemplateTypePicker.call(this, pBodyTemplateType);
@@ -258,22 +361,6 @@ function bodyTemplateMaker(pBodyTemplateType, pImg, pTitle, pText1, pText2, pOut
     }
 
     this.emit(':responseReady');
-}
-
-function listTemplateTypePicker(pNum) {
-    var val;
-
-    switch (pNum) {
-        case 1:
-            val = new Alexa.templateBuilders.ListTemplate1Builder();
-            break;
-        case 2:
-            val = new Alexa.templateBuilders.ListTemplate2Builder();
-            break;
-        default:
-            val = null;
-    }
-    return val;
 }
 
 // returns true if the skill is running on a device with a display (show|spot)
@@ -493,6 +580,7 @@ exports.handler = skillBuilder
     LaunchRequestHandler,
     VerticalTemplateHandler,
     HorizontalTemplateHandler,
+    BodyTemplateSelectionHandler,
     HelpHandler,
     ExitHandler,
     SessionEndedRequestHandler
