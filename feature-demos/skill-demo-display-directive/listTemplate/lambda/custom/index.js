@@ -38,8 +38,8 @@ const VerticalTemplateHandler = {
     attributes.quizScore = 0;
 
     var question = askQuestion(handlerInput);
-    var speakOutput = startQuizMessage + question;
-    var repromptOutput = question;
+    var speakOutput = startQuizMessage;
+    var repromptOutput = repromptSpeech;
 
     const item = attributes.quizItem;
     const property = attributes.quizProperty;
@@ -80,7 +80,7 @@ const HorizontalTemplateHandler = {
     console.log("Inside HorizontalTemplateHandler");
     console.log(JSON.stringify(request));
     return request.type === "IntentRequest" &&
-           (request.intent.name === "HorizontalTemplateIntent" || request.intent.name === "AMAZON.StartOverIntent");
+           (request.intent.name === "HorizontalTemplateIntent");
   },
   handle(handlerInput) {
     console.log("Inside HorizontalTemplateHandler - handle");
@@ -117,7 +117,7 @@ const HorizontalTemplateHandler = {
         backButton : 'hidden',
         backgroundImage,
         title,
-        listItems : itemList,
+        listItems : statesList,
       });
     }
 
@@ -247,8 +247,6 @@ const ErrorHandler = {
 const skillBuilder = Alexa.SkillBuilders.custom();
 const imagePath = "https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/quiz-game/state_flag/{0}x{1}/{2}._TTH_.png";
 const backgroundImagePath = "https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/quiz-game/state_flag/{0}x{1}/{2}._TTH_.png";
-const speechConsCorrect = ['Booya', 'All righty', 'Bam', 'Bazinga', 'Bingo', 'Boom', 'Bravo', 'Cha Ching', 'Cheers', 'Dynomite', 'Hip hip hooray', 'Hurrah', 'Hurray', 'Huzzah', 'Oh dear.  Just kidding.  Hurray', 'Kaboom', 'Kaching', 'Oh snap', 'Phew','Righto', 'Way to go', 'Well done', 'Whee', 'Woo hoo', 'Yay', 'Wowza', 'Yowsa'];
-const speechConsWrong = ['Argh', 'Aw man', 'Blarg', 'Blast', 'Boo', 'Bummer', 'Darn', "D'oh", 'Dun dun dun', 'Eek', 'Honk', 'Le sigh', 'Mamma mia', 'Oh boy', 'Oh dear', 'Oof', 'Ouch', 'Ruh roh', 'Shucks', 'Uh oh', 'Wah wah', 'Whoops a daisy', 'Yikes'];
 const data = [
   {StateName: 'Alaska', Abbreviation: 'AK', Capital: 'Juneau', StatehoodYear: 1959, StatehoodOrder: 49},
   {StateName: 'Colorado', Abbreviation: 'CO', Capital: 'Denver', StatehoodYear: 1876, StatehoodOrder: 38},
@@ -264,7 +262,7 @@ const states = {
 
 const welcomeMessage = `Welcome to the Amazon Template Demonstration!  You can ask me to display body template options in a horizontal or vertical list format, just say horizontal or vertical.  What would you like to do?`;
 const startQuizMessage = `OK.  Here is the list in your preferred format. `;
-const exitSkillMessage = `Thank you for checking out the United States Template demo!  Come watch it again soon!`;
+const exitSkillMessage = `Thank you for checking out the United States Template demo!  Now try it out yourself!`;
 const repromptSpeech = `Which other list template can I show you?`;
 const helpMessage = `I know lots of things about display templates.  You can ask me for a list or a specific body template, and I'll show you what I've got.  You can see it in a horizontal or vertically scrolling list.  What would you like to do?`;
 const useCardsFlag = true;
