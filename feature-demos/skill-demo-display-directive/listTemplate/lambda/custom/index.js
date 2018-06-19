@@ -323,14 +323,6 @@ function getBadAnswer(item) {
   return `I'm sorry. ${item} is not something I know very much about in this skill. ${helpMessage}`;
 }
 
-function getCurrentScore(score, counter) {
-  return `Your current score is ${score} out of ${counter}. `;
-}
-
-function getFinalScore(score, counter) {
-  return `Your final score is ${score} out of ${counter}. `;
-}
-
 function getCardTitle(item) {
   return item.StateName;
 }
@@ -372,15 +364,6 @@ function getListHeader(property, item) {
   return "Choose any of the states below to see a different body template demonstration.";
 }
 
-function getAnswer(property, item) {
-  switch (property) {
-    case 'Abbreviation':
-      return `The ${formatCasing(property)} of ${item.StateName} is <say-as interpret-as='spell-out'>${item[property]}</say-as>. `;
-    default:
-      return `The ${formatCasing(property)} of ${item.StateName} is ${item[property]}. `;
-  }
-}
-
 function getRandom(min, max) {
   return Math.floor((Math.random() * ((max - min) + 1)) + min);
 }
@@ -409,18 +392,6 @@ function askQuestion(handlerInput) {
   return question;
 }
 
-function compareSlots(slots, value) {
-  for (const slot in slots) {
-    if (Object.prototype.hasOwnProperty.call(slots, slot) && slots[slot].value !== undefined) {
-      if (slots[slot].value.toString().toLowerCase() === value.toString().toLowerCase()) {
-        return true;
-      }
-    }
-  }
-
-  return false;
-}
-
 function getItem(slots) {
   const propertyArray = Object.getOwnPropertyNames(data[0]);
   let slotValue;
@@ -442,12 +413,6 @@ function getItem(slots) {
   return slotValue;
 }
 
-function getSpeechCon(type) {
-  if (type) return `<say-as interpret-as='interjection'>${speechConsCorrect[getRandom(0, speechConsCorrect.length - 1)]}! </say-as><break strength='strong'/>`;
-  return `<say-as interpret-as='interjection'>${speechConsWrong[getRandom(0, speechConsWrong.length - 1)]} </say-as><break strength='strong'/>`;
-}
-
-
 function getTextDescription(item) {
   let text = '';
 
@@ -457,61 +422,6 @@ function getTextDescription(item) {
     }
   }
   return text;
-}
-
-function getAndShuffleMultipleChoiceAnswers(currentIndex, item, property) {
-  return shuffle(getMultipleChoiceAnswers(currentIndex, item, property));
-}
-
-// This function randomly chooses 3 answers 2 incorrect and 1 correct answer to
-// display on the screen using the ListTemplate. It ensures that the list is unique.
-function getMultipleChoiceAnswers(currentIndex, item, property) {
-
-  // insert the correct answer first
-  let answerList = [item[property]];
-
-  // There's a possibility that we might get duplicate answers
-  // 8 states were founded in 1788
-  // 4 states were founded in 1889
-  // 3 states were founded in 1787
-  // to prevent duplicates we need avoid index collisions and take a sample of
-  // 8 + 4 + 1 = 13 answers (it's not 8+4+3 because later we take the unique
-  // we only need the minimum.)
-  let count = 0
-  let upperBound = 12
-
-  let seen = new Array();
-  seen[currentIndex] = 1;
-
-  while (count < upperBound) {
-    let random = getRandom(0, data.length - 1);
-
-    // only add if we haven't seen this index
-    if ( seen[random] === undefined ) {
-      answerList.push(data[random][property]);
-      count++;
-    }
-  }
-
-  // remove duplicates from the list.
-  answerList = answerList.filter((v, i, a) => a.indexOf(v) === i)
-  // take the first three items from the list.
-  answerList = answerList.slice(0, 5);
-  return answerList;
-}
-
-// This function takes the contents of an array and randomly shuffles it.
-function shuffle(array) {
-  let currentIndex = array.length, temporaryValue, randomIndex;
-
-  while ( 0 !== currentIndex ) {
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex--;
-    temporaryValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temporaryValue;
-  }
-  return array;
 }
 
 /* LAMBDA SETUP */

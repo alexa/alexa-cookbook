@@ -15,4 +15,4 @@ This folder contains the interaction model and skill code.  It is structured to 
 
 ## Exploring
 
-Once enabled, try playing through a few questions on different devices. Each round of questions will generate console log messages, depending on which device you are using. Open the AWS Console and navigate to the CloudWatch Logs section and view the logs associated with your skill's Lambda function. It is most easy to access the logs from Lambda function page. Click on the Monitoring tab, then click on one of the Jump to Logs links. Examine the logs and you will see information about the events which have been generated.
+Once enabled, try saying different state names on different devices. Each state uses a different body template so you know what to expect with the examples. Look at the code to see each Template that's in use and learn how you can use these different options in your own skills.
