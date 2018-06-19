@@ -303,64 +303,6 @@ function bodyTemplateChoice(pStateName) {
   return templateName;
 };
 
-
-function bodyTemplateTypePicker(pNum) {
-    var val;
-
-    switch (pNum) {
-        case 1:
-            val = new Alexa.templateBuilders.BodyTemplate1Builder();
-            break;
-        case 2:
-            val = new Alexa.templateBuilders.BodyTemplate2Builder();
-            break;
-        case 3:
-            val = new Alexa.templateBuilders.BodyTemplate3Builder();
-            break;
-        case 6:
-            val = new Alexa.templateBuilders.BodyTemplate6Builder();
-            break;
-        case 7:
-            val = new Alexa.templateBuilders.BodyTemplate7Builder();
-            break;
-        default:
-            val = null;
-    }
-    return val;
-}
-
-function bodyTemplateMaker(pBodyTemplateType, pImg, pTitle, pText1, pText2, pOutputSpeech, pReprompt, pHint, pBackgroundIMG) {
-    var bodyTemplate = bodyTemplateTypePicker.call(this, pBodyTemplateType);
-    var template = bodyTemplate.setTitle(pTitle)
-        .build();
-
-    if (pBodyTemplateType != 7) {
-        //Text not supported in BodyTemplate7
-        bodyTemplate.setTextContent(makeRichText(pText1) || null, makeRichText(pText2) || null) //Add text or null
-    }
-
-    if (pImg) {
-        bodyTemplate.setImage(makeImage(pImg));
-    }
-
-    if (pBackgroundIMG) {
-        bodyTemplate.setBackgroundImage(makeImage(pBackgroundIMG));
-    }
-
-    this.response.speak(pOutputSpeech)
-        .renderTemplate(template)
-        .shouldEndSession(null); //Keeps session open without pinging user..
-
-    this.response.hint(pHint || null, "PlainText");
-    this.attributes.lastOutputResponse = pOutputSpeech;
-
-    if (pReprompt) {
-        this.response.listen(pReprompt); // .. but we will ping them if we add a reprompt
-    }
-
-    this.emit(':responseReady');
-}
-
 // returns true if the skill is running on a device with a display (show|spot)
 function supportsDisplay(handlerInput) {
   var hasDisplay =
