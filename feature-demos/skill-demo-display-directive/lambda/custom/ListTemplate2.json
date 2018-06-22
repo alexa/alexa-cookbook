@@ -1,0 +1,332 @@
+{
+    "response": {
+        "shouldEndSession": false,
+        "outputSpeech": {
+            "type": "SSML",
+            "ssml": "<speak> This is List Template 2.  This is a horizontally scrolling list, and the hint text is displayed here.  Which other template can I show you? </speak>"
+        },
+        "reprompt": {
+            "outputSpeech": {
+                "type": "SSML",
+                "ssml": "<speak> Which template would you like to see? </speak>"
+            }
+        },
+        "card": {
+            "type": "Standard",
+            "title": "ListTemplate2 Title",
+            "image": {
+                "smallImageUrl": "https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/display-templates/720x480-small-card._TTH_.png",
+                "largeImageUrl": "https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/display-templates/1200x800-large-card._TTH_.png"
+            },
+            "text": "ListTemplate2 Text"
+        },
+        "directives": [
+            {
+                "type": "Hint",
+                "hint": {
+                    "type": "PlainText",
+                    "text": "is there a maximum number of items I can put in a list?"
+                }
+            },
+            {
+                "type": "Display.RenderTemplate",
+                "template": {
+                    "type": "ListTemplate2",
+                    "title": "ListTemplate2 Display Title",
+                    "token": "TOKEN",
+                    "listItems": [
+                        {
+                            "token": "TOKEN0",
+                            "image": {
+                                "contentDescription": "Item Description",
+                                "sources": [
+                                    {
+                                        "url": "https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/display-templates/192x280-list-image-portrait._TTH_.png",
+                                        "widthPixels": 192,
+                                        "heightPixels": 280,
+                                        "size": "X_SMALL"
+                                    }
+                                ]
+                            },
+                            "textContent": {
+                                "primaryText": {
+                                    "text": "Primary 0",
+                                    "type": "PlainText"
+                                },
+                                "secondaryText": {
+                                    "text": "Secondary Text 0",
+                                    "type": "PlainText"
+                                },
+                                "tertiaryText": {
+                                    "text": "Tertiary Text 0",
+                                    "type": "PlainText"
+                                }
+                            }
+                        },
+                        {
+                            "token": "TOKEN1",
+                            "image": {
+                                "contentDescription": "Item Description",
+                                "sources": [
+                                    {
+                                        "url": "https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/display-templates/280x280-list-image-square._TTH_.png",
+                                        "widthPixels": 280,
+                                        "heightPixels": 280,
+                                        "size": "X_SMALL"
+                                    }
+                                ]
+                            },
+                            "textContent": {
+                                "primaryText": {
+                                    "text": "Primary 1",
+                                    "type": "PlainText"
+                                },
+                                "secondaryText": {
+                                    "text": "Secondary Text 1",
+                                    "type": "PlainText"
+                                },
+                                "tertiaryText": {
+                                    "text": "Tertiary Text 1",
+                                    "type": "PlainText"
+                                }
+                            }
+                        },
+                        {
+                            "token": "TOKEN2",
+                            "image": {
+                                "contentDescription": "Item Description",
+                                "sources": [
+                                    {
+                                        "url": "https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/display-templates/372x280-list-image-4-3._TTH_.png",
+                                        "widthPixels": 372,
+                                        "heightPixels": 280,
+                                        "size": "X_SMALL"
+                                    }
+                                ]
+                            },
+                            "textContent": {
+                                "primaryText": {
+                                    "text": "Primary 2",
+                                    "type": "PlainText"
+                                },
+                                "secondaryText": {
+                                    "text": "Secondary Text 2",
+                                    "type": "PlainText"
+                                },
+                                "tertiaryText": {
+                                    "text": "Tertiary Text 2",
+                                    "type": "PlainText"
+                                }
+                            }
+                        },
+                        {
+                            "token": "TOKEN3",
+                            "image": {
+                                "contentDescription": "Item Description",
+                                "sources": [
+                                    {
+                                        "url": "https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/display-templates/498x280-list-image-16-9._TTH_.png",
+                                        "widthPixels": 298,
+                                        "heightPixels": 280,
+                                        "size": "X_SMALL"
+                                    }
+                                ]
+                            },
+                            "textContent": {
+                                "primaryText": {
+                                    "text": "Primary 3",
+                                    "type": "PlainText"
+                                },
+                                "secondaryText": {
+                                    "text": "Secondary Text 3",
+                                    "type": "PlainText"
+                                },
+                                "tertiaryText": {
+                                    "text": "Tertiary Text 3",
+                                    "type": "PlainText"
+                                }
+                            }
+                        },
+                        {
+                            "token": "TOKEN4",
+                            "image": {
+                                "contentDescription": "Item Description",
+                                "sources": [
+                                    {
+                                        "url": "https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/display-templates/192x280-list-image-portrait._TTH_.png",
+                                        "widthPixels": 192,
+                                        "heightPixels": 280,
+                                        "size": "X_SMALL"
+                                    }
+                                ]
+                            },
+                            "textContent": {
+                                "primaryText": {
+                                    "text": "Primary 4",
+                                    "type": "PlainText"
+                                },
+                                "secondaryText": {
+                                    "text": "Secondary Text 4",
+                                    "type": "PlainText"
+                                },
+                                "tertiaryText": {
+                                    "text": "Tertiary Text 4",
+                                    "type": "PlainText"
+                                }
+                            }
+                        },
+                        {
+                            "token": "TOKEN5",
+                            "image": {
+                                "contentDescription": "Item Description",
+                                "sources": [
+                                    {
+                                        "url": "https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/display-templates/280x280-list-image-square._TTH_.png",
+                                        "widthPixels": 280,
+                                        "heightPixels": 280,
+                                        "size": "X_SMALL"
+                                    }
+                                ]
+                            },
+                            "textContent": {
+                                "primaryText": {
+                                    "text": "Primary 5",
+                                    "type": "PlainText"
+                                },
+                                "secondaryText": {
+                                    "text": "Secondary Text 5",
+                                    "type": "PlainText"
+                                },
+                                "tertiaryText": {
+                                    "text": "Tertiary Text 5",
+                                    "type": "PlainText"
+                                }
+                            }
+                        },
+                        {
+                            "token": "TOKEN6",
+                            "image": {
+                                "contentDescription": "Item Description",
+                                "sources": [
+                                    {
+                                        "url": "https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/display-templates/372x280-list-image-4-3._TTH_.png",
+                                        "widthPixels": 372,
+                                        "heightPixels": 280,
+                                        "size": "X_SMALL"
+                                    }
+                                ]
+                            },
+                            "textContent": {
+                                "primaryText": {
+                                    "text": "Primary 6",
+                                    "type": "PlainText"
+                                },
+                                "secondaryText": {
+                                    "text": "Secondary Text 6",
+                                    "type": "PlainText"
+                                },
+                                "tertiaryText": {
+                                    "text": "Tertiary Text 6",
+                                    "type": "PlainText"
+                                }
+                            }
+                        },
+                        {
+                            "token": "TOKEN7",
+                            "image": {
+                                "contentDescription": "Item Description",
+                                "sources": [
+                                    {
+                                        "url": "https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/display-templates/498x280-list-image-16-9._TTH_.png",
+                                        "widthPixels": 298,
+                                        "heightPixels": 280,
+                                        "size": "X_SMALL"
+                                    }
+                                ]
+                            },
+                            "textContent": {
+                                "primaryText": {
+                                    "text": "Primary 7",
+                                    "type": "PlainText"
+                                },
+                                "secondaryText": {
+                                    "text": "Secondary Text 7",
+                                    "type": "PlainText"
+                                },
+                                "tertiaryText": {
+                                    "text": "Tertiary Text 7",
+                                    "type": "PlainText"
+                                }
+                            }
+                        },
+                        {
+                            "token": "TOKEN8",
+                            "image": {
+                                "contentDescription": "Item Description",
+                                "sources": [
+                                    {
+                                        "url": "https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/display-templates/192x280-list-image-portrait._TTH_.png",
+                                        "widthPixels": 192,
+                                        "heightPixels": 280,
+                                        "size": "X_SMALL"
+                                    }
+                                ]
+                            },
+                            "textContent": {
+                                "primaryText": {
+                                    "text": "Primary 8",
+                                    "type": "PlainText"
+                                },
+                                "secondaryText": {
+                                    "text": "Secondary Text 8",
+                                    "type": "PlainText"
+                                },
+                                "tertiaryText": {
+                                    "text": "Tertiary Text 8",
+                                    "type": "PlainText"
+                                }
+                            }
+                        },
+                        {
+                            "token": "TOKEN9",
+                            "image": {
+                                "contentDescription": "Item Description",
+                                "sources": [
+                                    {
+                                        "url": "https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/display-templates/280x280-list-image-square._TTH_.png",
+                                        "widthPixels": 280,
+                                        "heightPixels": 280,
+                                        "size": "X_SMALL"
+                                    }
+                                ]
+                            },
+                            "textContent": {
+                                "primaryText": {
+                                    "text": "Primary 9",
+                                    "type": "PlainText"
+                                },
+                                "secondaryText": {
+                                    "text": "Secondary Text 9",
+                                    "type": "PlainText"
+                                },
+                                "tertiaryText": {
+                                    "text": "Tertiary Text 9",
+                                    "type": "PlainText"
+                                }
+                            }
+                        }
+                    ],
+                    "backgroundImage": {
+                        "sources": [
+                            {
+                                "url": "https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/display-templates/1024x600-display-background._TTH_.png"
+                            }
+                        ]
+                    },
+                    "backButton": "HIDDEN"
+                }
+            }
+        ]
+    },
+    "sessionAttributes": {}
+}
