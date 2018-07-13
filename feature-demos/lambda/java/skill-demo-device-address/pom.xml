@@ -1,0 +1,56 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>alexa-skills-kit-samples</groupId>
+    <artifactId>address</artifactId>
+    <packaging>jar</packaging>
+    <version>1.0</version>
+    <name>address</name>
+    <url>http://developer.amazon.com/ask</url>
+    <licenses>
+        <license>
+            <name>The Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <name>Alexa Skills Kit</name>
+            <email>ask-sdk-java@amazon.com</email>
+            <organization>Alexa</organization>
+            <organizationUrl>http://developer.amazon.com/ask</organizationUrl>
+        </developer>
+    </developers>
+    <scm>
+        <connection>scm:git:https://github.com/amzn/alexa-skills-kit-java.git</connection>
+        <developerConnection>scm:git:https://github.com/amzn/alexa-skills-kit-java.git</developerConnection>
+        <url>https://github.com/amzn/alexa-skills-kit-java.git</url>
+    </scm>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.amazon.alexa</groupId>
+            <artifactId>ask-sdk</artifactId>
+            <version>2.3.3</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <sourceDirectory>src</sourceDirectory>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.7.0</version>
+                    <configuration>
+                        <source>1.8</source>
+                        <target>1.8</target>
+                        <forceJavacCompilerUse>true</forceJavacCompilerUse>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+</project>
