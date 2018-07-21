@@ -7,6 +7,6 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
-    "ask-sdk-core": "^2.0.0",
+    "ask-sdk-core": "^2.0.0"
   }
 }
