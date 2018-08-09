@@ -25,7 +25,7 @@ A new in-skill product will be created as a JSON file in a folder called `/isps/
 
 5. Open the in-skill product JSON file (`/isps/entitlement/premium-greeting.json`) in your code editor.
 
-6. Copy a completed version by [clicking here](https://github.com/alexa/alexa-cookbook/edit/master/labs/CLI/assets/premium-greetings.json) and paste it into your in-skill product JSON file.
+6. Copy a completed version by [clicking here](https://github.com/alexa/alexa-cookbook/blob/master/labs/CLI/assets/premium-greetings.json) and paste it into your in-skill product JSON file.
 
 7. Return to your terminal window and type in `ask deploy -t isp` to deploy your product.
 
