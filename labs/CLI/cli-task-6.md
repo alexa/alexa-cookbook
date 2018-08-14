@@ -21,7 +21,7 @@ The terminal prompt will ask you for a name.
 
 4. Type in `premium-greeting`
 
-A new in-skill product will be created as a JSON file in a folder called `/isps/entiltement/`. 
+A new in-skill product will be created as a JSON file in a folder called `/isps/entitlement/`. 
 
 5. Open the in-skill product JSON file (`/isps/entitlement/premium-greeting.json`) in your code editor.
 
