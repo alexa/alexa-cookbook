@@ -248,7 +248,7 @@ function selectCurrentEvents(events, startIndex) {
 }
 
 function sleep(milliseconds) {
-  return new Promise(resolve => setTimeout(resolve, milliseconds));
+  return new Promise(resolve => setTimeout(resolve(), milliseconds));
 }
 
 // 4. Exports handler function and setup ===================================================
