@@ -131,6 +131,6 @@ Your code should look something like this:
   )
 ``` 
 
-6. Now Deploy your changes from your local environment to the clode by typing `ask deploy` into your terminal window and pusing Enter.
+6. Now Deploy your changes from your local environment to the clode by typing `ask deploy` into your terminal window and pushing Enter.
 
 7. Test the changes you've made to your skill on your device, from the developer portal or on echosim.io. You can try to say something like "Alexa, start hello jeff" and then follow up with "buy it now". Experiment with declining the option to purchase, and then try the experience again with accepting the purchase.
