@@ -16,4 +16,4 @@
 
   **Note:** This process takes a bit longer since the model is essentially training Alexa to recognize the speech input from our customers. You should see a confirmation message in your terminal "Model deployment finished."
 
-  Congratulations! Test the changes you've made to your skill on your device, from the testing pane in the [developer portal](https://developer.amazon.com/alexa/console/ask), or on [echosim.io](https://www.echosim.io). Remmber to use the new invocation name you gave your skill. You'll want to say something like "Alexa, start hello jeff" or you can also try "Alexa, hello jeff". or "ask", "open", "tell"...go ahead and experiment with a few variations.
+  Congratulations! Test the changes you've made to your skill on your device, from the testing pane in the [developer portal](https://developer.amazon.com/alexa/console/ask), or on [echosim.io](https://www.echosim.io). Remember to use the new invocation name you gave your skill. You'll want to say something like "Alexa, start hello jeff" or you can also try "Alexa, hello jeff". or "ask", "open", "tell"...go ahead and experiment with a few variations.
