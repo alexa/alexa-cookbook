@@ -12,7 +12,7 @@ Alexa skills follow the same model. Basic ingredients can be added together to c
 This Cookbook is a desk reference for other Alexa skill design materials.
 
 #### Table of Contents <a id="toc"></a>
- + [javascript cookbook](src/javascript/alexa-cookbook.js) coantins helper functions which make it easier to access Alexa Skills Kit features or perform frequent tasks.
+ + [javascript cookbook](src/javascript/alexa-cookbook.js) contains helper functions which make it easier to access Alexa Skills Kit features or perform frequent tasks.
    + [documentation](docs) of the cookbook
  + [feature-demos](feature-demos) are demos focused on demonstrating a specific feature
  + [guides](guides) contains supplemental guides to address specific use cases
