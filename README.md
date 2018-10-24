@@ -1,7 +1,7 @@
 
 # Alexa Skill Building Cookbook
 
-<div style="border-style: solid; border-color: black; text-align: center; background-color: lightgreen; padding: 5px;">Please note that the Alexa Cookbook has recently been reorganized.  If you cannot find what you're looking for, first try a repo search and if that doesn't help, please open an <a href="./issues/new?template=cannot_find.md">issue</a> and we'll do our best to help.</div>
+<div style="border-style: solid; border-color: black; text-align: center; background-color: lightgreen; padding: 5px;">Please note that the Alexa Cookbook has recently been reorganized.  If you cannot find what you're looking for, try a repo search first, and if that doesn't help, please open an <a href="./issues/new?template=cannot_find.md">issue</a> and we'll do our best to help.</div>
 
 ### Welcome!
 
@@ -12,14 +12,12 @@ Alexa skills follow the same model. Basic ingredients can be added together to c
 This Cookbook is a desk reference for other Alexa skill design materials.
 
 #### Table of Contents <a id="toc"></a>
- + [javascript cookbook](src/javascript/alexa-cookbook.js) coantins helper functions which make it easier to access Alexa Skills Kit features or perform frequent tasks.
-   + [documentation](docs) of the cookbook
  + [feature-demos](feature-demos) are demos focused on demonstrating a specific feature
  + [guides](guides) contains supplemental guides to address specific use cases
  + [tools](tools) contains utilities and tools which help make skill building or operating easiser.
 
 
-#### Before Cooking (pre-requisites)
+#### Before Cooking (prerequisites)
 
 Recommended:
 * You should have some experience with scripting or Javascript programming.
