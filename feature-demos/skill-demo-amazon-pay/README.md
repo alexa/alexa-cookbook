@@ -1,7 +1,7 @@
 # Amazon Pay for Alexa Demo
-This is a demo showing Amazon Pay for Alexa Skills.  
+This is a demo to showcase Amazon Pay for Alexa.  
 
-Amazon Pay for Alexa Skills is currently available for the en-US locale, for US based merchants.
+Amazon Pay for Alexa Skills is currently available for the United States, Europe, and Japan.
 
 ## What You Will Need
 *  [Amazon Developer Account](http://developer.amazon.com/alexa)
@@ -14,8 +14,8 @@ Amazon Pay for Alexa Skills is currently available for the en-US locale, for US 
 This folder contains the interaction model and skill code.  It is structured to make it easy to deploy if you have the ASK CLI already setup.  If you would like to use the Alexa Developer Console, you can follow the steps outlined in the [Hello World](https://github.com/alexa/skill-sample-nodejs-hello-world) example, substituting the [Model](./models/en-US.json) and the [skill code](./lambda/custom/index.js) when called for.  In addition, you will need to create the additional supporting javascript files found in the custom folder.
 
 1. Clone repository and navigate the demo's root folder (with the skill.json file).
-1. Open [config.js](./lambda/custom/config.js) and update values `appID`, `sellerId`, and `sandboxCustomerEmailId`
-   * the `appID` is the skill id
+1. Open [config.js](./lambda/custom/config.js) and update values `bucketName`, `sellerId`, and `sandboxCustomerEmailId`
+   * the `bucketName` is your [S3](https://aws.amazon.com/s3/) instance.
    * the `sellerId` is your Seller Id.  You can find that [here](https://sellercentral.amazon.com/hz/me/integration/details)
    * the `sandboxCustomerEmailId` is the email address of the test account you created or otherwise have access to.  This is not an account usable on the www.amazon.com website.
 1. Give your skill permission to use your Amazon Pay account.  You can do that [here](https://sellercentral.amazon.com/external-payments/integration/alexa/).  The documentation is [here](https://developer.amazon.com/docs/amazon-pay/integrate-skill-with-amazon-pay-v2.html#link_sc)..
@@ -25,11 +25,7 @@ This folder contains the interaction model and skill code.  It is structured to 
 If you would like to explore the skill, the areas to pay attention to are the Amazon Pay permission in the Alexa Developer Console, and the Connections.SendRequest directive and the Connections.Response request type.
 
 ## Running the Demo
-Launch the demo, 'Alexa, open payments demo', and you'll be immediately directed to the purchase flow.  If you receive the message `Thank you for ordering form Blitz and Chips` then you have successfully configured your skill! If you receive an error, proceed to the [troubleshooting section](#troubleshooting).
-
-![alt text](https://i.imgur.com/joMdlZl.png)
-
-You will get a payment record in your email and your Alexa app home screen.
+Launch the demo by saying, 'Alexa, open No Nicks'. If you receive an error, proceed to the [troubleshooting section](#troubleshooting).
 
 ## Next Steps
 Read the integration guide: https://developer.amazon.com/docs/amazon-pay/amazon-pay-overview.html

@@ -1,34 +1,60 @@
 {
-    "manifest": {
-      "publishingInformation": {
-        "locales": {
-          "en-US": {
-            "summary": "Demo skill of Amazon Pay for Alexa Skills",
-            "examplePhrases": [
-              "Alexa, open payments demo"
-            ],
-            "name": "Demo - Amazon Pay for Alexa Skills",
-            "description": "Demo skill of Amazon Pay for Alexa Skills"
-          }
+  "manifest": {
+    "apis": {
+      "custom": {
+        "endpoint": {
+          "uri": "no-nicks",
+          "sourceDir": "lambda/custom"
         },
-        "isAvailableWorldwide": true,
-        "testingInstructions": "n/a",
-        "category": "EDUCATION_AND_REFERENCE",
-        "distributionCountries": []
-      },
-      "apis": {
-        "custom": {
-          "endpoint": {
-            "sourceDir": "lambda/custom"
-          }
+        "interfaces": []
+      }
+    },
+    "manifestVersion": "1.0",
+    "permissions": [
+      {
+        "name": "payments:autopay_consent"
+      }
+    ],
+    "privacyAndCompliance": {
+      "locales": {
+        "en-US": {
+          "privacyPolicyUrl": "https://example.com",
+          "termsOfUseUrl": "https://example.com"
         }
       },
-      "permissions": [
-        {
-          "name": "payments:autopay_consent"
+      "allowsPurchases": true,
+      "usesPersonalInfo": true,
+      "isChildDirected": false,
+      "isExportCompliant": true,
+      "containsAds": false
+    },
+    "publishingInformation": {
+      "locales": {
+        "en-US": {
+          "name": "No Nicks",
+          "smallIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/23bf/c2e52e552ee44a6099b06ac30bc713b4/APP_ICON?versionId=d6YX5pM5JDYLgTcFRTicg7KvFj8rAPBY&AWSAccessKeyId=AKIAJFEYRBGIHK2BBYKA&Expires=1551319004&Signature=gawNKWveGqtpMO7KdLZ4e0RTAwc%3D",
+          "largeIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/96f3/c5c84a64a51e498fa462c50974141ca3/APP_ICON_LARGE?versionId=E0Kk1TGSsweWB3o_QcxQ7At0kdNoCy6x&AWSAccessKeyId=AKIAJFEYRBGIHK2BBYKA&Expires=1551319004&Signature=y4qt8ujQmdDeH%2FAWqAHhfLYQln8%3D",
+          "summary": "Demo skill of Amazon Pay for Alexa Skills",
+          "description": "This is a fictional merchant that demonstrates how to use Amazon Pay for Alexa skills.",
+          "examplePhrases": [
+            "Alexa, open No Nicks",
+            "Alexa, ask No Nicks for a starter kit",
+            "Alexa, ask No Nicks for refills"
+          ],
+          "keywords": [
+            "no",
+            "nicks",
+            "shaving",
+            "kit"
+          ],
+          "updatesDescription": "TBD"
         }
-      ],
-      "manifestVersion": "1.0"
+      },
+      "isAvailableWorldwide": true,
+      "distributionMode": "PUBLIC",
+      "testingInstructions": "tbd",
+      "category": "SHOPPING",
+      "distributionCountries": []
     }
   }
-  
+}

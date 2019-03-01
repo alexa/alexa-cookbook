@@ -19,8 +19,9 @@ function handleErrors( handlerInput ) {
 	switch ( actionResponseStatusMessage ) {
 		// Permissions errors - These must be resolved before a user can use Amazon Pay
 		case 'ACCESS_DENIED':
-		case 'ACCESS_NOT_REQUESTED':
+		case 'ACCESS_NOT_REQUESTED': 		// Amazon Pay permissions not enabled
 		case 'FORBIDDEN':
+		case 'VoicePurchaseNotEnabled': 	// Voice Purchase not enabled 	TODO: Add this to documentation
 			permissionsError 	= true;
 			errorMessage 		= config.enablePermission;
 			break;
@@ -116,8 +117,8 @@ function handleAuthorizationDeclines( authorizationStatusReasonCode, handlerInpu
 }
 
 // Output object to console for debugging purposes
-function debug( handlerInput ) {
-	console.log( config.debug + JSON.stringify( handlerInput ) );
+function debug( handlerInput, message ) {
+	console.log( config.debug + ' ' + message + JSON.stringify( handlerInput ) );
 }
 
 module.exports = {

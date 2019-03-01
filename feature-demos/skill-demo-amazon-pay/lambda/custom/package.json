@@ -1,10 +1,12 @@
 {
   "name": "amazon-pay-alexa-demo",
-  "version": "1.0.0",
-  "description": "This is a bare-bones demo to show how you can integrate Amazon Pay into your Alexa skills.",
+  "version": "2.0.0",
+  "description": "This is a fictional merchant that demonstrates how you can integrate Amazon Pay into your Alexa skills.",
   "main": "index.js",
   "dependencies": {
-    "ask-sdk": "^2.0.3"
+    "ask-sdk": "^2.4.0",
+    "ask-sdk-core": "^2.4.0",
+    "ask-sdk-s3-persistence-adapter": "^2.4.0"
   },
   "repository": {
     "type": "git",
