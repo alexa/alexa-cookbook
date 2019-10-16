@@ -1,0 +1,36 @@
+{
+  "manifest": {
+    "publishingInformation": {
+      "locales": {
+        "en-US": {
+          "summary": "An APL video demo. Find the code base on GitHub.",
+          "examplePhrases": [
+            "Alexa open video demo",
+            "help",
+            "stop"
+          ],
+          "name": "APL Video Demo",
+          "description": "A demo that demonstrates how to build a video skill with play and pause capabilities using Alexa Presentation Language (APL)."
+        }
+      },
+      "isAvailableWorldwide": true,
+      "testingInstructions": "Say play or pause.",
+      "category": "EDUCATION_AND_REFERENCE",
+      "distributionCountries": []
+    },
+    "apis": {
+      "custom": {
+        "endpoint": {
+          "sourceDir": "lambda/custom",
+          "uri": "ask-custom-skill-demo-apl-video-default"
+        },
+        "interfaces": [
+          {
+            "type": "ALEXA_PRESENTATION_APL"
+          }
+        ]
+      }
+    },
+    "manifestVersion": "1.0"
+  }
+}

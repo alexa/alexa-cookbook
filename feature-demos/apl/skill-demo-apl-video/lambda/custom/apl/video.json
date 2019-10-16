@@ -1,0 +1,28 @@
+{
+  "type": "APL",
+  "version": "1.2",
+  "settings": {},
+  "theme": "dark",
+  "import": [],
+  "resources": [],
+  "styles": {},
+  "onMount": [],
+  "graphics": {},
+  "commands": {},
+  "layouts": {},
+  "mainTemplate": {
+      "parameters": [
+          "payload"
+      ],
+      "items": [
+          {
+              "type": "Video",
+              "id": "APLVideo",
+              "width": "100vw",
+              "height": "100vh",
+              "autoplay": true,
+              "source": "https://dag-github-assets.s3-us-west-2.amazonaws.com/alexa-cookbook/Alexa-hosted+Setup.mp4"
+          }
+      ]
+  }
+}
