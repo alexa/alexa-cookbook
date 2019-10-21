@@ -1,0 +1,120 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "dynamic heroes",
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "SelectCharacterIntent",
+          "slots": [
+            {
+              "name": "character",
+              "type": "Character"
+            }
+          ],
+          "samples": [
+            "{character}",
+            "select {character}",
+            "choose {character}",
+            "I'll be {character}"
+          ]
+        },
+        {
+          "name": "EngagementIntent",
+          "slots": [
+            {
+              "name": "engagement_action",
+              "type": "EngagementAction"
+            }
+          ],
+          "samples": [
+            "{engagement_action}",
+            "I'm going to {engagement_action}",
+            "Let's {engagement_action}"
+          ]
+        },
+        {
+          "name": "AttackIntent",
+          "slots": [
+            {
+              "name": "attack_action",
+              "type": "AttackAction"
+            }
+          ],
+          "samples": [
+            "{attack_action}",
+            "Attack with {attack_action}"
+          ]
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        }
+      ],
+      "types": [
+        {
+          "values": [
+            {
+              "name": {
+                "value": "roy"
+              }
+            },
+            {
+              "name": {
+                "value": "olivia"
+              }
+            },
+            {
+              "name": {
+                "value": "andrew"
+              }
+            },
+            {
+              "name": {
+                "value": "pan"
+              }
+            }
+          ],
+          "name": "Character"
+        },
+        {
+          "values": [
+            {
+              "name": {
+                "value": "fight"
+              }
+            },
+            {
+              "name": {
+                "value": "run"
+              }
+            }
+          ],
+          "name": "EngagementAction"
+        },
+        {
+          "values": [
+            {
+              "name": {
+                "value": "pocket sand"
+              }
+            }
+          ],
+          "name": "AttackAction"
+        }
+      ]
+    }
+  },
+  "version": "61"
+}
