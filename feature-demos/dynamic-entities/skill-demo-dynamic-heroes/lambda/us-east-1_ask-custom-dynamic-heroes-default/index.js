@@ -5,6 +5,10 @@ const Alexa = require('ask-sdk-core');
 
 const randomNumber = (max)  => Math.floor(Math.random() * Math.floor(max))
 
+/* 
+  Define a Character class that can be used to create characters and set their unique attributes.
+*/
+
 class Character {
   constructor(name, attackOptions) {
       this.name = name,
@@ -37,6 +41,10 @@ class Character {
   }
 }
 
+/* 
+  Define characters and their abilities
+*/
+
 const dynamicAttackOptions = {
     roy: [{name: 'sous vide', impact: 100}],
     olivia: [{name: 'katsu', impact: 11}],
@@ -55,11 +63,13 @@ const LaunchRequestHandler = {
     return handlerInput.responseBuilder
       .speak(speechText)
       .reprompt(speechText)
-      .withSimpleCard('Dynamic Heroes', speechText)
       .getResponse();
   },
 };
 
+/* 
+  Provide users with a list of possible characters to choose from. 
+*/
 const SelectCharacterIntentHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
@@ -69,19 +79,25 @@ const SelectCharacterIntentHandler = {
     const characterName = handlerInput.requestEnvelope.request.intent.slots.character.value.toLowerCase(),
           character = new Character(characterName, dynamicAttackOptions[characterName]),
           selectionText = `You selected ${character.name}. With ${character.getAttackOptionNames().join(". ")} as a special.`,
-          encounterText = 'You encountered a wild coding inquiry. Will you fight or run?',
+          encounterText = 'You encountered a random person with a briefcase. Will you fight or run?',
           speechText = `${selectionText} ${encounterText}`,
           attributes = handlerInput.attributesManager.getSessionAttributes()
     attributes.character = character
+    /*
+      After a character is selected, store the character in SessionAttributes
+      to use in subsequent sessions.
+    */
     handlerInput.attributesManager.setSessionAttributes(attributes)
     return handlerInput.responseBuilder
       .speak(speechText)
-      .withSimpleCard('Hello World', speechText)
       .reprompt(encounterText)
       .getResponse();
   },
 };
 
+/* 
+  When the user encounters an enemy, ask the user to select an engagement (attack or run).
+*/
 const EngagementIntentHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
@@ -91,7 +107,7 @@ const EngagementIntentHandler = {
     const engagementAction = handlerInput.requestEnvelope.request.intent.slots.engagement_action.value.toLowerCase(),
           attributes = handlerInput.attributesManager.getSessionAttributes(),
           { character } = attributes,
-          encounterText = 'You encountered a wild coding inquiry. Will you fight or run?'
+          encounterText = 'You encountered a random person with a briefcase. Will you fight or run?'
     var response = handlerInput.responseBuilder,
         speechText = ""
 
@@ -102,6 +118,9 @@ const EngagementIntentHandler = {
       speechText = `You ran away. As you are taking a breath ${encounterText}`
     }
 
+    /*
+      Use Dynamic Entities to bias the recognition for the character's specific attack engagement.
+    */
     const replaceEntityDirective = {
       type: 'Dialog.UpdateDynamicEntities',
       updateBehavior: 'REPLACE',
@@ -128,6 +147,11 @@ const EngagementIntentHandler = {
   },
 }
 
+
+/*
+  When a user selects an attack, this handler will look up how much damage it deals to the opponent.
+  Then update the data in the session attribute appropriately.
+*/
 const AttackIntentHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
@@ -141,7 +165,6 @@ const AttackIntentHandler = {
           speechText = `You attacked with ${attackAction.name} and dealt ${attackAction.impact} damage`;
     return handlerInput.responseBuilder
       .speak(speechText)
-      .withSimpleCard('Hello World', speechText)
       .getResponse();
   },
 };
@@ -157,7 +180,6 @@ const HelpIntentHandler = {
     return handlerInput.responseBuilder
       .speak(speechText)
       .reprompt(speechText)
-      .withSimpleCard('Hello World', speechText)
       .getResponse();
   },
 };
@@ -169,11 +191,10 @@ const CancelAndStopIntentHandler = {
         || handlerInput.requestEnvelope.request.intent.name === 'AMAZON.StopIntent');
   },
   handle(handlerInput) {
-    const speechText = 'Goodbye!';
+    const speechText = 'Thanks for playing Dynamic Heroes!';
 
     return handlerInput.responseBuilder
       .speak(speechText)
-      .withSimpleCard('Hello World', speechText)
       .getResponse();
   },
 };
