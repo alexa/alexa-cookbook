@@ -3,7 +3,7 @@ const Alexa = require('ask-sdk-core');
 const HELP_MESSAGE = 'This is a simple demo. Just open the skill to see the video.';
 const ERROR_MESSAGE = 'Sorry, an error occurred in the demo. Please check the logs.';
 const STOP_MESSAGE = 'Goodbye!';
-const videoUrl = 'https://s3.amazonaws.com/ask-samples-resources/videos/underconfirmation.mp4';
+// NOTE: set the video url location below
 
 function supportsVideo(handlerInput) {
   const hasVideo =
@@ -23,6 +23,12 @@ const LaunchRequestHandler = {
     return request.type === 'LaunchRequest';
   },
   handle(handlerInput) {
+    // video location
+    const videoUrl = 'https://s3.amazonaws.com/ask-samples-resources/videos/underconfirmation.mp4';
+    // Use this isntead if you want to use your own video and your skill is Alexa-hosted. Be sure to require the util.js file
+    // const util = require('util.js');
+    // const videoUrl = util.getS3PreSignedUrl('Media/myVideo.mp4');
+    
     if (supportsVideo(handlerInput)) {
       handlerInput.responseBuilder.addVideoAppLaunchDirective(videoUrl, 'Video Sample Title', 'Video Subtitle');
 
