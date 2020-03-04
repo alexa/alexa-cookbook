@@ -1,0 +1,7 @@
+LaunchRequest
+SpeakSpeedIntent speakingSpeedChange=faster
+AMAZON.HelpIntent
+AMAZON.StopIntent
+SpeakSpeedIntent speakingSpeedChange=slower
+AMAZON.HelpIntent
+AMAZON.StopIntent

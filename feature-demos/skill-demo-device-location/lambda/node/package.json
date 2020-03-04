@@ -1,0 +1,24 @@
+{
+  "name": "skill-sample-node-device-address-api",
+  "version": "2.0.0",
+  "description": "A Device Address API sample skill.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "alexa",
+    "skill",
+    "settings"
+  ],
+  "author": "Amazon.com",
+  "license": "SEE LICENSE IN LICENSE.txt",
+  "dependencies": {
+    "ask-sdk-core": "^2.0.0",
+    "ask-sdk-model": "^1.0.0"
+  },
+  "repository" : {
+    "type" : "git",
+    "url" : ""
+  }
+}

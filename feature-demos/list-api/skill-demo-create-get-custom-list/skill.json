@@ -1,0 +1,46 @@
+{
+  "manifest": {
+    "apis": {
+      "custom": {
+        "endpoint": {
+          "sourceDir": "lambda",
+          "uri": "ask-custom-skill-demo-create-get-custom-list"
+        },
+        "interfaces": []
+      }
+    },
+    "manifestVersion": "1.0",
+    "permissions": [
+      {
+        "name": "alexa::household:lists:read"
+      },
+      {
+        "name": "alexa::household:lists:write"
+      }
+    ],
+    "privacyAndCompliance": {
+      "locales": {
+        "en-US": {}
+      }
+    },
+    "publishingInformation": {
+      "locales": {
+        "en-US": {
+          "name": "Custom List Demo",
+          "summary": "Demo that shows how to use the List API to create and get custom lists(s)",
+          "description": "Demo that shows how to use the List API to create and get custom lists(s)",
+          "examplePhrases": [
+            "Alexa open custom list demo",
+            "Create a custom list name {list_name}",
+            "What are my custom lists"
+          ],
+          "keywords": []
+        }
+      },
+      "isAvailableWorldwide": true,
+      "testingInstructions": "To create a custom list say Create a custom list name {list_name}. To get custom lists, say What are my custom lists",
+      "category": "KNOWLEDGE_AND_TRIVIA",
+      "distributionCountries": []
+    }
+  }
+}

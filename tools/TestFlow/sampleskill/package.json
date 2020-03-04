@@ -1,0 +1,16 @@
+{
+  "name": "AlexaSampleSkillFunction",
+  "version": "1.0.0",
+  "description": "Sample Alexa Skill Code for testing",
+  "readme": "Lambda function for Alexa",
+  "repository": "my repository",
+  "main": "index.js",
+  "scripts": {},
+  "author": "me",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "ask-sdk": "^2.0.5",
+    "i18next": "latest",
+    "i18next-sprintf-postprocessor": "latest"
+  }
+}

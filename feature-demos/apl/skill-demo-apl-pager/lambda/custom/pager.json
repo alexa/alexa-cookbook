@@ -1,0 +1,411 @@
+{
+    "type": "APL",
+    "version": "1.0",
+    "theme": "dark",
+    "import": [
+        {
+            "name": "alexa-layouts",
+            "version": "1.0.0"
+        }
+    ],
+    "resources": [
+        {
+            "description": "All page resources",
+            "strings": {
+                "pagesBackground": "https://d2o906d8ln7ui1.cloudfront.net/images/BT7_Background.png",
+                "pagesLogo": "https://d2o906d8ln7ui1.cloudfront.net/images/cheeseskillicon.png",
+                "pagesHint": "search for blue cheese"
+            }
+        },
+        {
+            "description": "Page1 resources",
+            "strings": {
+                "page1Title": "Today's Daily Photo of Cheese",
+                "page1Image": "https://d2o906d8ln7ui1.cloudfront.net/images/MollyforBT7.png"
+            }
+        },
+        {
+            "description": "Page2 resources",
+            "strings": {
+                "page2Title": "Today's Daily Photo of Cheese",
+                "page2Text": "But in reality, mice prefer grains, fruits, and manmade foods that are high in sugar, and tend to turn up their noses at very smelly foods, like cheese. In fact, a 2006 study found that mice actively avoid cheese and dairy in general."
+            }
+        },
+        {
+            "description": "Page3 resources",
+            "strings": {
+                "page3Title": "Welcome to The Daily Cheese",
+                "page3Image": "http://images.media-allrecipes.com/userphotos/250x250/303241.jpg"
+            }
+        },
+        {
+            "description": "Stock color for the light theme",
+            "colors": {
+                "colorTextPrimary": "#151920"
+            }
+        },
+        {
+            "description": "Stock color for the dark theme",
+            "when": "${viewport.theme == 'dark'}",
+            "colors": {
+                "colorTextPrimary": "#f0f1ef"
+            }
+        },
+        {
+            "description": "Standard font sizes",
+            "dimensions": {
+                "textSizeBody": 48,
+                "textSizePrimary": 27,
+                "textSizeSecondary": 23,
+                "textSizeSecondaryHint": 25
+            }
+        },
+        {
+            "description": "Common spacing values",
+            "dimensions": {
+                "spacingThin": 6,
+                "spacingSmall": 12,
+                "spacingMedium": 24,
+                "spacingLarge": 48,
+                "spacingExtraLarge": 72
+            }
+        },
+        {
+            "description": "Common margins and padding",
+            "dimensions": {
+                "marginTop": 40,
+                "marginLeft": 60,
+                "marginRight": 60,
+                "marginBottom": 40
+            }
+        }
+    ],
+    "styles": {
+        "textStyleBase": {
+            "description": "Base font description; set color and core font family",
+            "values": [
+                {
+                    "color": "@colorTextPrimary",
+                    "fontFamily": "Amazon Ember"
+                }
+            ]
+        },
+        "textStyleBase0": {
+            "description": "Thin version of basic font",
+            "extend": "textStyleBase",
+            "values": {
+                "fontWeight": "100"
+            }
+        },
+        "textStyleBase1": {
+            "description": "Light version of basic font",
+            "extend": "textStyleBase",
+            "values": {
+                "fontWeight": "300"
+            }
+        },
+        "mixinBody": {
+            "values": {
+                "fontSize": "@textSizeBody"
+            }
+        },
+        "mixinPrimary": {
+            "values": {
+                "fontSize": "@textSizePrimary"
+            }
+        },
+        "mixinSecondary": {
+            "values": {
+                "fontSize": "@textSizeSecondary"
+            }
+        },
+        "textStylePrimary": {
+            "extend": [
+                "textStyleBase1",
+                "mixinPrimary"
+            ]
+        },
+        "textStyleSecondary": {
+            "extend": [
+                "textStyleBase0",
+                "mixinSecondary"
+            ]
+        },
+        "textStyleBody": {
+            "extend": [
+                "textStyleBase1",
+                "mixinBody"
+            ]
+        },
+        "textStyleSecondaryHint": {
+            "values": {
+                "fontFamily": "Bookerly",
+                "fontStyle": "italic",
+                "fontSize": "@textSizeSecondaryHint",
+                "color": "@colorTextPrimary"
+            }
+        }
+    },
+    "layouts": {
+        "Page1": {
+            "parameters": [
+                {
+                    "name": "hint",
+                    "type": "string"
+                }
+            ],
+            "items": [
+                {
+                    "when": "${viewport.shape == 'round'}",
+                    "type": "Container",
+                    "direction": "column",
+                    "width": "100vw",
+                    "height": "100vh",
+                    "items": [
+                        {
+                            "type": "Image",
+                            "source": "@pagesBackground",
+                            "scale": "best-fill",
+                            "width": "100vw",
+                            "height": "100vh",
+                            "position": "absolute",
+                            "scrim": true
+                        },
+                        {
+                            "type": "AlexaHeader",
+                            "headerTitle": "@page1Title",
+                            "headerAttributionImage": "@pagesLogo"
+                        },
+                        {
+                            "type": "Container",
+                            "width": "100vw",
+                            "height": "100vh",
+                            "paddingLeft": "@marginLeft",
+                            "paddingRight": "@marginRight",
+                            "paddingBottom": 200,
+                            "alignItems": "center",
+                            "justifyContent": "center",
+                            "items": [
+                                {
+                                    "type": "Image",
+                                    "source": "@page1Image",
+                                    "scale": "best-fit",
+                                    "width": "100vw",
+                                    "height": "100vh",
+                                    "align": "center"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "Container",
+                    "width": "100vw",
+                    "height": "100vh",
+                    "items": [
+                        {
+                            "type": "Image",
+                            "source": "@pagesBackground",
+                            "scale": "best-fill",
+                            "width": "100vw",
+                            "height": "100vh",
+                            "position": "absolute"
+                        },
+                        {
+                            "type": "AlexaHeader",
+                            "headerTitle": "@page1Title",
+                            "headerAttributionImage": "@pagesLogo"
+                        },
+                        {
+                            "type": "Container",
+                            "direction": "row",
+                            "justifyContent": "center",
+                            "items": [
+                                {
+                                    "type": "Image",
+                                    "width": "50vw",
+                                    "height": "50vh",
+                                    "source": "@page1Image",
+                                    "scale": "best-fit",
+                                    "align": "center"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "AlexaFooter",
+                            "footerHint": "${hint}"
+                        }
+                    ]
+                }
+            ]
+        },
+        "Page2": {
+            "parameters": [
+                {
+                    "name": "hint",
+                    "type": "string"
+                }
+            ],
+            "items": [
+                {
+                    "when": "${viewport.shape == 'round'}",
+                    "type": "Container",
+                    "direction": "column",
+                    "paddingLeft": 50,
+                    "paddingRight": 30,
+                    "width": "100vw",
+                    "height": "100vh",
+                    "items": [
+                        {
+                            "type": "Image",
+                            "source": "@pagesBackground",
+                            "position": "absolute",
+                            "width": "100vw",
+                            "height": "100vh",
+                            "scale": "best-fill"
+                        },
+                        {
+                            "type": "AlexaHeader",
+                            "headerTitle": "@page2Title",
+                            "headerAttributionImage": "@pagesLogo"
+                        },
+                        {
+                            "type": "Text",
+                            "text": "@page2Text",
+                            "size": "@textSizeBody",
+                            "style": "textStyleBody"
+                        }
+                    ]
+                },
+                {
+                    "type": "Container",
+                    "width": "100vw",
+                    "height": "100vh",
+                    "items": [
+                        {
+                            "type": "Image",
+                            "source": "@pagesBackground",
+                            "position": "absolute",
+                            "width": "100vw",
+                            "height": "100vh",
+                            "scale": "best-fill"
+                        },
+                        {
+                            "type": "AlexaHeader",
+                            "headerTitle": "@page2Title",
+                            "headerAttributionImage": "@pagesLogo"
+                        },
+                        {
+                            "type": "Container",
+                            "height": "60vh",
+                            "width": "100vw",
+                            "paddingLeft": "@marginLeft",
+                            "paddingRight": "@marginRight",
+                            "paddingBottom": "@marginBottom",
+                            "items": [
+                                {
+                                    "type": "Text",
+                                    "text": "@page2Text",
+                                    "size": "@textSizeBody",
+                                    "spacing": "@spacingSmall",
+                                    "style": "textStyleBody"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "AlexaFooter",
+                            "footerHint": "${hint}"
+                        }
+                    ]
+                }
+            ]
+        },
+        "Page3": {
+            "parameters": [
+                {
+                    "name": "hint",
+                    "type": "string"
+                }
+            ],
+            "items": [
+                {
+                    "type": "Container",
+                    "items": [
+                        {
+                            "type": "Image",
+                            "source": "@pagesBackground",
+                            "scale": "best-fill",
+                            "width": "100%",
+                            "height": "100%",
+                            "position": "absolute"
+                        },
+                        {
+                            "type": "AlexaHeader",
+                            "headerAttributionImage": "@pagesLogo"
+                        },
+                        {
+                            "type": "Container",
+                            "grow": 1,
+                            "justifyContent": "${viewport.shape == 'round' ? 'center' : 'end'}",
+                            "items": [
+                                {
+                                    "paddingLeft": "@marginLeft",
+                                    "paddingRight": "@marginRight",
+                                    "type": "Text",
+                                    "text": "@page3Title",
+                                    "style": "textStyleBody",
+                                    "align": "${viewport.shape == 'round' ? 'center' : 'left'}"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "AlexaFooter",
+                            "footerHint": "${hint}"
+                        }
+                    ]
+                }
+            ]
+        },
+        "MyPager": {
+            "parameters": [
+                {
+                    "name": "hint",
+                    "type": "string"
+                }
+            ],
+            "items": [
+                {
+                    "type": "Pager",
+                    "id": "pagerComponentId",
+                    "width": "100vw",
+                    "height": "100vh",
+                    "items": [
+                        {
+                            "type": "Page1",
+                            "hint": "${hint}"
+                        },
+                        {
+                            "type": "Page2",
+                            "hint": "${hint}"
+                        },
+                        {
+                            "type": "Page3",
+                            "hint": "${hint}"
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "mainTemplate": {
+        "parameters": [
+            "payload"
+        ],
+        "items": [
+            {
+                "type": "MyPager",
+                "hint": "${payload.pagerTemplateData.properties.hintString}"
+            }
+        ]
+    }
+}

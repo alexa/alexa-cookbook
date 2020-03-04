@@ -1,0 +1,11 @@
+LaunchRequest
+BookmarkGetIntent
+BookmarkSetIntent page=25
+? BookmarkSetIntent page=31
+BookmarkGetIntent
+ResetIntent
+AMAZON.YesIntent
+
+LaunchRequest
+BookmarkGetIntent
+AMAZON.StopIntent

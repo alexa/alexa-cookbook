@@ -1,0 +1,24 @@
+{
+  "name": "amazon-pay-alexa-demo",
+  "version": "1.0.0",
+  "description": "This is a bare-bones demo to show how you can integrate Amazon Pay into your Alexa skills.",
+  "main": "index.js",
+  "dependencies": {
+    "ask-sdk": "^2.0.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xengravity/amazon-pay-alexa-demo.git"
+  },
+  "keywords": [
+    "alexa",
+    "amazon",
+    "pay",
+    "nodejs"
+  ],
+  "author": "Tony Cordova",
+  "bugs": {
+    "url": "https://github.com/xengravity/amazon-pay-alexa-demo/issues"
+  },
+  "homepage": "https://github.com/xengravity/amazon-pay-alexa-demo#readme"
+}

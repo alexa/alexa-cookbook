@@ -1,0 +1,36 @@
+{
+  "manifest": {
+    "publishingInformation": {
+      "locales": {
+        "en-US": {
+          "summary": "A demo skill to show how the Device Address API works.",
+          "examplePhrases": [
+            "Alexa open device address demo",
+            "Alexa ask device address demo where am i",
+            "Alexa ask device address demo whats my location"
+          ],
+          "name": "Device Location Demo",
+          "description": "Create a demo skill to access your device's address."
+        }
+      },
+      "isAvailableWorldwide": true,
+      "testingInstructions": "Sample Testing Instructions.",
+      "category": "EDUCATION_AND_REFERENCE",
+      "distributionCountries": []
+    },
+    "apis": {
+      "custom": {
+        "endpoint": {
+          "sourceDir": "lambda/node",
+          "uri": "ask-device-location-demo"
+        }
+      }
+    },
+    "manifestVersion": "1.0",
+    "permissions": [
+      {
+        "name": "alexa::devices:all:address:full:read"
+      }
+    ]
+  }
+}

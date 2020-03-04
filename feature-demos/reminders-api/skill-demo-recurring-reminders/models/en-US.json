@@ -1,0 +1,124 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "channel guide",
+      "intents": [
+        {
+          "name": "AMAZON.YesIntent",
+          "samples": []
+        },
+        {
+          "name": "WhenIsMyShowIntent",
+          "slots": [
+            {
+              "name": "Show",
+              "type": "LIST_OF_SHOWS",
+              "samples": [
+                "{Show}"
+              ]
+            }
+          ],
+          "samples": [
+            "{Show}",
+            "When does {Show} play on TV",
+            "What time does {Show} play on TV",
+            "When is the next episode of {Show}",
+            "When is the next {Show}",
+            "What time is the next {Show}"
+          ]
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NoIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": [
+            "what shows are there"
+          ]
+        },
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.FallbackIntent",
+          "samples": []
+        }
+      ],
+      "types": [
+        {
+          "name": "LIST_OF_SHOWS",
+          "values": [
+            {
+              "name": {
+                "value": "Kings and Thrones"
+              }
+            },
+            {
+              "name": {
+                "value": "Heaven's cuisine"
+              }
+            },
+            {
+              "name": {
+                "value": "Blind Ninja"
+              }
+            },
+            {
+              "name": {
+                "value": "Running Zombies"
+              }
+            },
+            {
+              "name": {
+                "value": "True Investigators"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "dialog": {
+      "intents": [
+        {
+          "name": "WhenIsMyShowIntent",
+          "delegationStrategy": "ALWAYS",
+          "confirmationRequired": false,
+          "prompts": {},
+          "slots": [
+            {
+              "name": "Show",
+              "type": "LIST_OF_SHOWS",
+              "confirmationRequired": false,
+              "elicitationRequired": true,
+              "prompts": {
+                "elicitation": "Elicit.Slot.796235482124.915768408182"
+              }
+            }
+          ]
+        }
+      ],
+      "delegationStrategy": "ALWAYS"
+    },
+    "prompts": [
+      {
+        "id": "Elicit.Slot.796235482124.915768408182",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "What show are you interested in?"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,178 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "display directive demo",
+            "intents": [
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.MoreIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NavigateSettingsIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NextIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NoIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.PageDownIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NavigateHomeIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.PageUpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.PreviousIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.RepeatIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.ScrollDownIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.ScrollLeftIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.ScrollRightIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.ScrollUpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.YesIntent",
+                    "samples": []
+                },
+                {
+                    "name": "HorizontalTemplateIntent",
+                    "slots": [],
+                    "samples": [
+                        "horizontal template",
+                        "horizontal",
+                        "show the second list template",
+                        "show list template two"
+                    ]
+                },
+                {
+                    "name": "VerticalTemplateIntent",
+                    "slots": [],
+                    "samples": [
+                        "list template one",
+                        "vertical template",
+                        "vertical",
+                        "show the first list template",
+                        "show list template one"
+                    ]
+                },
+                {
+                    "name": "BodyTemplateSelectionIntent",
+                    "slots": [
+                        {
+                            "name": "templateSelection",
+                            "type": "bodyTemplateSelection"
+                        }
+                    ],
+                    "samples": [
+                        "{templateSelection}",
+                        "show me the {templateSelection} layout",
+                        "show me the {templateSelection} template",
+                        "show me the layout for {templateSelection}",
+                        "lets see {templateSelection}"
+                    ]
+                }
+            ],
+            "types": [
+                {
+                    "name": "bodyTemplateSelection",
+                    "values": [
+                        {
+                            "id": "WA",
+                            "name": {
+                                "value": "Washington",
+                                "synonyms": [
+                                    "five",
+                                    "seven",
+                                    "final",
+                                    "last",
+                                    "fifth",
+                                    "seventh",
+                                    "seven"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "NM",
+                            "name": {
+                                "value": "New Mexico",
+                                "synonyms": [
+                                    "four",
+                                    "six",
+                                    "sixth",
+                                    "fourth"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "MN",
+                            "name": {
+                                "value": "Minnesota",
+                                "synonyms": [
+                                    "third",
+                                    "three"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "CO",
+                            "name": {
+                                "value": "Colorado",
+                                "synonyms": [
+                                    "two",
+                                    "second"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "AK",
+                            "name": {
+                                "value": "Alaska",
+                                "synonyms": [
+                                    "first",
+                                    "one"
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}

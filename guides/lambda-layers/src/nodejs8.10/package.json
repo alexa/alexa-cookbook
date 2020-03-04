@@ -1,0 +1,17 @@
+{
+  "name": "lambda-layer",
+  "version": "1.0.0",
+  "description": "AWS Lambda Layer Build",
+  "dependencies": {
+    "ask-sdk": "latest",
+    "ask-sdk-runtime": "latest",
+    "ask-sdk-core": "latest",
+    "ask-sdk-model": "latest",
+    "ask-sdk-dynamodb-persistence-adapter": "latest",
+    "ask-sdk-s3-persistence-adapter": "latest",
+    "ask-sdk-v1adapter": "latest",
+    "alexa-sdk": "latest",
+    "i18next": "latest",
+    "i18next-sprintf-postprocessor": "latest"
+  }
+}

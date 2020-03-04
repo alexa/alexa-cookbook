@@ -1,0 +1,14 @@
+{
+  "name": "SMAPI SDK Demo",
+  "version": "1.0.0",
+  "description": "Test Scripts that use the SMAPI SDK",
+  "main": "",
+  "scripts": {
+  },
+  "author": "",
+  "license": "LicenseRef-.amazon.com.-AmznSL-1.0",
+  "dependencies": {
+    "ask-smapi-model": "^1.1.0",
+    "ask-smapi-sdk": "^1.1.0"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "manifest": {
+    "publishingInformation": {
+      "locales": {
+        "en-US": {
+          "summary": "Get notified on your favorite TV shows",
+          "examplePhrases": [
+            "Alexa, open Channel Guide",
+            "Alexa, ask Channel Guide, what time is Kings and Thrones",
+            "Alexa, ask Channel Guide, when is the next episode of Heaven's cuisine"
+          ],
+          "keywords": [
+            "TV",
+            "channel guide"
+          ],
+          "name": "Channel Guide",
+          "description": "Get notified on your favorite TV shows.\n\nSay Alexa, when is the next episode of Heaven's cuisine"
+        }
+      }
+    },
+    "apis": {
+      "custom": {
+        "endpoint": {
+          "uri": "<lambda-endpoint>"
+        }
+      }
+    },
+    "manifestVersion": "1.0",
+    "permissions": [
+      {
+        "name": "alexa::alerts:reminders:skill:readwrite"
+      }
+    ]
+  }
+}

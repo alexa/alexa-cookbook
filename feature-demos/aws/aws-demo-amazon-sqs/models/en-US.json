@@ -1,0 +1,23 @@
+{
+	"interactionModel": {
+		"languageModel": {
+			"invocationName": "s. q. s. demo",
+			"intents": [
+				{
+					"name": "AMAZON.CancelIntent",
+					"samples": []
+				},
+				{
+					"name": "AMAZON.HelpIntent",
+					"samples": [
+						"help"
+					]
+				},
+				{
+					"name": "AMAZON.StopIntent",
+					"samples": []
+				}
+			]
+		}
+	}
+}

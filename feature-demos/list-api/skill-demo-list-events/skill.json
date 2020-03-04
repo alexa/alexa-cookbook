@@ -1,0 +1,71 @@
+{
+  "manifest": {
+    "publishingInformation": {
+      "locales": {
+        "en-US": {
+          "summary": "TODO: skill summary",
+          "examplePhrases": [
+            "TODO: Alexa open invocation name",
+            "TOOD: example phrase 2",
+            "TOOD: example phrase 3"
+          ],
+          "name": "Demo - skill and list events",
+          "description": "TODO: skill description"
+        }
+      },
+      "isAvailableWorldwide": true,
+      "testingInstructions": "TODO: Sample Testing Instructions.",
+      "category": "EDUCATION_AND_REFERENCE",
+      "distributionCountries": []
+    },
+    "apis": {
+      "householdList": {}
+    },
+    "permissions": [
+      {
+        "name": "alexa::household:lists:read"
+      }
+    ],
+    "events": {
+      "endpoint": {
+        "uri": "### TODO: FILL IN WITH YOUR LAMBDA ARN ###"
+      },
+      "subscriptions": [
+        {
+          "eventName": "SKILL_ENABLED"
+        },
+        {
+          "eventName": "SKILL_DISABLED"
+        },
+        {
+          "eventName": "SKILL_PERMISSION_ACCEPTED"
+        },
+        {
+          "eventName": "SKILL_PERMISSION_CHANGED"
+        },
+        {
+          "eventName": "SKILL_ACCOUNT_LINKED"
+        },
+        {
+          "eventName": "ITEMS_CREATED"
+        },
+        {
+          "eventName": "ITEMS_UPDATED"
+        },
+        {
+          "eventName": "ITEMS_DELETED"
+        },
+        {
+          "eventName": "LIST_CREATED"
+        },
+        {
+          "eventName": "LIST_UPDATED"
+        },
+        {
+          "eventName": "LIST_DELETED"
+        }
+      ]
+    },
+    "manifestVersion": "1.0"
+  }
+}

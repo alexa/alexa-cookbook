@@ -1,0 +1,48 @@
+~ 111
+MyColorSetIntent color=red
+AMAZON.StopIntent
+
+~ 222
+@ -3h
+MyColorSetIntent color=blue
+AMAZON.StopIntent
+
+~ 333
+@ -3d
+MyColorSetIntent color=green
+AMAZON.StopIntent
+
+~ 444
+@ -20m
+MyColorSetIntent color=yellow
+AMAZON.StopIntent
+
+~ 555
+@ -6d
+MyColorSetIntent color=blue
+AMAZON.StopIntent
+
+~ 777
+@ -7d
+MyColorSetIntent color=green
+AMAZON.StopIntent
+
+~ 888
+@ -9d
+MyColorSetIntent color=blue
+AMAZON.StopIntent
+
+~ 800
+@ -9d
+MyColorSetIntent color=yellow
+AMAZON.StopIntent
+
+~ 900
+@ -2h
+MyColorSetIntent color=red
+AMAZON.StopIntent
+
+~ 950
+@ -9h
+MyColorSetIntent color=purple
+AMAZON.StopIntent

@@ -1,0 +1,11 @@
+{
+    "name": "skill-connections-demo-requester",
+    "version": "1.0.0",
+    "description": "Skill Connections Requester Skill.",
+    "main": "index.js",
+    "author": "",
+    "dependencies": {
+        "ask-sdk-core": "^2.6.0",
+        "ask-sdk-model": "^1.9.0"
+    }
+}

@@ -1,0 +1,253 @@
+{
+  "name": "COOKBOOK_OrdinalSlotType",
+  "values": [
+    {
+      "name": {
+        "value": "31",
+        "synonyms": [
+          "trigésimo primero"
+        ]
+      }
+    },
+    {
+      "name": {
+        "value": "30",
+        "synonyms": [
+          "trigésimo"
+        ]
+      }
+    },
+    {
+      "name": {
+        "value": "29",
+        "synonyms": [
+          "vigésimo noveno"
+        ]
+      }
+    },
+    {
+      "name": {
+        "value": "28",
+        "synonyms": [
+          "vigésimo octavo"
+        ]
+      }
+    },
+    {
+      "name": {
+        "value": "27",
+        "synonyms": [
+          "vigésimo séptimo"
+        ]
+      }
+    },
+    {
+      "name": {
+        "value": "26",
+        "synonyms": [
+          "vigésimo sexto"
+        ]
+      }
+    },
+    {
+      "name": {
+        "value": "25",
+        "synonyms": [
+          "vigésimo quinto"
+        ]
+      }
+    },
+    {
+      "name": {
+        "value": "24",
+        "synonyms": [
+          "vigésimo cuarto"
+        ]
+      }
+    },
+    {
+      "name": {
+        "value": "23",
+        "synonyms": [
+          "vigésimo tercero"
+        ]
+      }
+    },
+    {
+      "name": {
+        "value": "22",
+        "synonyms": [
+          "vigésimo segundo"
+        ]
+      }
+    },
+    {
+      "name": {
+        "value": "21",
+        "synonyms": [
+          "vigésimo primero"
+        ]
+      }
+    },
+    {
+      "name": {
+        "value": "20",
+        "synonyms": [
+          "vigésimo"
+        ]
+      }
+    },
+    {
+      "name": {
+        "value": "19",
+        "synonyms": [
+          "décimo noveno"
+        ]
+      }
+    },
+    {
+      "name": {
+        "value": "18",
+        "synonyms": [
+          "décimo octavo"
+        ]
+      }
+    },
+    {
+      "name": {
+        "value": "17",
+        "synonyms": [
+          "décimo séptimo"
+        ]
+      }
+    },
+    {
+      "name": {
+        "value": "16",
+        "synonyms": [
+          "décimo sexto"
+        ]
+      }
+    },
+    {
+      "name": {
+        "value": "15",
+        "synonyms": [
+          "décimo quinto"
+        ]
+      }
+    },
+    {
+      "name": {
+        "value": "14",
+        "synonyms": [
+          "décimo cuarto"
+        ]
+      }
+    },
+    {
+      "name": {
+        "value": "13",
+        "synonyms": [
+          "décimo tercero"
+        ]
+      }
+    },
+    {
+      "name": {
+        "value": "12",
+        "synonyms": [
+          "décimo segundo"
+        ]
+      }
+    },
+    {
+      "name": {
+        "value": "11",
+        "synonyms": [
+          "décimo primero"
+        ]
+      }
+    },
+    {
+      "name": {
+        "value": "10",
+        "synonyms": [
+          "décimo"
+        ]
+      }
+    },
+    {
+      "name": {
+        "value": "9",
+        "synonyms": [
+          "noveno"
+        ]
+      }
+    },
+    {
+      "name": {
+        "value": "8",
+        "synonyms": [
+          "octavo"
+        ]
+      }
+    },
+    {
+      "name": {
+        "value": "7",
+        "synonyms": [
+          "séptimo"
+        ]
+      }
+    },
+    {
+      "name": {
+        "value": "6",
+        "synonyms": [
+          "sexto"
+        ]
+      }
+    },
+    {
+      "name": {
+        "value": "5",
+        "synonyms": [
+          "quinto"
+        ]
+      }
+    },
+    {
+      "name": {
+        "value": "4",
+        "synonyms": [
+          "cuarto"
+        ]
+      }
+    },
+    {
+      "name": {
+        "value": "3",
+        "synonyms": [
+          "tercero"
+        ]
+      }
+    },
+    {
+      "name": {
+        "value": "2",
+        "synonyms": [
+          "segundo"
+        ]
+      }
+    },
+    {
+      "name": {
+        "value": "1",
+        "synonyms": [
+          "primero"
+        ]
+      }
+    }
+  ]
+},

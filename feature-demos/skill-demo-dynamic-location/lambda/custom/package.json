@@ -1,0 +1,16 @@
+{
+  "name": "skill-sample-node-dynamic-location",
+  "version": "2.0.0",
+  "description": "A sample skill to get the dynamic location.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Amazon.com",
+  "license": "SEE LICENSE IN LICENSE.txt",
+  "dependencies": {
+    "ask-sdk-core": "^2.3.0",
+    "ask-sdk-model": "^1.11.1",
+    "i18next": "^15.0.5"
+  }
+}

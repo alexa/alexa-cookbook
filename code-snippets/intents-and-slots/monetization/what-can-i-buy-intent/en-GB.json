@@ -1,0 +1,28 @@
+{
+  "name": "COOKBOOK_WhatCanIBuyIntent",
+  "samples": [
+    "i want to purchase",
+    "i want to buy",
+    "what could i buy",
+    "can i buy something",
+    "i want to buy something",
+    "what is available to buy",
+    "what can i buy",
+    "what can i shop for",
+    "tell me what i can buy",
+    "what's for sale",
+    "what can be purchased",
+    "whatcha selling",
+    "what can i purchase",
+    "what is your premium content",
+    "i want to shop",
+    "tell me what you are selling",
+    "is there anything for sale",
+    "what products do you offer",
+    "what are the premium packs",
+    "what do I get for premium",
+    "what do I get for paid content",
+    "what is the paid content",
+    "what is the premium content"
+  ]
+},

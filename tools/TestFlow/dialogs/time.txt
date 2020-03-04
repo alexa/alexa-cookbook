@@ -1,0 +1,12 @@
+@ -7d
+LaunchRequest
+AMAZON.StopIntent
+@ -6h
+LaunchRequest
+AMAZON.StopIntent
+@ -30m
+LaunchRequest
+AMAZON.StopIntent
+@ 0m
+LaunchRequest
+AMAZON.StopIntent

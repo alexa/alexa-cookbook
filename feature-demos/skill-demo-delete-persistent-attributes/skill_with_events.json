@@ -1,0 +1,33 @@
+{
+  "manifest": {
+    "publishingInformation": {
+      "locales": {
+        "en-US": {
+          "examplePhrases": [
+            "Alexa open delete attributes demo"
+          ],
+          "name": "Feature Demo - Delete Persistent Attributes"
+        }
+      }
+    },
+    "apis": {
+      "custom": {
+        "endpoint": {
+          "sourceDir": "lambda/custom",
+          "uri": "ask-feature-demo-delete-persistent-attributes"
+        }
+      }
+    },
+    "events": {
+      "endpoint": {
+        "uri": "arn:aws:lambda:us-west-2:123412341234:function:ask-feature-demo-delete-persistent-attributes"
+      },
+      "subscriptions": [
+        {
+          "eventName": "SKILL_DISABLED"
+        }
+      ]
+    },
+    "manifestVersion": "1.0"
+  }
+}

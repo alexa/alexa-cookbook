@@ -1,0 +1,37 @@
+Intent Name
+-----------
+COOKBOOK_OrdinalSlotType
+
+Sample Utterances
+-----------------
+31,,thirty-first
+30,,thirtieth
+29,,twenty-ninth
+28,,twenty-eighth
+27,,twenty-seventh
+26,,twenty-sixth
+25,,twenty-fifth
+24,,twenty-fourth
+23,,twenty-third
+22,,twenty-second
+21,,twenty-first
+20,,twentieth
+19,,nineteenth
+18,,eighteenth
+17,,seventeenth
+16,,sixteenth
+15,,fifteenth
+14,,fourteenth
+13,,thirteenth
+12,,twelfth
+11,,eleventh
+10,,tenth
+9,,ninth
+8,,eighth
+7,,seventh
+6,,sixth
+5,,fifth
+4,,fourth
+3,,third
+2,,second
+1,,first

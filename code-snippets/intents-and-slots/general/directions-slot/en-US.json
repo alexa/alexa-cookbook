@@ -1,0 +1,140 @@
+        {
+          "name": "COOKBOOK_DirectionsSlotType",
+          "values": [
+            {
+              "id": "north",
+              "name": {
+                "value": "north",
+                "synonyms":[
+                  "northern",
+                  "northernly"
+                ]
+              }
+            },
+            {
+              "id": "south",
+              "name": {
+                "value": "south",
+                "synonyms":[
+                  "southern",
+                  "southernly"
+                ]
+              }
+            },
+            {
+              "id": "east",
+              "name": {
+                "value": "east",
+                "synonyms":[
+                  "eastern",
+                  "easternly"
+                ]
+              }
+            },
+            {
+              "id": "west",
+              "name": {
+                "value": "west",
+                "synonyms":[
+                  "western",
+                  "westernly"
+                ]
+              }
+            },
+            {
+              "id": "up",
+              "name": {
+                "value": "up",
+                "synonyms":[
+                  "upstairs",
+                  "up the stairs",
+                  "straight up",
+                  "above me",
+                  "on top of me"
+                ]
+              }
+            },
+            {
+              "id": "down",
+              "name": {
+                "value": "down",
+                "synonyms":[
+                  "downstairs",
+                  "down the stairs",
+                  "straight down",
+                  "below me",
+                  "underneath"
+                ]
+              }
+            },
+            {
+              "id": "in",
+              "name": {
+                "value": "in",
+                "synonyms": [
+                  "inside",
+                  "indoors"
+                ]
+              }
+            },
+            {
+              "id": "out",
+              "name": {
+                "value": "out",
+                "synonyms": [
+                  "outside",
+                  "outdoors"
+                ]
+              }
+            },
+            {
+              "id": "left",
+              "name": {
+                "value": "left",
+                "synonyms":[
+                  "left hand side"
+                ]
+              }
+            },
+            {
+              "id": "right",
+              "name": {
+                "value": "right",
+                "synonyms":[
+                  "right hand side"
+                ]
+              }
+            },
+            {
+              "id": "back",
+              "name": {
+                "value": "back",
+                "synonyms": [
+                  "behind me",
+                  "turn around"
+                ]
+              }
+            },
+            {
+              "id": "forward",
+              "name": {
+                "value": "forward",
+                "synonyms":[
+                  "continue",
+                  "carry on",
+                  "onward",
+                  "ahead"
+                ]
+              }
+            },
+            {
+              "id": "elevator",
+              "name": {
+                "value": "elevator",
+                "synonyms": [
+                  "lift"
+                ]
+              }
+            }
+          ]
+        }

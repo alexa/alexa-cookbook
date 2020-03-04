@@ -1,0 +1,33 @@
+{
+  "manifest": {
+    "publishingInformation": {
+      "locales": {
+        "en-US": {
+          "summary": "An example of how the Body and List templates work.",
+          "examplePhrases": [
+            "Alexa, open Display Directive Demo"
+          ],
+          "keywords": [],
+          "name": "Demo - Display Directive",
+          "description": "A feature demo for the display directive.  To start, say \"Alexa, launch Display Directive Demo\" or \"Alexa, open Display Directive Demo\" to see an example"
+        }
+      },
+      "isAvailableWorldwide": true,
+      "testingInstructions": "Include your testing instruction (if any) here",
+      "category": "KNOWLEDGE_AND_TRIVIA",
+      "distributionCountries": []
+    },
+    "apis": {
+      "custom": {
+        "endpoint": {
+          "sourceDir": "lambda/custom"
+        },
+				"interfaces": [{
+					"type": "RENDER_TEMPLATE"
+				}]
+      }
+    },
+    "manifestVersion": "1.0",
+    "permissions": []
+  }
+}

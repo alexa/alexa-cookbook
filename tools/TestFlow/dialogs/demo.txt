@@ -1,0 +1,20 @@
+LaunchRequest
+AMAZON.HelpIntent
+MyColorSetIntent color=green
+? MyColorSetIntent color=orange
+? MyColorSetIntent color=blue
+MyColorSetIntent color=
+MyColorSetIntent color=
+? MyColorSetIntent color=
+? MyColorSetIntent color=
+end
+? BookmarkSetIntent page=28
+BookmarkGetIntent
+ResetIntent
+AMAZON.YesIntent
+LaunchRequest
+BookmarkGetIntent
+MyColorSetIntent color=green
+MyColorSetIntent color=blue
+AMAZON.HelpIntent
+AMAZON.StopIntent

@@ -1,0 +1,346 @@
+ {
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "forget me not",
+            "intents": [
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NoIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.YesIntent",
+                    "samples": []
+                },
+                {
+                    "name": "ResetIntent",
+                    "slots": [],
+                    "samples": [
+                        "reset",
+                        "reset memory",
+                        "clear memory"
+                    ]
+                },
+                {
+                    "name": "MyColorSetIntent",
+                    "slots": [
+                        {
+                            "name": "color",
+                            "type": "ColorSlotType"
+                        }
+                    ],
+                    "samples": [
+                        "my color is {color}",
+                        "my favorite color is {color}"
+                    ]
+                },
+                {
+                    "name": "BookmarkSetIntent",
+                    "slots": [
+                        {
+                            "name": "page",
+                            "type": "AMAZON.NUMBER",
+                            "samples": [
+                                "{page}",
+                                "page {page}",
+                                "i left off on page {page}"
+                            ]
+                        }
+                    ],
+                    "samples": [
+                        "set a bookmark for {page}",
+                        "set a bookmark"
+                    ]
+                },
+                {
+                    "name": "BookmarkGetIntent",
+                    "slots": [],
+                    "samples": [
+                        "what page did I leave off on",
+                        "tell me the bookmark",
+                        "what is the bookmark"
+                    ]
+                },
+                {
+                    "name": "GetNewFactIntent",
+                    "slots": [],
+                    "samples": [
+                        "give me a fact",
+                        "tell me a fact"
+                    ]
+                },
+                {
+                    "name": "MyPhoneNumberIntent",
+                    "slots": [
+                        {
+                            "name": "mobileNumber",
+                            "type": "AMAZON.PhoneNumber",
+                            "samples": [
+                                "send it to {mobileNumber}",
+                                "my mobile is {mobileNumber}",
+                                "my phone number is {mobileNumber}",
+                                "my number is {mobileNumber}",
+                                "{mobileNumber}"
+                            ]
+                        }
+                    ],
+                    "samples": [
+                        "send me a text",
+                        "send a text",
+                        "text me at {mobileNumber}",
+                        "my mobile is {mobileNumber}",
+                        "my number is {mobileNumber}",
+                        "my phone number is {mobileNumber}"
+                    ]
+                },
+                {
+                    "name": "AMAZON.MoreIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NavigateHomeIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NavigateSettingsIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NextIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.PageUpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.PageDownIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.PreviousIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.ScrollRightIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.ScrollDownIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.ScrollLeftIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.ScrollUpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "SpeakSpeedIntent",
+                    "slots": [
+                        {
+                            "name": "speakingSpeedChange",
+                            "type": "speakSpeedSlotType"
+                        }
+                    ],
+                    "samples": [
+                        "speak {speakingSpeedChange}"
+                    ]
+                },
+                {
+                    "name": "MyColorGetIntent",
+                    "slots": [],
+                    "samples": [
+                        "get my color",
+                        "what is my favorite color",
+                        "what is my color"
+                    ]
+                },
+                {
+                    "name": "LaunchRequest"
+                }
+            ],
+            "types": [
+                {
+                    "name": "ColorSlotType",
+                    "values": [
+                        {
+                            "id": "brn",
+                            "name": {
+                                "value": "brown",
+                                "synonyms": [
+                                    "tan",
+                                    "earth",
+                                    "sienna"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "blk",
+                            "name": {
+                                "value": "black",
+                                "synonyms": [
+                                    "ebony"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "wht",
+                            "name": {
+                                "value": "white",
+                                "synonyms": [
+                                    "snow"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "pur",
+                            "name": {
+                                "value": "purple",
+                                "synonyms": [
+                                    "violet",
+                                    "indigo"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "orn",
+                            "name": {
+                                "value": "orange"
+                            }
+                        },
+                        {
+                            "id": "yel",
+                            "name": {
+                                "value": "yellow"
+                            }
+                        },
+                        {
+                            "id": "grn",
+                            "name": {
+                                "value": "green",
+                                "synonyms": [
+                                    "lime"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "blu",
+                            "name": {
+                                "value": "blue",
+                                "synonyms": [
+                                    "navy"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "red",
+                            "name": {
+                                "value": "red",
+                                "synonyms": [
+                                    "scarlet",
+                                    "crimson"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "speakSpeedSlotType",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "slower"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "faster"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        "dialog": {
+            "intents": [
+                {
+                    "name": "BookmarkSetIntent",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "page",
+                            "type": "AMAZON.NUMBER",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.1298640133108.110887262871"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "MyPhoneNumberIntent",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "mobileNumber",
+                            "type": "AMAZON.PhoneNumber",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.147640314547.594530034359"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        "prompts": [
+            {
+                "id": "Elicit.Slot.1298640133108.110887262871",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "what page"
+                    }
+                ]
+            },
+            {
+                "id": "Confirm.Intent.1018158812104",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Okay I heard {mobileNumber} , is that correct?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.147640314547.594530034359",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "what is your phone number?"
+                    }
+                ]
+            }
+        ]
+    }
+}
+
+

@@ -1,0 +1,18 @@
+{
+    "version": "1.0",
+    "type": "APLT",
+    "onMount": {},
+    "mainTemplate": {
+        "parameters": [
+            "payload"
+        ],
+        "item": {
+            "type": "Text",
+            "id": "myTextId",
+            "msPerCharacter": 800,
+            "textAlign": "right",
+            "text": "${payload.textData.text}",
+            "overflow": "marquee"
+        }
+    }
+}

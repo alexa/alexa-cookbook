@@ -1,0 +1,14 @@
+Intent Name
+-----------
+COOKBOOK_CancelOrderIntent
+
+Sample Utterances
+-----------------
+cancellation
+cancel order
+cancel my order
+cancel the order
+cancel that order
+i need to cancel the order
+i would like to cancel my order
+cancel order please

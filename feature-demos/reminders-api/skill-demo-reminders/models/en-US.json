@@ -1,0 +1,58 @@
+{
+  "interactionModel": {
+      "languageModel": {
+          "invocationName": "reminder demo",
+          "intents": [
+              {
+                  "name": "CreateReminderIntent",
+                  "slots": [],
+                  "samples": [
+                      "set a reminder",
+                      "create a reminder",
+                      "new reminder"
+                  ]
+              },
+              {
+                  "name": "AMAZON.CancelIntent",
+                  "samples": []
+              },
+              {
+                  "name": "AMAZON.HelpIntent",
+                  "samples": []
+              },
+              {
+                  "name": "AMAZON.StopIntent",
+                  "samples": []
+              },
+              {
+                  "name": "AMAZON.NavigateHomeIntent",
+                  "samples": []
+              }
+          ],
+          "types": []
+      },
+      "dialog": {
+          "intents": [
+              {
+                  "name": "CreateReminderIntent",
+                  "confirmationRequired": true,
+                  "prompts": {
+                      "confirmation": "ConfirmCreateReminderIntent"
+                  },
+                  "slots": []
+              }
+          ]
+      },
+      "prompts": [
+          {
+              "id": "ConfirmCreateReminderIntent",
+              "variations": [
+                  {
+                      "type": "PlainText",
+                      "value": "Would you like me to remind you in thirty seconds to get up and dance?"
+                  }
+              ]
+          }
+      ]
+  }
+}

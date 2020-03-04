@@ -1,0 +1,9 @@
+{
+  "deploy_settings": {
+    "default": {
+      "skill_id": "",
+      "was_cloned": false,
+      "merge": {}
+    }
+  }
+}

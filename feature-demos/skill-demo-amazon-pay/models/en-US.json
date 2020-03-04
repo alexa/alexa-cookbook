@@ -1,0 +1,31 @@
+{
+    "interactionModel":
+    {
+        "languageModel":
+        {
+            "invocationName": "payments demo",
+            "intents": [
+            {
+                "name": "AMAZON.CancelIntent",
+                "samples": []
+            },
+            {
+                "name": "AMAZON.HelpIntent",
+                "samples": ["help"]
+            },
+            {
+                "name": "AMAZON.StopIntent",
+                "samples": []
+            },
+            {
+                "name": "AMAZON.YesIntent",
+                "samples": []
+            },
+            {
+                "name": "AMAZON.NoIntent",
+                "samples": []
+            }],
+            "types": []
+        }
+    }
+}

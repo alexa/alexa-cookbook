@@ -1,0 +1,19 @@
+Intent Name
+-----------
+COOKBOOK_DirectionsSlotType
+
+Sample Utterances
+-----------------
+north,north,northern,northernly
+south,south,southern,southernly
+east,east,eastern,easternly
+west,west,western,westernly
+up,up,upstairs,up the stairs,straight up,above me,on top of me
+down,down,downstairs,down the stairs,straight down,below me,underneath
+in,in,inside,indoors
+out,out,outside,outdoors
+left,left,left hand side
+right,right,right hand side
+back,back,behind me,turn around
+forward,forward,continue,carry on,onward,ahead
+elevator,elevator,lift

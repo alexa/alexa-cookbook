@@ -1,0 +1,37 @@
+Intent Name
+-----------
+COOKBOOK_OrdinalSlotType
+
+Sample Utterances
+-----------------
+31,,trigésimo primero
+30,,trigésimo
+29,,vigésimo noveno
+28,,vigésimo octavo
+27,,vigésimo séptimo
+26,,vigésimo sexto
+25,,vigésimo quinto
+24,,vigésimo cuarto
+23,,vigésimo tercero
+22,,vigésimo segundo
+21,,vigésimo primero
+20,,vigésimo
+19,,décimo noveno
+18,,décimo octavo
+17,,décimo séptimo
+16,,décimo sexto
+15,,décimo quinto
+14,,décimo cuarto
+13,,décimo tercero
+12,,décimo segundo
+11,,décimo primero
+10,,décimo
+9,,noveno
+8,,octavo
+7,,séptimo
+6,,sexto
+5,,quinto
+4,,cuarto
+3,,tercero
+2,,segundo
+1,,primero

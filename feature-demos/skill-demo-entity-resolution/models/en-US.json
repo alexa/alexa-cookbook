@@ -1,0 +1,102 @@
+{
+	"interactionModel": {
+		"languageModel": {
+			"invocationName": "entity resolution quiz demo",
+			"intents": [
+				{
+					"name": "AMAZON.CancelIntent",
+					"samples": []
+				},
+				{
+					"name": "AMAZON.HelpIntent",
+					"samples": []
+				},
+				{
+					"name": "AMAZON.StopIntent",
+					"samples": []
+				},
+				{
+					"name": "AnswerIntent",
+					"samples": [
+						"I think it's {answer}",
+						"{answer}",
+						"{answer} did that",
+						"that was {answer}"
+					],
+					"slots": [
+						{
+							"name": "answer",
+							"type": "answerValues",
+							"samples": []
+						}
+					]
+				},
+				{
+					"name": "NewGameIntent",
+					"samples": [
+						"let's play a game",
+						"start over",
+						"for my first question"
+					],
+					"slots": []
+				}
+			],
+			"types": [
+				{
+					"name": "answerValues",
+					"values": [
+						{
+							"id": null,
+							"name": {
+								"value": "Thomas Edison",
+								"synonyms": [
+									"Edison",
+									"Menlo Park",
+									"Thomas Edison"
+								]
+							}
+						},
+						{
+							"id": null,
+							"name": {
+								"value": "North America",
+								"synonyms": [
+									"Northern America",
+									"Canada",
+									"Mexico",
+									"America",
+									"North America"
+								]
+							}
+						},
+						{
+							"id": null,
+							"name": {
+								"value": "Auguste Rodin",
+								"synonyms": [
+									"Rodin",
+									"Auguste",
+									"august",
+									"august rodin",
+									"Auguste Rodin"
+								]
+							}
+						},
+						{
+							"id": null,
+							"name": {
+								"value": "The Canary Islands",
+								"synonyms": [
+									"Canary Islands",
+									"Canary Island",
+									"the Canaries",
+									"The Canary Islands"
+								]
+							}
+						}
+					]
+				}
+			]
+		}
+	}
+}

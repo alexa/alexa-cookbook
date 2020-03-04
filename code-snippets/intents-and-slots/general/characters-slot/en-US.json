@@ -1,0 +1,784 @@
+{
+  "name": "COOKBOOK_CharactersSlotType",
+  "values": [
+    {
+      "id":"a",
+      "name": {
+        "value": "a.",
+        "synonyms": [
+          "alpha",
+          "ae",
+          "alfa",
+          "able",
+          "affirmative",
+          "affirm",
+          "actor",
+          "ash",
+          "argentine",
+          "ack",
+          "authority",
+          "adams",
+          "apple",
+          "alice",
+          "america",
+          "andrew",
+          "amsterdam",
+          "argentine",
+          "ace"
+        ]
+      }
+    },
+    {
+      "id":"b",
+      "name": {
+        "value": "b.",
+        "synonyms": [
+          "bravo",
+          "bee",
+          "beta",
+          "boy",
+          "baker",
+          "brussels",
+          "back",
+          "beer",
+          "bills",
+          "boston",
+          "brother",
+          "bertha",
+          "benjamin",
+          "baltimore",
+          "butter"
+        ]
+      }
+    },
+    {
+      "id":"c",
+      "name": {
+        "value": "c.",
+        "synonyms": [
+          "charlie",
+          "sea",
+          "see",
+          "cast",
+          "canteen",
+          "chain",
+          "canada",
+          "capture",
+          "chicago",
+          "charles",
+          "casablanca",
+          "cork",
+          "coca",
+          "chile"
+        ]
+      }
+    },
+    {
+      "id":"d",
+      "name": {
+        "value": "d.",
+        "synonyms": [
+          "delta",
+          "dee",
+          "dog",
+          "diver",
+          "damascus",
+          "destroy",
+          "dora",
+          "denver",
+          "dover",
+          "david",
+          "danemark",
+          "don",
+          "duff",
+          "dock",
+          "denmark"
+        ]
+      }
+    },
+    {
+      "id":"e",
+      "name": {
+        "value": "e.",
+        "synonyms": [
+          "echo",
+          "easy",
+          "epsilon",
+          "eagle",
+          "egg",
+          "ecuador",
+          "englishman",
+          "edward",
+          "eastern",
+          "edison",
+          "eddy",
+          "ecuador",
+          "eddystone",
+          "egypt",
+          "england" 
+        ]
+      }
+    },
+    {
+      "id":"f",
+      "name": {
+        "value": "f.",
+        "synonyms": [
+          "foxtrot",
+          "eff",
+          "fox",
+          "fisher",
+          "france",
+          "freddy",
+          "freddie",
+          "fractious",
+          "frank",
+          "father",
+          "florida",
+          "frederick",
+          "francisco",
+          "finland"
+        ]
+      }
+    },
+    {
+      "id":"g",
+      "name": {
+        "value": "g.",
+        "synonyms": [
+          "golf",
+          "gee",
+          "gamma",
+          "george",
+          "gig",
+          "gangway",
+          "greece",
+          "galloping",
+          "gallipoli",
+          "gibraltar",
+          "gold",
+          "germany",
+          "geneva"
+        ]
+      }
+    },
+    {
+      "id":"h",
+      "name": {
+        "value": "h.",
+        "synonyms": [
+          "hotel",
+          "age",
+          "have",
+          "hypo",
+          "how",
+          "halliard",
+          "horse",
+          "hanover",
+          "high",
+          "henry",
+          "harry",
+          "havana",
+          "honolulu",
+          "hawaii"
+        ]
+      }
+    },
+    {
+      "id":"i",
+      "name": {
+        "value": "i.",
+        "synonyms": [
+          "india",
+          "eye",
+          "iota",
+          "item",
+          "interrogatory",
+          "int",
+          "insect",
+          "ice",
+          "italy",
+          "invariably",
+          "ireland",
+          "ida",
+          "isaac",
+          "italia",
+          "ink"
+        ]
+      }
+    },
+    {
+      "id":"j",
+      "name": {
+        "value": "j.",
+        "synonyms": [
+          "juliett",
+          "joliet",
+          "jay",
+          "jig",
+          "jockey",
+          "jake",
+          "japan",
+          "jersey",
+          "juggling",
+          "jack",
+          "james",
+          "jerusalem",
+          "jude",
+          "john",
+          "johnnie",
+          "jug",
+          "julietta"
+        ]
+      }
+    },
+    {
+      "id":"k",
+      "name": {
+        "value": "k.",
+        "synonyms": [
+          "kilo",
+          "kay",
+          "kappa",
+          "king",
+          "knapsack",
+          "khartoum",
+          "knights",
+          "kate",
+          "kilogramme",
+          "kimberly",
+          "kilowatt",
+          "kentucky"
+        ]
+      }
+    },
+    {
+      "id":"l",
+      "name": {
+        "value": "l.",
+        "synonyms": [
+          "lima",
+          "el",
+          "lambda",
+          "love",
+          "lugger",
+          "lash",
+          "loose",
+          "lincoln",
+          "london",
+          "louis",
+          "liverpool",
+          "lucy",
+          "lewis",
+          "luxembourg"
+        ]
+      }
+    },
+    {
+      "id":"m",
+      "name": {
+        "value": "m.",
+        "synonyms": [
+          "mike",
+          "em",
+          "mu",
+          "musket",
+          "mule",
+          "madrid",
+          "emma",
+          "managing",
+          "mary",
+          "mother",
+          "madagascar",
+          "monkey",
+          "metro",
+          "mexico",
+          "montreal"
+        ]
+      }
+    },
+    {
+      "id":"n",
+      "name": {
+        "value": "n.",
+        "synonyms": [
+          "november",
+          "en",
+          "nu",
+          "new york",
+          "nan",
+          "nancy",
+          "norway",
+          "nicaragua",
+          "nora",
+          "negative",
+          "negat",
+          "neptune",
+          "net",
+          "never",
+          "newark",
+          "nelly",
+          "nuts",
+          "neufchatel",
+          "nectar"
+        ]
+      }
+    },
+    {
+      "id":"o",
+      "name": {
+        "value": "o.",
+        "synonyms": [
+          "oscar",
+          "owe",
+          "omnicron",
+          "oboe",
+          "option",
+          "oyster",
+          "oak",
+          "ostend",
+          "owners",
+          "ocean",
+          "october",
+          "oliver",
+          "oslo",
+          "orange",
+          "oble",
+          "ontario",
+          "otto"
+        ]
+      }
+    },
+    {
+      "id":"p",
+      "name": {
+        "value": "p.",
+        "synonyms": [
+          "papa",
+          "pee",
+          "pea",
+          "pup",
+          "preparatory",
+          "prep",
+          "peter",
+          "pistol",
+          "page",
+          "paris",
+          "pip",
+          "play",
+          "pudding",
+          "portugal",
+          "polka",
+          "paul",
+          "pacific"
+        ]
+      }
+    },
+    {
+      "id":"q",
+      "name": {
+        "value": "q.",
+        "synonyms": [
+          "quebec",
+          "cue",
+          "queue",
+          "quack",
+          "queen",
+          "quadrant",
+          "quail",
+          "quaker",
+          "queenie",
+          "quad"
+        ]
+      }
+    },
+    {
+      "id":"r",
+      "name": {
+        "value": "r.",
+        "synonyms": [
+          "romeo",
+          "are",
+          "rush",
+          "roger",
+          "reefer",
+          "raft",
+          "rome",
+          "remarks",
+          "robert",
+          "ropert",
+          "roma",
+          "rivoli",
+          "rot",
+          "radio",
+          "romania"
+        ]
+      }
+    },
+    {
+      "id":"s",
+      "name": {
+        "value": "s.",
+        "synonyms": [
+          "sierra",
+          "ess",
+          "sigma",
+          "sail",
+          "sugar",
+          "shipmate",
+          "scout",
+          "sardinia",
+          "support",
+          "samuel",
+          "santiago",
+          "susan",
+          "sam",
+          "sweden"
+        ]
+      }
+    },
+    {
+      "id":"t",
+      "name": {
+        "value": "t.",
+        "synonyms": [
+          "tango",
+          "tee",
+          "tea",
+          "tau",
+          "tare",
+          "topsoil",
+          "tide",
+          "tokie",
+          "the",
+          "texas",
+          "thomas",
+          "tripoli",
+          "tommy",
+          "talk",
+          "toc",
+          "tokio",
+          "tom",
+          "tokyo"
+        ]
+      }
+    },
+    {
+      "id":"u",
+      "name": {
+        "value": "u.",
+        "synonyms": [
+          "uniform",
+          "you",
+          "ewe",
+          "unit",
+          "uncle",
+          "unload",
+          "use",
+          "uruguay",
+          "unless",
+          "union",
+          "utah",
+          "upsala",
+          "united"
+        ]
+      }
+    },
+    {
+      "id":"v",
+      "name": {
+        "value": "v.",
+        "synonyms": [
+          "victor",
+          "vee",
+          "vice",
+          "vessel",
+          "vast",
+          "victoria",
+          "vic",
+          "vindictive",
+          "violet",
+          "valencia",
+          "vinegar",
+          "venezuela"
+        ]
+      }
+    },
+    {
+      "id":"w",
+      "name": {
+        "value": "w.",
+        "synonyms": [
+          "whisky",
+          "double you",
+          "watch",
+          "william",
+          "windage",
+          "winch",
+          "washington",
+          "when",
+          "wednesday",
+          "willie"
+        ]
+      }
+    },
+    {
+      "id":"x",
+      "name": {
+        "value": "x.",
+        "synonyms": [
+          "x-ray",
+          "xray",
+          "eggs",
+          "ex",
+          "chi",
+          "xaintrie",
+          "xpeditiously",
+          "xmas",
+          "xanthippe",
+          "xerxes",
+          "extra"
+        ]
+      }
+    },
+    {
+      "id":"y",
+      "name": {
+        "value": "y.",
+        "synonyms": [
+          "yankee",
+          "why",
+          "yoke",
+          "yeoman",
+          "yacht",
+          "yokohama",
+          "your",
+          "yale",
+          "yellow",
+          "young",
+          "yorker"
+        ]
+      }
+    },
+    {
+      "id":"z",
+      "name": {
+        "value": "z.",
+        "synonyms": [
+          "zulu",
+          "zed",
+          "zee",
+          "zeta",
+          "zebra",
+          "zoo",
+          "zanzibar",
+          "zigzag",
+          "zurich",
+          "zululand"
+        ]
+      }
+    },
+    {
+      "id":"1",
+      "name": {
+        "value": "1",
+        "synonyms": [
+          "one",
+          "won"
+        ]
+      }
+    },
+    {
+      "id":"2",
+      "name": {
+        "value": "2",
+        "synonyms": [
+          "two",
+          "too",
+          "to"
+        ]
+      }
+    },
+    {
+      "id":"3",
+      "name": {
+        "value": "3",
+        "synonyms": [
+          "three"
+        ]
+      }
+    },
+    {
+      "id":"4",
+      "name": {
+        "value": "4",
+        "synonyms": [
+          "four",
+          "fower"
+        ]
+      }
+    },
+    {
+      "id":"5",
+      "name": {
+        "value": "5",
+        "synonyms": [
+          "five",
+          "fiver"
+        ]
+      }
+    },
+    {
+      "id":"6",
+      "name": {
+        "value": "6",
+        "synonyms": [
+          "six"
+        ]
+      }
+    },
+    {
+      "id":"7",
+      "name": {
+        "value": "7",
+        "synonyms": [
+          "seven"
+        ]
+      }
+    },
+    {
+      "id":"8",
+      "name": {
+        "value": "8",
+        "synonyms": [
+          "eight",
+          "ate"
+        ]
+      }
+    },
+    {
+      "id":"9",
+      "name": {
+        "value": "9",
+        "synonyms": [
+          "nine",
+          "niner"
+        ]
+      }
+    },
+    {
+      "id":"0",
+      "name": {
+        "value": "0",
+        "synonyms": [
+          "null",
+          "zero",
+          "naught",
+          "zip"
+        ]
+      }
+    },
+    {
+      "id":"double",
+      "name": {
+        "value": "double",
+        "synonyms": [
+          "double"
+        ]
+      }
+    },
+    {
+      "id":"triple",
+      "name": {
+        "value": "triple",
+        "synonyms": [
+          "trip"
+        ]
+      }
+    },
+    {
+      "id":".",
+      "name": {
+        "value": "dot",
+        "synonyms": [
+          "decimal point"
+        ]
+      }
+    },
+    {
+      "id":"!",
+      "name": {
+        "value": "bang",
+        "synonyms": [
+          "exclamation point"
+        ]
+      }
+    },
+    {
+      "id":"@",
+      "name": {
+        "value": "at",
+        "synonyms": [
+          "at sign"
+        ]
+      }
+    },
+    {
+      "id":"#",
+      "name": {
+        "value": "hash",
+        "synonyms": [
+          "number sign",
+          "hash mark",
+          "pound sign"
+        ]
+      }
+    },
+    {
+      "id":"$",
+      "name": {
+        "value": "dollar",
+        "synonyms": [
+          "dollar sign"
+        ]
+      }
+    },
+    {
+      "id":"%",
+      "name": {
+        "value": "percent",
+        "synonyms": [
+          "percentage"
+        ]
+      }
+    },
+    {
+      "id":"^",
+      "name": {
+        "value": "carrot",
+        "synonyms": [
+          "power",
+          "up arrow"
+        ]
+      }
+    },
+    {
+      "id":"&",
+      "name": {
+        "value": "ampersand",
+        "synonyms": [
+          "and"
+        ]
+      }
+    },
+    {
+      "id":"*",
+      "name": {
+        "value": "star",
+        "synonyms": [
+          "asterisk"
+        ]
+      }
+    }
+  ]
+}

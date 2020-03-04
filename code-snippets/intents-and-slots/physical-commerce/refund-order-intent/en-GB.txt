@@ -1,0 +1,17 @@
+Intent Name
+-----------
+COOKBOOK_RefundOrderIntent
+
+Sample Utterances
+-----------------
+refund
+refund order
+refund my order
+i'd like my order refunded
+i'd like a refund
+i need a refund
+refund the order
+please give me a refund
+give me a refund
+i would like a refund
+i want my money back

@@ -1,0 +1,53 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "recipe app",
+            "intents": [
+                {
+                    "name": "AMAZON.FallbackIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NavigateHomeIntent",
+                    "samples": []
+                },
+                {
+                    "name": "IngredientIntent",
+                    "slots": [
+                        {
+                            "name": "Ingredient",
+                            "type": "Ingredient"
+                        }
+                    ],
+                    "samples": [
+                        "Add {Ingredient} to my ingredient list"
+                    ]
+                }
+            ],
+            "types": [
+                {
+                    "name": "Ingredient",
+                    "valueSupplier": {
+                        "type": "CatalogValueSupplier",
+                        "valueCatalog": {
+                            "catalogId": "amzn1.ask.interactionModel.catalog.4a0177ce-edfb-48b9-a211-284dd16183cb",
+                            "version": "1"
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}

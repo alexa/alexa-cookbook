@@ -1,0 +1,253 @@
+{
+  "name": "COOKBOOK_OrdinalSlotType",
+  "values": [
+    {
+      "name": {
+        "value": "31",
+        "synonyms": [
+          "thirty-first"
+        ]
+      }
+    },
+    {
+      "name": {
+        "value": "30",
+        "synonyms": [
+          "thirtieth"
+        ]
+      }
+    },
+    {
+      "name": {
+        "value": "29",
+        "synonyms": [
+          "twenty-ninth"
+        ]
+      }
+    },
+    {
+      "name": {
+        "value": "28",
+        "synonyms": [
+          "twenty-eighth"
+        ]
+      }
+    },
+    {
+      "name": {
+        "value": "27",
+        "synonyms": [
+          "twenty-seventh"
+        ]
+      }
+    },
+    {
+      "name": {
+        "value": "26",
+        "synonyms": [
+          "twenty-sixth"
+        ]
+      }
+    },
+    {
+      "name": {
+        "value": "25",
+        "synonyms": [
+          "twenty-fifth"
+        ]
+      }
+    },
+    {
+      "name": {
+        "value": "24",
+        "synonyms": [
+          "twenty-fourth"
+        ]
+      }
+    },
+    {
+      "name": {
+        "value": "23",
+        "synonyms": [
+          "twenty-third"
+        ]
+      }
+    },
+    {
+      "name": {
+        "value": "22",
+        "synonyms": [
+          "twenty-second"
+        ]
+      }
+    },
+    {
+      "name": {
+        "value": "21",
+        "synonyms": [
+          "twenty-first"
+        ]
+      }
+    },
+    {
+      "name": {
+        "value": "20",
+        "synonyms": [
+          "twentieth"
+        ]
+      }
+    },
+    {
+      "name": {
+        "value": "19",
+        "synonyms": [
+          "nineteenth"
+        ]
+      }
+    },
+    {
+      "name": {
+        "value": "18",
+        "synonyms": [
+          "eighteenth"
+        ]
+      }
+    },
+    {
+      "name": {
+        "value": "17",
+        "synonyms": [
+          "seventeenth"
+        ]
+      }
+    },
+    {
+      "name": {
+        "value": "16",
+        "synonyms": [
+          "sixteenth"
+        ]
+      }
+    },
+    {
+      "name": {
+        "value": "15",
+        "synonyms": [
+          "fifteenth"
+        ]
+      }
+    },
+    {
+      "name": {
+        "value": "14",
+        "synonyms": [
+          "fourteenth"
+        ]
+      }
+    },
+    {
+      "name": {
+        "value": "13",
+        "synonyms": [
+          "thirteenth"
+        ]
+      }
+    },
+    {
+      "name": {
+        "value": "12",
+        "synonyms": [
+          "twelfth"
+        ]
+      }
+    },
+    {
+      "name": {
+        "value": "11",
+        "synonyms": [
+          "eleventh"
+        ]
+      }
+    },
+    {
+      "name": {
+        "value": "10",
+        "synonyms": [
+          "tenth"
+        ]
+      }
+    },
+    {
+      "name": {
+        "value": "9",
+        "synonyms": [
+          "ninth"
+        ]
+      }
+    },
+    {
+      "name": {
+        "value": "8",
+        "synonyms": [
+          "eighth"
+        ]
+      }
+    },
+    {
+      "name": {
+        "value": "7",
+        "synonyms": [
+          "seventh"
+        ]
+      }
+    },
+    {
+      "name": {
+        "value": "6",
+        "synonyms": [
+          "sixth"
+        ]
+      }
+    },
+    {
+      "name": {
+        "value": "5",
+        "synonyms": [
+          "fifth"
+        ]
+      }
+    },
+    {
+      "name": {
+        "value": "4",
+        "synonyms": [
+          "fourth"
+        ]
+      }
+    },
+    {
+      "name": {
+        "value": "3",
+        "synonyms": [
+          "third"
+        ]
+      }
+    },
+    {
+      "name": {
+        "value": "2",
+        "synonyms": [
+          "second"
+        ]
+      }
+    },
+    {
+      "name": {
+        "value": "1",
+        "synonyms": [
+          "first"
+        ]
+      }
+    }
+  ]
+}

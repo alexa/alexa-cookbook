@@ -1,0 +1,21 @@
+{
+    "manifest": {
+      "publishingInformation": {
+        "locales": {
+          "en-US": {
+            "name": "Demo-Skill-Name"
+          }
+        }
+      },
+      "apis": {
+        "custom": {
+          "endpoint": {
+            "sourceDir": "lambda/custom",
+            "uri": "ask-demo-lambda-function-name"
+          }
+        }
+      },
+      "manifestVersion": "1.0"
+    }
+  }
+  

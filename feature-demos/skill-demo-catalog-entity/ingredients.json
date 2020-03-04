@@ -1,0 +1,77 @@
+{
+  "values": 
+  [
+    {
+        "id": "id1",
+        "name": {
+            "value": "coconut milk"
+        }
+    },
+    {
+        "id": "id2",
+        "name": {
+            "value": "peppercorns"
+        }
+    },
+    {
+        "id": "id3",
+        "name": {
+            "value": "red chili"
+        }
+    },
+    {
+        "id": "id4",
+        "name": {
+            "value": "shallots"
+        }
+    },
+    {
+        "id": "id5",
+        "name": {
+            "value": "onions"
+        }
+    },
+    {
+        "id": "id6",
+        "name": {
+            "value": "black pepper"
+        }
+    },
+    {
+        "id": "id7",
+        "name": {
+            "value": "bell peppers"
+        }
+    },
+    {
+        "id": "id8",
+        "name": {
+            "value": "tomatoes"
+        }
+    },
+    {
+        "id": "id9",
+        "name": {
+            "value": "chili pepper"
+        }
+    },
+    {
+        "id": "id10",
+        "name": {
+            "value": "vinegar"
+        }
+    },
+    {
+        "id": "id11",
+        "name": {
+            "value": "pepper"
+        }
+    },
+    {
+        "id": "id12",
+        "name": {
+            "value": "salt"
+        }
+    }
+]
+}

@@ -1,0 +1,49 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "demo de ubicación",
+            "intents": [
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "MyLocationIntent",
+                    "slots": [],
+                    "samples": [
+                        "dame mi ubicación",
+                        "donde estoy",
+                        "donde estoy en el mapa",
+                        "mis coordenadas",
+                        "cuales son mis coordenadas",
+                        "pónme en el mapa",
+                        "mi posición",
+                        "posición",
+                        "ubicación",
+                        "mi ubicación",
+                        "dime mi ubicación",
+                        "dime donde estoy",
+                        "dime mis coordenadas",
+                        "cuál es mi posición",
+                        "cuál es mi ubicación",
+                        "punto en el mapa",
+                        "ubícame"
+                    ]
+                },
+                {
+                    "name": "AMAZON.NavigateHomeIntent",
+                    "samples": []
+                }
+            ],
+            "types": []
+        }
+    }
+}

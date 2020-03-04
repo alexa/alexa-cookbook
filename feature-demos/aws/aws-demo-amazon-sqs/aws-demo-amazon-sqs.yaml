@@ -1,0 +1,60 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: SQS demo for Skill Developers
+Parameters: 
+  QueueName: 
+    Type: String
+    Default: SQS4SkillDevelopers
+    Description: Enter the name for the SQS queue.
+  LambdaRoleName: 
+    Type: String
+    Default: ask-lambda-Demo-Amazon-SQS
+    Description: Enter the name for Lambda function execution role. The CLI defaults to "ask-lambda-" followed by the normalized skill name.
+Resources:
+  LambdaRole:
+    # add rights to access SQS
+    Description: Creating service role in IAM for AWS Lambda
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Ref LambdaRoleName
+      AssumeRolePolicyDocument:
+        Statement:
+        -
+          Effect: Allow
+          Principal:
+            Service:
+              - lambda.amazonaws.com
+          Action:
+            - sts:AssumeRole
+      Path: "/"
+      Policies:
+        -
+          PolicyName: sqs-access
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+            - Effect: Allow
+              Action:
+              - sqs:DeleteMessage
+              - sqs:GetQueueAttributes
+              - sqs:GetQueueUrl
+              - sqs:ReceiveMessage
+              - sqs:SendMessage
+              Resource: !GetAtt TheQueue.Arn
+      # includes default Lambda execution permissions
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+  TheQueue:
+    Type: AWS::SQS::Queue
+    Properties: 
+      MessageRetentionPeriod: 600 # 10 minutes
+      QueueName: !Ref QueueName
+Outputs:
+  QueueURL:
+    Description: URL of newly created SQS Queue
+    Value: !Ref TheQueue
+  QueueARN:
+    Description: ARN of newly created SQS Queue
+    Value: !GetAtt TheQueue.Arn
+  QueueName:
+    Description: Name newly created SQS Queue
+    Value: !GetAtt TheQueue.QueueName
