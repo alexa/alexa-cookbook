@@ -1,126 +1,36 @@
 {
-	"manifest": {
-		"publishingInformation": {
-			"locales": {
-				"en-US": {
-					"name": "Hello World",
-					"summary": "Sample Short Description",
-					"description": "Sample Full Description",
-					"examplePhrases": [ "Alexa open hello world", "hello", "help" ],
-					"keywords": []
-				},
-				"en-GB": {
-					"name": "Hello World",
-					"summary": "Sample Short Description",
-					"description": "Sample Full Description",
-					"examplePhrases": [ "Alexa open hello world", "hello", "help" ],
-					"keywords": []
-				},
-				"en-CA": {
-					"name": "Hello World",
-					"summary": "Sample Short Description",
-					"description": "Sample Full Description",
-					"examplePhrases": [ "Alexa open hello world", "hello", "help" ],
-					"keywords": []
-				},
-				"en-IN": {
-					"name": "Hello World",
-					"summary": "Sample Short Description",
-					"description": "Sample Full Description",
-					"examplePhrases": [ "Alexa open hello world", "hello", "help" ],
-					"keywords": []
-				},
-				"en-AU": {
-					"name": "Hello World",
-					"summary": "Sample Short Description",
-					"description": "Sample Full Description",
-					"examplePhrases": [ "Alexa open hello world", "hello", "help" ],
-					"keywords": []
-				},
-				"es-ES": {
-					"name": "Hola Mundo",
-					"summary": "Sample Short Description",
-					"description": "Sample Full Description",
-					"examplePhrases": [ "Alexa abre hola mundo", "hola", "ayuda" ],
-					"keywords": []
-				},
-				"es-MX": {
-					"name": "Hola Mundo",
-					"summary": "Sample Short Description",
-					"description": "Sample Full Description",
-					"examplePhrases": [ "Alexa abre hola mundo", "hola", "ayuda" ],
-					"keywords": []
-				},
-				"es-US": {
-					"name": "Hola Mundo",
-					"summary": "Sample Short Description",
-					"description": "Sample Full Description",
-					"examplePhrases": [ "Alexa abre hola mundo", "hola", "ayuda" ],
-					"keywords": []
-				},
-				"fr-FR": {
-					"name": "Le Génie des Salutations",
-					"summary": "Sample Short Description",
-					"description": "Sample Full Description",
-					"examplePhrases": [ "Alexa ouvre le génie des salutations", "bonjour", "aide" ],
-					"keywords": []
-				},
-				"fr-CA": {
-					"name": "Le Génie des Salutations",
-					"summary": "Sample Short Description",
-					"description": "Sample Full Description",
-					"examplePhrases": [ "Alexa ouvre le génie des salutations", "bonjour", "aide" ],
-					"keywords": []
-				},
-				"ja-JP": {
-					"name": "ハローワールド",
-					"summary": "Sample Short Description",
-					"description": "Sample Full Description",
-					"examplePhrases": [ "アレクサ、ハローワールドを開いて", "こんにちは", "ヘルプ" ],
-					"keywords": []
-				},
-				"de-DE": {
-					"name": "Hallo Welt",
-					"summary": "Sample Short Description",
-					"description": "Sample Full Description",
-					"examplePhrases": [ "Alexa öffne hallo welt", "hallo", "hilfe" ],
-					"keywords": []
-				},
-				"it-IT": {
-					"name": "Ciao Mondo",
-					"summary": "Sample Short Description",
-					"description": "Sample Full Description",
-					"examplePhrases": [ "Alexa apri ciao mondo", "ciao", "aiuto" ],
-					"keywords": []
-				},
-				"hi-IN": {
-					"name": "नमस्ते दुनिया",
-					"summary": "Sample Short Description",
-					"description": "Sample Full Description",
-					"examplePhrases": [ "Alexa मज़ेदार नमस्ते दुनिया", "hello", "मदद करो" ],
-					"keywords": []
-				},
-				"pt-BR": {
-					"name": "Olá Mundo",
-					"summary": "Sample Short Description",
-					"description": "Sample Full Description",
-					"examplePhrases": [ "Alexa abra olá mundo", "olá", "ajuda" ],
-					"keywords": []
-				}
-			},
-			"isAvailableWorldwide": true,
-			"testingInstructions": "Sample Testing Instructions.",
-			"category": "KNOWLEDGE_AND_TRIVIA",
-			"distributionCountries": []
-		},
-		"apis": {
-			"custom": {
-				"endpoint": {
-					"sourceDir": "lambda/py",
-					"uri": "ask-custom-helloworld-classes-default"
-				}
-			}
-		},
-		"manifestVersion": "1.0"
-	}
+  "manifest": {
+    "publishingInformation": {
+      "locales": {
+        "en-US": {
+          "name": "Medicine Reminder",
+          "summary": "Sample Short Description",
+          "description": "Sample Full Description",
+          "examplePhrases": [
+            "Alexa open medicine reminder",
+            "Alexa ask medicine reminder to set a reminder"
+          ],
+          "keywords": []
+        }
+      },
+      "isAvailableWorldwide": true,
+      "testingInstructions": "Sample Testing Instructions.",
+      "category": "KNOWLEDGE_AND_TRIVIA",
+      "distributionCountries": []
+    },
+    "apis": {
+      "custom": {
+        "endpoint": {
+          "sourceDir": "lambda/py/lambda_upload",
+          "uri": "ask-custom-Medicine_Reminder-default"
+        }
+      }
+    },
+    "manifestVersion": "1.0",
+    "permissions": [
+      {
+        "name": "alexa::alerts:reminders:skill:readwrite"
+      }
+    ]
+  }
 }

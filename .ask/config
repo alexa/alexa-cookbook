@@ -1,18 +1,30 @@
 {
   "deploy_settings": {
     "default": {
-      "skill_id": "",
+      "skill_id": "amzn1.ask.skill.38bdee31-ea1e-4a65-ad66-916cc9b11269",
       "resources": {
         "lambda": [
           {
-            "functionName": "",
             "alexaUsage": [
               "custom/default"
             ],
-            "runtime": "python3.6",
-            "handler": "hello_world.handler"
+            "arn": "arn:aws:lambda:us-east-1:718583862047:function:ask-custom-Medicine_Reminder-default",
+            "awsRegion": "us-east-1",
+            "codeUri": "lambda/py/lambda_upload",
+            "functionName": "ask-custom-Medicine_Reminder-default",
+            "handler": "reminder_sample.handler",
+            "revisionId": "7e5a00e9-5df0-4231-9692-f33e62ce34d3",
+            "runtime": "python3.6"
           }
-        ]
+        ],
+        "manifest": {
+          "eTag": "ef46274b37557af77c32d1a09c0d3a72"
+        },
+        "interactionModel": {
+          "en-US": {
+            "eTag": "723b78b3d19638cbdfb8b64537d9c156"
+          }
+        }
       },
       "was_cloned": false,
       "merge": {}
