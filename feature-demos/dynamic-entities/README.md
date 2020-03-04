@@ -1,1 +1,0 @@
-# Dynamic Entity Demos - Alexa Cookbook

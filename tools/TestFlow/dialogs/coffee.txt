@@ -1,7 +1,0 @@
-LaunchRequest
-CoffeeIntent
-AMAZON.YesIntent
-end
-# AMAZON.YesIntent
-
-

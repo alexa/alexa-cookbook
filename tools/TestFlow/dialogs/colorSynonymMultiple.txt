@@ -1,8 +1,0 @@
-# LaunchRequest
-# MyColorGetIntent
-MyColorSetIntent color=red/red
-MyColorSetIntent color=pizza/hawaiian/veggie/cheese
-end
-MyColorSetIntent color=crimson/red
-MyColorSetIntent color=unicorn/
-AMAZON.StopIntent

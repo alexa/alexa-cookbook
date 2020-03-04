@@ -1,5 +1,0 @@
-LaunchRequest
-BookmarkGetIntent
-? BookmarkSetIntent page=31
-BookmarkGetIntent
-AMAZON.StopIntent

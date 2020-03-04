@@ -1,3 +1,0 @@
-LaunchRequest
-AMAZON.HelpIntent
-AMAZON.StopIntent

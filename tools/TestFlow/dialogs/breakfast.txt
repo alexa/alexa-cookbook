@@ -1,3 +1,0 @@
-LaunchRequest
-BreakfastIntent
-AMAZON.YesIntent

@@ -1,4 +1,0 @@
-LaunchRequest
-WhatsMyColorIntent
-MyColorIsIntent Color=blue
-WhatsMyColorIntent

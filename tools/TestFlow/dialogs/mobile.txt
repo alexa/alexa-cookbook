@@ -1,3 +1,0 @@
-LaunchRequest
-MyPhoneNumberIntent mobileNumber=5082598400
-AMAZON.StopIntent
