@@ -1,0 +1,210 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "demo de temporizadores",
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "ReadTimerIntent",
+          "slots": [],
+          "samples": [
+            "lee mi temporizador",
+            "leer mi temporizador",
+            "como va mi temporizador",
+            "consultar mi temporizador",
+            "consulta mi temporizador",
+            "consultar temporizador",
+            "consulta temporizador",
+            "consulta mi tiempo",
+            "revisar temporizador",
+            "revisar tiempo",
+            "estado del temporizador",
+            "cual es el estado del temporizador",
+            "estado del temporizador",
+            "como voy de tiempo",
+            "tiempo restante",
+            "cuanto tiempo me queda",
+            "cuanto tiempo falta",
+            "revisa el temporizador",
+            "revisa mi temporizador"
+          ]
+        },
+        {
+          "name": "SetTimerIntent",
+          "slots": [
+            {
+              "name": "duration",
+              "type": "AMAZON.DURATION",
+              "samples": ["de {duration}", "por {duration}", "{duration}"]
+            }
+          ],
+          "samples": [
+            "poner un temporizador de {duration}",
+            "temporizador de {duration}",
+            "crea un temporizador de {duration}",
+            "quiero un temporizador de {duration}",
+            "avísame en {duration}",
+            "temporizador",
+            "quiero un temporizador",
+            "configurar temporizador",
+            "configura un temporizador",
+            "crear temporizador",
+            "crea un temporizador"
+          ]
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "DeleteTimerIntent",
+          "slots": [],
+          "samples": [
+            "destruye el temporizador",
+            "quita el temporizador",
+            "elimina el temporizador",
+            "borra el temporizador",
+            "destruye mi temporizador",
+            "quita mi temporizador",
+            "elimina mi temporizador",
+            "borra mi temporizador",
+            "destruir temporizador",
+            "quitar temporizador",
+            "eliminar temporizador",
+            "borrar temporizador"
+          ]
+        },
+        {
+          "name": "AMAZON.PauseIntent",
+          "slots": [],
+          "samples": [
+            "detén el temporizador",
+            "pausa el temporizador",
+            "detiene el temporizador",
+            "suspende el temporizador",
+            "congela el temporizador",
+            "detén mi temporizador",
+            "pausa mi temporizador",
+            "detiene mi temporizador",
+            "suspende mi temporizador",
+            "congela mi temporizador",
+            "pausar temporizador",
+            "detener temporizador",
+            "suspender temporizador",
+            "congelar temporizador",
+            "detén los temporizadores",
+            "pausa los temporizadores",
+            "detiene los temporizadores",
+            "suspende los temporizadores",
+            "congela los temporizadores",
+            "detén mis temporizadores",
+            "pausa mis temporizadores",
+            "detiene mis temporizadores",
+            "suspende mis temporizadores",
+            "congela mis temporizadores",
+            "pausar temporizadores",
+            "detener temporizadores",
+            "suspender temporizadores",
+            "congelar temporizadores",
+            "pon mi temporizador en pausa",
+            "pon mis temporizadores en pausa",
+            "pon temporizador en pausa",
+            "pon temporizadores en pausa",
+            "pon el temporizador en pausa",
+            "pon los temporizadores en pausa"
+          ]
+        },
+        {
+          "name": "AMAZON.ResumeIntent",
+          "slots": [],
+          "samples": [
+            "resume el temporizador",
+            "continua el temporizador",
+            "retoma el temporizador",
+            "reinicia el temporizador",
+            "resume mi temporizador",
+            "continua mi temporizador",
+            "retoma mi temporizador",
+            "reinicia mi temporizador",
+            "resumir temporizador",
+            "continuar temporizador",
+            "retomar temporizador",
+            "reiniciar temporizador",
+            "resume los temporizadores",
+            "continua los temporizador",
+            "retoma los temporizador",
+            "reinicia los temporizador",
+            "resume mis temporizadores",
+            "continua mis temporizadores",
+            "retoma mis temporizadores",
+            "reinicia mis temporizadores",
+            "resumir temporizadores",
+            "continuar temporizadores",
+            "retomar temporizadores",
+            "reiniciar temporizadores"
+          ]
+        }
+      ],
+      "types": []
+    },
+    "dialog": {
+      "intents": [
+        {
+          "name": "SetTimerIntent",
+          "confirmationRequired": false,
+          "prompts": {},
+          "slots": [
+            {
+              "name": "duration",
+              "type": "AMAZON.DURATION",
+              "confirmationRequired": false,
+              "elicitationRequired": true,
+              "prompts": {
+                "elicitation": "Elicit.Slot.144347225484.737098379773"
+              }
+            }
+          ]
+        }
+      ],
+      "delegationStrategy": "ALWAYS"
+    },
+    "prompts": [
+      {
+        "id": "Elicit.Slot.144347225484.737098379773",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "de cuanto tiempo?"
+          },
+          {
+            "type": "PlainText",
+            "value": "vale. un temporizador de cuanto tiempo?"
+          },
+          {
+            "type": "PlainText",
+            "value": "genial. de que duración lo quieres?"
+          },
+          {
+            "type": "PlainText",
+            "value": "un temporizador que dure cuanto tiempo?"
+          },
+          {
+            "type": "PlainText",
+            "value": "vale. que duración quieres para el temporizador?"
+          }
+        ]
+      }
+    ]
+  }
+}
