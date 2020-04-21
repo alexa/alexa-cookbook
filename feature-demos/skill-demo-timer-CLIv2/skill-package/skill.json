@@ -1,0 +1,148 @@
+{
+  "manifest": {
+    "apis": {
+      "custom": {
+        "endpoint": {
+          "uri": "<< ARN of lambda endpoint >>"
+        }
+      }
+    },
+    "manifestVersion": "1.0",
+    "permissions": [
+      {
+        "name": "alexa::alerts:timers:skill:readwrite"
+      }
+    ],
+    "privacyAndCompliance": {
+      "locales": {
+        "en-US": {
+          "privacyPolicyUrl": "https://amazon.com/privacy",
+          "termsOfUseUrl": ""
+        },
+        "es-ES": {
+          "privacyPolicyUrl": "https://amazon.es/privacy",
+          "termsOfUseUrl": ""
+        },
+        "ja-JP": {
+          "privacyPolicyUrl": "https://amazon.co.jp/privacy",
+          "termsOfUseUrl": ""
+        }
+      },
+      "allowsPurchases": false,
+      "usesPersonalInfo": true,
+      "isChildDirected": false,
+      "isExportCompliant": true,
+      "containsAds": false
+    },
+    "publishingInformation": {
+      "locales": {
+        "en-US": {
+          "name": "Timers Demo",
+          "summary": "Sample skill showing custom timer management",
+          "description": "Sample skill showing how to use the Timers API via SDK",
+          "examplePhrases": [
+            "Alexa open timers demo",
+            "set a timer",
+            "check my timer"
+          ],
+          "keywords": []
+        },
+        "en-GB": {
+          "name": "Timers Demo",
+          "summary": "Sample skill showing custom timer management",
+          "description": "Sample skill showing how to use the Timers API via SDK",
+          "examplePhrases": [
+            "Alexa open timers demo",
+            "set a timer",
+            "check my timer"
+          ],
+          "keywords": []
+        },
+        "en-IN": {
+          "name": "Timers Demo",
+          "summary": "Sample skill showing custom timer management",
+          "description": "Sample skill showing how to use the Timers API via SDK",
+          "examplePhrases": [
+            "Alexa open timers demo",
+            "set a timer",
+            "check my timer"
+          ],
+          "keywords": []
+        },
+        "en-AU": {
+          "name": "Timers Demo",
+          "summary": "Sample skill showing custom timer management",
+          "description": "Sample skill showing how to use the Timers API via SDK",
+          "examplePhrases": [
+            "Alexa open timers demo",
+            "set a timer",
+            "check my timer"
+          ],
+          "keywords": []
+        },
+        "en-CA": {
+          "name": "Timers Demo",
+          "summary": "Sample skill showing custom timer management",
+          "description": "Sample skill showing how to use the Timers API via SDK",
+          "examplePhrases": [
+            "Alexa open timers demo",
+            "set a timer",
+            "check my timer"
+          ],
+          "keywords": []
+        },
+        "es-ES": {
+          "name": "Demo de Temporizadores",
+          "summary": "Sample Short Description",
+          "description": "Sample Full Description",
+          "examplePhrases": [
+            "Alexa abre demo de temporizadores",
+            "crea un temporizador",
+            "como va mi temporizador"
+          ],
+          "keywords": []
+        },
+        "es-MX": {
+          "name": "Demo de Temporizadores",
+          "summary": "Sample Short Description",
+          "description": "Sample Full Description",
+          "examplePhrases": [
+            "Alexa abre demo de temporizadores",
+            "crea un temporizador",
+            "como va mi temporizador"
+          ],
+          "keywords": []
+        },
+        "es-US": {
+          "name": "Demo de Temporizadores",
+          "summary": "Sample Short Description",
+          "description": "Sample Full Description",
+          "examplePhrases": [
+            "Alexa abre demo de temporizadores",
+            "crea un temporizador",
+            "como va mi temporizador"
+          ],
+          "keywords": []
+        },
+        "ja-JP": {
+          "name": "タイマーデモ",
+          "summary": "タイマーAPIのサンプルスキル",
+          "description": "このサンプルスキルはASK SDKからTimer APIを使う方法を示しています。",
+          "examplePhrases": [
+            "アレクサ、タイマーデモを開いて",
+            "タイマーをセットして",
+            "タイマーをチェックして"
+          ],
+          "keywords": []
+        }
+      },
+      "isAvailableWorldwide": true,
+      "testingInstructions": "Sample Testing Instructions.",
+      "category": "EDUCATION_AND_REFERENCE",
+      "distributionCountries": [],
+      "automaticDistribution": {
+        "isActive": false
+      }
+    }
+  }
+}
