@@ -1,0 +1,189 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "timers demo",
+            "modelConfiguration": {
+                "fallbackIntentSensitivity": {
+                    "level": "LOW"
+                }
+            },
+            "intents": [
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NavigateHomeIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.FallbackIntent",
+                    "samples": []
+                },
+                {
+                    "name": "ReadTimerIntent",
+                    "slots": [],
+                    "samples": [
+                        "let's do a time check",
+                        "what's my time left",
+                        "time left",
+                        "what's my time",
+                        "what's my timer status",
+                        "timer status",
+                        "time check",
+                        "timer check",
+                        "read my timer",
+                        "check on my timer",
+                        "check timer",
+                        "check my timer"
+                    ]
+                },
+                {
+                    "name": "SetTimerIntent",
+                    "slots": [
+                        {
+                            "name": "duration",
+                            "type": "AMAZON.DURATION",
+                            "samples": [
+                                "it's {duration}",
+                                "{duration}",
+                                "run for {duration}",
+                                "make it {duration}",
+                                "for {duration}"
+                            ]
+                        }
+                    ],
+                    "samples": [
+                        "create a timer",
+                        "set a timer",
+                        "set timer",
+                        "I want a timer",
+                        "timer",
+                        "timer of {duration}",
+                        "I want a timer of {duration}",
+                        "create a timer of {duration}",
+                        "create timer of {duration}",
+                        "set up a timer of {duration}",
+                        "set up timer of {duration}",
+                        "set a timer of {duration}",
+                        "set timer of {duration}",
+                        "{duration} timer"
+                    ]
+                },
+                {
+                    "name": "DeleteTimerIntent",
+                    "slots": [],
+                    "samples": [
+                        "destroy my timer",
+                        "remove my timer",
+                        "delete my timer",
+                        "erase my timer",
+                        "destroy timer",
+                        "remove timer",
+                        "delete timer",
+                        "erase timer"
+                    ]
+                },
+                {
+                    "name": "AMAZON.PauseIntent",
+                    "samples": [
+                        "pause my timer",
+                        "stop my timer",
+                        "suspend my timer",
+                        "freeze my timer",
+                        "pause timer",
+                        "stop timer",
+                        "suspend timer",
+                        "freeze timer",
+                        "pause my timers",
+                        "stop my timers",
+                        "suspend my timers",
+                        "freeze my timers",
+                        "pause timers",
+                        "stop timers",
+                        "suspend timers",
+                        "freeze timers"
+                    ]
+                },
+                {
+                    "name": "AMAZON.ResumeIntent",
+                    "samples": [
+                        "resume my timer",
+                        "continue my timer",
+                        "rerun my timer",
+                        "restart my timer",
+                        "resume timer",
+                        "continue timer",
+                        "rerun timer",
+                        "restart timer",
+                        "resume my timers",
+                        "continue my timers",
+                        "rerun my timers",
+                        "restart my timers",
+                        "resume timers",
+                        "continue timers",
+                        "rerun timers",
+                        "restart timers"
+                    ]
+                }
+            ],
+            "types": []
+        },
+        "dialog": {
+            "intents": [
+                {
+                    "name": "SetTimerIntent",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "duration",
+                            "type": "AMAZON.DURATION",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.846226267540.416825397393"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "delegationStrategy": "ALWAYS"
+        },
+        "prompts": [
+            {
+                "id": "Elicit.Slot.846226267540.416825397393",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "ok. what is the duration of the timer?"
+                    },
+                    {
+                        "type": "PlainText",
+                        "value": "a timer of what duration?"
+                    },
+                    {
+                        "type": "PlainText",
+                        "value": "great. what would be the duration?"
+                    },
+                    {
+                        "type": "PlainText",
+                        "value": "ok. run a timer of for how long?"
+                    },
+                    {
+                        "type": "PlainText",
+                        "value": "for how long?"
+                    }
+                ]
+            }
+        ]
+    }
+}
