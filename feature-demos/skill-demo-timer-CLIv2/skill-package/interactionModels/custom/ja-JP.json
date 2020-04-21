@@ -1,0 +1,205 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "タイマーデモ",
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "ReadTimerIntent",
+          "samples": [
+            "タイマーをチェックして",
+            "タイマーチェック",
+            "タイマーを確認して",
+            "タイマーはどうなってる",
+            "タイマーの状況を教えて",
+            "タイマーの状況は",
+            "タイマーの残りを教えて",
+            "タイマーはどんな感じ",
+            "タイマーはどう",
+            "タイマー確認",
+            "チェックタイマー",
+            "タイマーを確認"
+          ]
+        },
+        {
+          "name": "SetTimerIntent",
+          "slots": [
+            {
+              "name": "duration",
+              "type": "AMAZON.DURATION",
+              "samples": [
+                "{duration} でセット",
+                "{duration} のタイマーを設定して",
+                "{duration} のタイマーを設定",
+                "{duration} で設定して",
+                "{duration} で設定",
+                "{duration} に設定",
+                "{duration} にして",
+                "{duration} でお願い",
+                "{duration} で",
+                "{duration} にして",
+                "{duration} くらいかな",
+                "{duration} くらい",
+                "{duration} で"
+              ]
+            }
+          ],
+          "samples": [
+            "{duration} のタイマー",
+            "{duration} のタイマーをセットして",
+            "{duration} のタイマーをセット",
+            "{duration} でセットして",
+            "{duration} でセット",
+            "{duration} のタイマーを設定して",
+            "{duration} のタイマーを設定",
+            "{duration} で設定して",
+            "{duration} で設定",
+            "{duration} に設定",
+            "タイマーを {duration} にセットして",
+            "タイマーを {duration} にセット",
+            "タイマーを {duration} でセットして",
+            "タイマーを {duration} でセット",
+            "タイマーを {duration} に設定して",
+            "タイマーを {duration} に設定",
+            "タイマー",
+            "タイマーセット",
+            "タイマーをセットして",
+            "タイマーをセット",
+            "タイマーを設定して",
+            "タイマーを設定",
+            "タイマー設定"
+          ]
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "DeleteTimerIntent",
+          "slots": [],
+          "samples": [
+            "タイマーを削除",
+            "タイマーを消去",
+            "タイマーを消して",
+            "タイマーを無くして",
+            "タイマーを無効にして",
+            "タイマーを外して",
+            "タイマーをキャンセル",
+            "タイマーをキャンセルして"
+          ]
+        },
+        {
+          "name": "AMAZON.PauseIntent",
+          "slots": [],
+          "samples": [
+            "タイマーを止めて",
+            "タイマーを停止して",
+            "タイマーを一時停止して",
+            "タイマーを一旦止めて",
+            "タイマーを一旦停止して",
+            "タイマーをストップして",
+            "タイマーをストップ",
+            "タイマーを一時ストップ",
+            "タイマーを一旦ストップ",
+            "タイマーを一時ストップして",
+            "タイマーを一旦ストップして",
+            "タイマー停止",
+            "タイマーストップ",
+            "タイマーをサスペンドして",
+            "タイマーをフリーズして",
+            "タイマーをサスペンド",
+            "タイマーをフリーズ",
+            "タイマーサスペンド",
+            "タイマーフリーズ"
+          ]
+        },
+        {
+          "name": "AMAZON.ResumeIntent",
+          "slots": [],
+          "samples": [
+            "タイマーを再開して",
+            "タイマーを再開",
+            "タイマー再開",
+            "タイマーをリスタートして",
+            "タイマーをリスタート",
+            "タイマーリスタート",
+            "タイマーを続けて",
+            "タイマーの続き",
+            "タイマーをリジュームして",
+            "タイマーをリジューム",
+            "タイマーリジューム",
+            "続きからタイマーを開始して",
+            "続きからタイマーを開始",
+            "続きからタイマーをスタートして",
+            "続きからタイマーをスタート",
+            "タイマーの続きをスタートして",
+            "タイマーの続きをスタート",
+            "タイマーの続きからスタートして",
+            "タイマーの続きからスタート",
+            "タイマーの続きから"
+          ]
+        }
+      ],
+      "types": []
+    },
+    "dialog": {
+      "intents": [
+        {
+          "name": "SetTimerIntent",
+          "confirmationRequired": false,
+          "prompts": {},
+          "slots": [
+            {
+              "name": "duration",
+              "type": "AMAZON.DURATION",
+              "confirmationRequired": false,
+              "elicitationRequired": true,
+              "prompts": {
+                "elicitation": "Elicit.Slot.144347225484.737098379773"
+              }
+            }
+          ]
+        }
+      ],
+      "delegationStrategy": "ALWAYS"
+    },
+    "prompts": [
+      {
+        "id": "Elicit.Slot.144347225484.737098379773",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "何分のタイマーをセットしますか？"
+          },
+          {
+            "type": "PlainText",
+            "value": "わかりました。何分にセットしますか？"
+          },
+          {
+            "type": "PlainText",
+            "value": "はい。何分にセットしますか？"
+          },
+          {
+            "type": "PlainText",
+            "value": "わかりました。何分のタイマーをセットしますか？"
+          },
+          {
+            "type": "PlainText",
+            "value": "はい。何分のタイマーをセットしますか？"
+          }
+        ]
+      }
+    ]
+  }
+}
