@@ -11,13 +11,11 @@
  * permissions and limitations under the License.
  */
 
-const net = require('net');
 const fs = require('fs');
+const http = require('http');
 
-const localDebugger = net.createServer();
+const localDebugger = http.createServer();
 
-const HTTP_HEADER_DELIMITER = '\r\n';
-const HTTP_BODY_DELIMITER = '\r\n\r\n';
 const DEFAULT_HANDLER_NAME = 'handler';
 const HOST_NAME = 'localhost';
 const DEFAULT_PORT = 0;
@@ -48,19 +46,29 @@ localDebugger.listen(portNumber, HOST_NAME, () => {
  * here - https://developer.amazon.com/docs/custom-skills/request-and-response-json-reference.html#http-header-1
  * The response is written onto the socket connection.
  */
-
-localDebugger.on('connection', (socket) => {
-    console.log(`Connection from: ${socket.remoteAddress}:${socket.remotePort}`);
-    socket.on('data', (data) => {
-        const body = JSON.parse(data.toString().split(HTTP_BODY_DELIMITER).pop());
-        console.log(`Request envelope: ${JSON.stringify(body)}`);
-        skillInvoker[lambdaHandlerName](body, null, (_invokeErr, response) => {
-            response = JSON.stringify(response);
-            console.log(`Response envelope: ${response}`);
-            socket.write(`HTTP/1.1 200 OK${HTTP_HEADER_DELIMITER}Content-Type: application/json;charset=UTF-8${HTTP_HEADER_DELIMITER}Content-Length: ${response.length}${HTTP_BODY_DELIMITER}${response}`);
+localDebugger.on('request', (request, response) => {
+    let body = [];
+    request.on('data', (chunk) => {
+        body.push(chunk);
+    }).on('end', () => {
+        const jsonBody = JSON.parse(Buffer.concat(body).toString());
+        skillInvoker[lambdaHandlerName](jsonBody, null, (_invokeErr, skillResponse) => {
+            skillResponse = JSON.stringify(skillResponse);
+            console.log(`Response envelope: ${skillResponse}`);
+            writeResponse(response, skillResponse);
+            response.end();
         });
+    });   
+  });
+
+function writeResponse(httpResponse, skillResponse) {
+    httpResponse.writeHead(200, {
+        'Content-Type': 'application/json',
+        'charset': 'UTF-8',
+        'Content-Length': skillResponse.length
     });
-});
+    httpResponse.write(skillResponse);
+}
 
 /**
  * Validates user specified port number is in legal range [0, 65535].
