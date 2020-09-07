@@ -66,6 +66,9 @@ const MyLocationIntentHandler = {
             // fetch geolocation data and use it in the response
             if (geoObject && geoObject.coordinate && geoObject.coordinate.accuracyInMeters < ACCURACY_THRESHOLD ) {
                 let freshness = (new Date(request.timestamp) - new Date(geoObject.timestamp)) / 1000; // freshness in seconds
+                if(freshness < 0) { // remove negative seconds
+                    freshness = 0;
+                }
 
                 const lat = geoObject.coordinate.latitudeInDegrees;
                 const lon = geoObject.coordinate.longitudeInDegrees;
