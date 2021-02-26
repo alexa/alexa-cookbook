@@ -16,10 +16,11 @@ Please refer to the [developer documentation](https://developer.amazon.com/en-US
 This template provides a collection of dialogs built using Alexa Conversations that provide examples of pizza ordering. Some of the built-in features of Alexa Conversations included in this skill include:
 
  - Context carryover
-    - For example, in the orderTwoToppingPizzaContextCarryover dialog, you can see an example of a user turn saying "How many people can *that* feed" where *that* refers to a size 
+    - For example, in the AddCustomPizzaThenRemove dialog, you can see an example of a user turn saying "Remove *that* pizza" where *that* refers to the most recent pizza, identified by the ordinal returned from AddCustomPizzaApi 
 - One step correction
     - When the skill confirms arguments the user has the ability to correct and refill arguments with new values in a single turn, without having to specifically model those utterances in Alexa Converations
-    - Example:  "You wanted pepperoni and mushrooms, correct?" -> "No, make that *sausage* and *green peppers*
+    - Example:  After informing a size, crust, or cheese, the user can respond to any prompt with something like "Actually, make that thin crust"
+    - NOTE: this feature is not yet supported for lists, like toppings.
 
 As a developer, you can see examples of:
 

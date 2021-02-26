@@ -1,1000 +1,500 @@
 /**
  * Copyright 2020 Amazon.com, Inc. and its affiliates. All Rights Reserved.
  * SPDX-License-Identifier: LicenseRef-.amazon.com.-AmznSL-1.0
- * 
+ *
  * Licensed under the Amazon Software License (the "License").
  * You may not use this file except in compliance with the License.
  * A copy of the License is located at
- * 
+ *
  * http://aws.amazon.com/asl/
- * 
+ *
  * or in the "license" file accompanying this file. This file is distributed
  * on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
  * express or implied. See the License for the specific language governing
  * permissions and limitations under the License.
-**/
+ **/
 'use strict';
-const Alexa         = require('ask-sdk');
-const i18next       = require('i18next');
-const sprintf       = require('sprintf-js').sprintf;
-const _             = require('lodash');
 
-// Localization strings
-const resources     = require('./resources')
-// Utility for parsing intent requests and API requests
-const requestUtils  = require('./requestUtils');
-// Static list of menu items with some helper functions
-const menu          = require('./menu');
+const Alexa = require('ask-sdk');
+const i18next = require('i18next');
+const sprintf = require('sprintf-js').sprintf;
+const _ = require('lodash');
 
-// APL docs
-const welcome_apl   = require('./launch_request.json');
+const resources = require('./resources')
+const util = require('./util');
 
-const states = {
-    PROMPTED_FOR_DAILY_SPECIALS: 'PROMPTED_FOR_DAILY_SPECIALS',
-    PROMPTED_TO_ORDER_DAILY_SPECIAL: 'PROMPTED_TO_ORDER_DAILY_SPECIAL',
-    PROMPTED_TO_CUSTOMIZE : 'PROMPTED_TO_CUSTOMIZE',
-    PROMPTED_TO_ADD_TO_ORDER: 'PROMPTED_TO_ADD_TO_ORDER',
-    PROMPTED_TO_ORDER_SPECIAL : 'PROMPTED_TO_ORDER_SPECIAL',
-    PROMPTED_TO_CUSTOMIZE_SPECIAL_PIZZA : 'PROMPTED_TO_CUSTOMIZE_SPECIAL_PIZZA'
+const REMOVE_PIZZA_BAD_REQUEST_TYPES = {
+    NO_ORDER_IN_PROGRESS: 'NO_ORDER_IN_PROGRESS',
+    TOO_FEW_PIZZAS_FOR_ORDINAL: 'TOO_FEW_PIZZAS_FOR_ORDINAL'
 };
+
+// For GetSpecialtyPizzaDetailsApi and summing costs for GetInProgressOrderApi, we have these data maps. It would be
+// neat to use keys and values of slot value "id"s so we could reuse them for all languages, but for now they are keyed
+// by resolved slot value "id" or "value", to reduce misses from "nearly" expected slot utterances.
+
+const SPECIALTY_PIZZAS_BY_ID = {
+    'meatLovers': {
+        'size': 'large',
+        'cheese': 'light',
+        'crust': 'traditional',
+        'toppings': [
+            'sausage',
+            'pepperoni',
+            'ham',
+            'bacon'
+        ],
+        'cost': 9.99
+    },
+    'veggieSupreme': {
+        'size': 'medium',
+        'cheese': 'normal',
+        'crust': 'thin',
+        'toppings': [
+            'spinach',
+            'olives',
+            'mushrooms',
+            'onions',
+            'artichoke hearts'
+        ],
+        'cost': 8.99
+    },
+    'kitchenSink': {
+        'size': 'extra large',
+        'cheese': 'extra',
+        'crust': 'deep dish',
+        'toppings': [
+            'ham',
+            'bacon',
+            'pepperoni',
+            'sausage',
+            'onions',
+            'black olives',
+            'green peppers',
+            'jalapenos',
+            'feta cheese'
+        ],
+        'cost': 9.99
+    }
+};
+
+const PIZZA_COSTS_BY_SIZE_ID = {
+    'S': 5.99,
+    'M': 7.99,
+    'L': 10.99,
+    'XL': 13.99
+};
+
 // *****************************************************************************
-// Launch request handler.
+// Launch request handler
 // *****************************************************************************
 const LaunchHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
     },
-    /**
-     * Launch request handler. 
-     * on launching the skill, user gets the 'speechOutput' message of this handler. 
-     * If user is silent or speaks something which is unrelated then user is reprompted with repromptOutput
-     *
-     * @param handlerInput {HandlerInput}
-     * @returns {Response}
-     */
     async handle(handlerInput) {
-        const personId = requestUtils.getPersonId(handlerInput);
-        const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
-        const {in_progress} = sessionAttributes;
-        
-        let speakOutput, reprompt;
-        // if they had 'in flight' orders that had not been moved to ordered.
-        if(in_progress){
-            if(personId){
-                speakOutput = handlerInput.t('WELCOME_PERSONALIZED', {
-                    personId: personId,
-                    prompt: handlerInput.t('WELCOME_BACK')
-                });
-            } else {
-                speakOutput = handlerInput.t('WELCOME_BACK');
-            }
-            reprompt = handlerInput.t('WELCOME_BACK_REPROMPT');
-            // the in-progress prompt asks them if they'd like to customize anything
-            // let's set that state for the Yes/No Intent Handlers
-            sessionAttributes.state = states.PROMPTED_TO_CUSTOMIZE;
-        } else {
-            // no in progress orders
-            let {day, period} = await requestUtils.getDayAndPeriod(handlerInput);
-            reprompt = handlerInput.t('WELCOME_REPROMPT');
-            if (personId) {
-                // Speaker is recognized, so greet by name
-                speakOutput = handlerInput.t('WELCOME_PERSONALIZED', {
-                    personId: personId,
-                    prompt: handlerInput.t('WELCOME', {
-                        day: day,
-                        period: period
-                    })
-                });
-            } else {
-                // Speaker is not recognized; give a generic greeting asking if they would like to hear our specials
-                speakOutput = handlerInput.t('WELCOME', {
-                    day: day,
-                    period: period
-                });
-            }
-            // give context to yes/no response by saving state
-            sessionAttributes.state = states.PROMPTED_FOR_DAILY_SPECIALS;
-        }
-        if (Alexa.getSupportedInterfaces(handlerInput.requestEnvelope)['Alexa.Presentation.APL']){
-            handlerInput.responseBuilder.addDirective({
-                type: 'Alexa.Presentation.APL.RenderDocument',
-                token: "welcomeToken",
-                document: welcome_apl
-            });
-        }
+        // Our skill is configured to start sessions with the skill's intent handlers, so this is the first handler hit.
         return handlerInput.responseBuilder
-                .speak(speakOutput)
-                .reprompt(reprompt)
-                .getResponse();
+            .speak(handlerInput.t('WELCOME'))
+            .reprompt(handlerInput.t('NO_NAME_PROMPT'))
+            .getResponse();
     }
 };
-/**
- * AMAZON.YesIntentHandler. 
- * 
- * Used in response to 
- *  - being prompted to hear the daily specials
- *  - ordering a daily special
- *  
- * @param handlerInput {HandlerInput}
- * @returns {Response}
- */
-const YesIntentHandler = {
-    canHandle(handlerInput) {
-        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.YesIntent'
-    },
-    async handle(handlerInput) {
-        let speakOutput, reprompt;
-        const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
-        let {day, period} = await requestUtils.getDayAndPeriod(handlerInput);
-        // if we just prompted them for specials
-        if (sessionAttributes.state == states.PROMPTED_FOR_DAILY_SPECIALS){
-            console.log("Getting daily special for " + period + " on " + day);
-            // copying to new object to not mess up downstream storage of object in session
-            let spoken_special = JSON.parse(JSON.stringify(menu.getDailySpecialForPeriod(day, period)));
-            console.log('Daily special: ' + JSON.stringify(spoken_special));
-            if (period === "lunch"){
-                speakOutput = handlerInput.t('DAILY_LUNCH_SPECIAL', {
-                    day: day,
-                    size: spoken_special.pizza.size,
-                    crust: spoken_special.pizza.crust,
-                    cheese: spoken_special.pizza.cheese,
-                    toppingsList: menu.makeSpeakableList(spoken_special.pizza.toppingsList),
-                    salad: spoken_special.salad,
-                    drinks: spoken_special.drinks,
-                    cost: spoken_special.cost
-                });
-            } else {
-                speakOutput = handlerInput.t('DAILY_DINNER_SPECIAL', {
-                    day: day,
-                    size: spoken_special.pizza.size,
-                    crust: spoken_special.pizza.crust,
-                    cheese: spoken_special.pizza.cheese,
-                    toppingsList: menu.makeSpeakableList(spoken_special.pizza.toppingsList),
-                    salad: spoken_special.salad,
-                    side: spoken_special.side,
-                    dessert: spoken_special.dessert,
-                    drinks: spoken_special.drinks,
-                    cost: spoken_special.cost
-                });
-            }
-            reprompt = handlerInput.t('DAILY_SPECIAL_REPROMPT',{
-                day: day,
-                period: period
-            });
-            sessionAttributes.state = states.PROMPTED_TO_ORDER_DAILY_SPECIAL;
-        } else if(sessionAttributes.state == states.PROMPTED_TO_ORDER_DAILY_SPECIAL){
-            let daily_special = menu.getDailySpecialForPeriod(day, period);
-            // the user answered 'yes' to ordering the daily special
-            speakOutput = handlerInput.t('ORDER_DAILY_SPECIAL',{
-                day: day,
-                period: period
-            });
-            reprompt = handlerInput.t('ORDER_DAILY_SPECIAL_REPROMPT',{
-                day: day,
-                period: period
-            });
-            // let the system know we prompted to customize the pizza or salad
-            sessionAttributes.state = states.PROMPTED_TO_ADD_TO_ORDER;
 
-            // lets save this order as in-progress
-            sessionAttributes.in_progress = daily_special;
-        } else if (sessionAttributes.state == states.PROMPTED_TO_ADD_TO_ORDER){
-            // the user answered 'yes' to customizing something, lets find out which
-            speakOutput = handlerInput.t('ADD_TO_ORDER',);
-            reprompt = handlerInput.t('ADD_TO_ORDER_REPROMPT');
-        } else if (sessionAttributes.state == states.PROMPTED_TO_ORDER_SPECIAL){
-            // the user answered yes to ordering one of the special pizzas
-            speakOutput = handlerInput.t('PROMPT_TO_CUSTOMIZE_SPECIAL',{
-                name: sessionAttributes.specialName
-            });
-            reprompt = handlerInput.t('PROMPT_TO_CUSTOMIZE_SPECIAL_REPROMPT');
-            sessionAttributes.state = states.PROMPTED_TO_CUSTOMIZE_SPECIAL_PIZZA;
-          
-            // lets save this order as in-progress
-            sessionAttributes.in_progress = {special : menu.getSpecialPizzaDetails(sessionAttributes.specialName)};
-        } else if (sessionAttributes.state == states.PROMPTED_TO_CUSTOMIZE_SPECIAL_PIZZA){
-            // user answered yes to customizing a pizza
-            // send this to Alexa Conversations for customize special pizza
-            let name = sessionAttributes.in_progress.special.name;
-            // if we dont have a special name, lets ask for it again
-            if (!name){
-                speakOutput = handlerInput.t('GET_SPECIAL_PIZZA_NAME');
-                reprompt = handlerInput.t('GET_SPECIAL_PIZZA_NAME_REPROMPT');
-            } else {
-                return handlerInput.responseBuilder
-                    .addDirective({
-                        type: 'Dialog.DelegateRequest',
-                        target: 'AMAZON.Conversations',
-                        period: {
-                            until: 'EXPLICIT_RETURN' 
-                        },
-                        updatedRequest: {
-                            type: 'Dialog.InputRequest',
-                            input: {
-                                name: 'customizePizzaReferenceSpecial',
-                                slots: {
-                                    name: {
-                                        name : 'name',
-                                        value: name
-                                    }
-                                }
-                            }
-                        }
-                    })
-                    .getResponse();
-            }
-        }
-        return handlerInput.responseBuilder
-            .speak(speakOutput)
-            .reprompt(reprompt)
-            .getResponse();
-    }
-};
-const AddPizzaReferenceSpecialToOrderIntentHandler = {
-    canHandle(handlerInput) {
-        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AddPizzaReferenceSpecialToOrderIntent'
-    },
-    handle(handlerInput){
-        let speakOutput, reprompt;
-        console.log("In AddPizzaReferenceSpecialToOrderIntentHandler");
+// *****************************************************************************
+// Intent handlers
+// *****************************************************************************
+// This skill uses the two modes, skill and Conversations, to easily implement a locking loop, where we can require the
+// user to sign-in before continuing, without having to manage that state in any handlers in the Conversations mode that
+// defines the bulk of the behavior.
 
-        const specialSlot = Alexa.getSlot(handlerInput.requestEnvelope, 'special');
-        const firstAuthority = _.first(_.get(specialSlot, 'resolutions.resolutionsPerAuthority'));
-        const special = _.first(_.get(firstAuthority, 'values')).value.name;
-        
-        // the user answered yes to ordering one of the special pizzas
-        speakOutput = handlerInput.t('PROMPT_TO_CUSTOMIZE_SPECIAL',{
-            name: special
-        });
-        reprompt = handlerInput.t('PROMPT_TO_CUSTOMIZE_SPECIAL_REPROMPT');
-        let sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
-        sessionAttributes.state = states.PROMPTED_TO_CUSTOMIZE_SPECIAL_PIZZA;
-    
-        // lets save this order as in-progress
-        sessionAttributes.in_progress = {special : menu.getSpecialPizzaDetails(special)};
-        return handlerInput.responseBuilder
-            .speak(speakOutput)
-            .reprompt(reprompt)
-            .getResponse();
-    }
-}
-const StartOverIntentHandler = {
+const GiveNameIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'StartOverIntent'
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'GiveNameIntent';
     },
-    handle(handlerInput){
-        // they answered 'start over' when asked to customize/resume their in progress order
-        // lets delete that state if saved
-        const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
-        if (sessionAttributes.state == states.PROMPTED_TO_CUSTOMIZE){
-            if (sessionAttributes.in_progress){
-                delete sessionAttributes.in_progress;
-            }
-        }
-        let speakOutput, reprompt;
-        speakOutput = handlerInput.t('PROMPT_FOR_ACTION');
-        reprompt = handlerInput.t('REMPROMPT_FOR_ACTION');
-        return handlerInput.responseBuilder
-            .speak(speakOutput)
-            .reprompt(reprompt)
-            .getResponse();
-    }
-}
+    handle(handlerInput) {
+        // If they sign in with a name, we want to allow the user to continue in Conversations. Since Conversations will
+        // require a name if we use its dialog flows for the ChangeUserApi, we can reuse it (and keep the saving of
+        // "givenName" in one place) by delegating into those dialogs.
 
-const WhatsInMyOrderIntentHandler = {
-    canHandle(handlerInput) {
-        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'WhatsInMyOrderIntent'
-    },
-    handle(handlerInput){
-        // They are asking what's in their current order
-        const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
-        const {in_progress} = sessionAttributes;
-        let speakOutput, reprompt;
-        // they dont have an in progress order
-        if(!in_progress){
-            speakOutput = handlerInput.t('NO_CURRENT_ORDER', {
-                orderText: menu.generateOrderText(in_progress)
-            });
-            reprompt = handlerInput.t('NO_CURRENT_ORDER_REPROMPT');
-        } else {
-            speakOutput = handlerInput.t('CURRENT_ORDER', {
-                orderText: menu.generateOrderText(in_progress)
-            });
-            reprompt = handlerInput.t('CURRENT_ORDER_REPROMPT');
-        }
-        return handlerInput.responseBuilder
-            .speak(speakOutput)
-            .reprompt(reprompt)
-            .getResponse();
-    }
-}
- /**
- * AMAZON.NoIntentHandler. 
- * 
- * Used in response to 
- *  - being prompted to hear the daily specials
- *  - ordering a daily special
- *  
- * @param handlerInput {HandlerInput}
- * @returns {Response}
- */
-const NoIntentHandler = {
-    canHandle(handlerInput) {
-        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.NoIntent'
-    },
-    handle(handlerInput) {
-        let speakOutput, reprompt;
-        const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
-        // if we just prompted them for specials, ordering daily special, or customizing special pizza
-        if (sessionAttributes.state == states.PROMPTED_FOR_DAILY_SPECIALS || 
-                sessionAttributes.state == states.PROMPTED_TO_ORDER_DAILY_SPECIAL ||
-                sessionAttributes.state == states.PROMPTED_TO_ORDER_SPECIAL){
-            speakOutput = handlerInput.t('PROMPT_FOR_ACTION');
-            reprompt = handlerInput.t('REMPROMPT_FOR_ACTION');
-        } 
-        // if we prompted them to customize and they said no
-        if (sessionAttributes.state == states.PROMPTED_TO_ADD_TO_ORDER || 
-                sessionAttributes.state == states.PROMPTED_TO_CUSTOMIZE_SPECIAL_PIZZA){
-            _.defaults(sessionAttributes, {
-                orders: []
-            });
-            const {in_progress} = sessionAttributes;
-            sessionAttributes.orders.push({ 
-                date : new Date().toISOString(),
-                order: in_progress
-            });
-            delete sessionAttributes.in_progress;
-            speakOutput = handlerInput.t('PLACE_ORDER', {
-                orderText: menu.generateOrderText(in_progress)
-            });
-            reprompt = handlerInput.t('PLACE_ORDER_REPROMPT');
-        } 
-        return handlerInput.responseBuilder
-            .speak(speakOutput)
-            .reprompt(reprompt)
-            .getResponse();
-    }
-};
-const ContinueOrderIntentHandler = {
-    canHandle(handlerInput) {
-        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'ContinueOrderIntent'
-    },
-
-    /**
-     * ContinueOrderIntent handler. 
-     * 
-     * Triggered when the user has an existing order in their persisted attributes that hasnt been moved to orders
-     *
-     * @param handlerInput {HandlerInput}
-     * @returns {Response}
-     */
-    handle(handlerInput) {
-        // lets get the in_progress order
-        const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
-        const {in_progress} = sessionAttributes;
-        let orderText = menu.generateOrderText(in_progress);
-        let speakOutput, reprompt;
-        // let's repeat their order to confirm its still what they want
-        speakOutput = handlerInput.t('REPEAT_ORDER_AND_ADD_SOMETHING', { 
-            orderText : orderText
-        });
-        reprompt = handlerInput.t('REPEAT_ORDER_AND_ADD_SOMETHING_REPROMPT');
-        
-        return handlerInput.responseBuilder
-            .speak(speakOutput)
-            .reprompt(reprompt) 
-            .getResponse();
-    }
-};
-const OrderIntentHandler = {
-    canHandle(handlerInput) {
-        const request = handlerInput.requestEnvelope.request;
-        return request.type === 'IntentRequest' && request.intent.name === 'OrderIntent';
-    },
-    handle(handlerInput) {
-        console.log("In OrderIntentHandler");
-        const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
-        _.defaults(sessionAttributes, {
-            orders: []
-        });
-        const {in_progress} = sessionAttributes;
-        let orderText = menu.generateOrderText(in_progress);
-        sessionAttributes.orders.push({ 
-            date : new Date().toISOString(),
-            order: in_progress
-        });  
-        let speakOutput = handlerInput.t('PLACE_ORDER', {
-            orderText : orderText
-        });
-        let reprompt = handlerInput.t('PLACE_ORDER_REPROMPT');
-        return handlerInput.responseBuilder
-            .speak(speakOutput)
-            .reprompt(reprompt)
-            .getResponse();
-    }
-}
-const AddSomethingIntentHandler = {
-    canHandle(handlerInput) {
-        const request = handlerInput.requestEnvelope.request;
-        return request.type === 'IntentRequest' && request.intent.name === 'AddSomethingIntent';
-    },
-    /**
-     * The user asked to add something to their order. Depending on what they asked to add
-     * lets give them a list of options.
-     *
-     * @param handlerInput {HandlerInput}
-     * @returns {Response}
-     */
-    handle(handlerInput) {
-        console.log("In AddSomethingIntentHandler");
-        let speakOutput, reprompt;
-        const itemSlot = Alexa.getSlot(handlerInput.requestEnvelope, 'item');
-        const firstAuthority = _.first(_.get(itemSlot, 'resolutions.resolutionsPerAuthority'));
-        const item = _.first(_.get(firstAuthority, 'values')).value.name;
-        if (item === 'pizza'){
-            speakOutput = handlerInput.t('PIZZA_ORDER_OPTIONS');
-            reprompt = handlerInput.t('PIZZA_ORDER_OPTIONS_REPROMPT');
-        } else if (item === 'salad'){
-            speakOutput = handlerInput.t('SALAD_ORDER_OPTIONS',{
-                salads : menu.makeSpeakableList(menu.getSalads())
-            });
-            reprompt = handlerInput.t('SALAD_ORDER_OPTIONS_REPROMPT');
-        } else if (item === 'side'){
-            speakOutput = handlerInput.t('SIDE_ORDER_OPTIONS',{
-                sides : menu.makeSpeakableList(menu.getSides())
-            });
-            reprompt = handlerInput.t('SIDE_ORDER_OPTIONS_REPROMPT');
-        } else if (item === 'drink'){
-            speakOutput = handlerInput.t('DRINK_ORDER_OPTIONS',{
-                drinks : menu.makeSpeakableList(menu.getDrinks())
-            });
-            reprompt = handlerInput.t('DRINK_ORDER_OPTIONS_REPROMPT');
-        } else if (item === 'dessert'){
-            speakOutput = handlerInput.t('DESSERT_ORDER_OPTIONS',{
-                desserts : menu.makeSpeakableList(menu.getDesserts())
-            });
-            reprompt = handlerInput.t('DESSERT_ORDER_OPTIONS_REPROMPT');
-        } else {
-            speakOutput = handlerInput.t('UNRECOGONIZED_ITEM');
-            reprompt = handlerInput.t('UNRECOGONIZED_ITEM_REPROMPT');
-        }
-        return handlerInput.responseBuilder
-            .speak(speakOutput)
-            .reprompt(reprompt)
-            .getResponse();
-    }
-}
-const HearPizzaReferenceSpecialsIntentHandler = {
-    canHandle(handlerInput) {
-        const request = handlerInput.requestEnvelope.request;
-        return request.type === 'IntentRequest' && request.intent.name === 'HearPizzaReferenceSpecialsIntent';
-    },
-    /**
-     * User asks to hear the specials, prompt to hear details or add to order
-     *
-     * @param handlerInput {HandlerInput}
-     * @returns {Response}
-     */
-    handle(handlerInput) {
-        console.log("In HearPizzaReferenceSpecialsIntentHandler");
-        let speakOutput, reprompt;
-        // make a deep copy of the object and return a 'speakable' list
-        let specials = menu.makeSpeakableList(JSON.parse(JSON.stringify(menu.getPizzaReferenceSpecials())));
-        speakOutput = handlerInput.t('PIZZA_REFERENCE_SPECIALS', {
-            specials: specials
-        });
-        reprompt = handlerInput.t('PIZZA_REFERENCE_SPECIALS_REPROMPT');
-        const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
-        sessionAttributes.state = states.PROMPTED_TO_HEAR_BLUE_SHIFT_SPECIAL_DETAILS;
-        return handlerInput.responseBuilder
-            .speak(speakOutput)
-            .reprompt(reprompt)
-            .getResponse();
-    },
-};
-const HelpIntentHandler = {
-    canHandle(handlerInput) {
-        const request = handlerInput.requestEnvelope.request;
-        return request.type === 'IntentRequest' && request.intent.name === 'AMAZON.HelpIntent';
-    },
-    /**
-     * User asked for help
-     *
-     * @param handlerInput {HandlerInput}
-     * @returns {Response}
-     */
-    handle(handlerInput) {
-        console.log("In HelpIntentHandler");
-        let speakOutput, reprompt;
-       
-        speakOutput = handlerInput.t('HELP_PROMPT');
-        reprompt = handlerInput.t('GENERIC_REPROMPT');
-        return handlerInput.responseBuilder
-            .speak(speakOutput)
-            .reprompt(reprompt)
-            .getResponse();
-    },
-};
-const HearSpecialDetailsIntentHandler = {
-    canHandle(handlerInput) {
-        const request = handlerInput.requestEnvelope.request;
-        return request.type === 'IntentRequest' && request.intent.name === 'HearSpecialDetailsIntent';
-    },
-    /**
-     * User asks to hear the specials, prompt to hear details or add to order
-     * Since these utterances are the same for clarifying which special they want to customize, 
-     * we will check for that state as well
-     *
-     * @param handlerInput {HandlerInput}
-     * @returns {Response}
-     */
-    handle(handlerInput) {
-        console.log("In HearSpecialDetailsIntentHandler");
-        let speakOutput, reprompt;
-        // get the name of the special
-        const specialNameSlot = Alexa.getSlot(handlerInput.requestEnvelope, 'special');
-        const firstAuthority = _.first(_.get(specialNameSlot, 'resolutions.resolutionsPerAuthority'));
-        const specialName = _.first(_.get(firstAuthority, 'values')).value.name;
-
-        console.log(JSON.stringify(specialNameSlot));
-        console.log("heard [" + specialName + "] as the special name")
-        // if they didnt pass us a name and just asked for details 'on a special', lets prompt again for name
-        if (!specialName){
-            let specials = menu.makeSpeakableList(JSON.parse(JSON.stringify(menu.getPizzaReferenceSpecials())));
-            speakOutput = handlerInput.t('REPEAT_PIZZA_REFERENCE_SPECIALS_AND_GET_NAME', {
-                specials: specials
-            });
-            reprompt = handlerInput.t('REPEAT_PIZZA_REFERENCE_SPECIALS_AND_GET_NAME_REPROMPT');
+        if (_.get(handlerInput.requestEnvelope, 'request.dialogState') !== 'COMPLETED') {
+            // We'll elicit for the slot by delegating to the dialog model. While the prompts are in our dialog model,
+            // we aren't using "auto-delegation" to the dialog model here because it would also occur during
+            // Conversations turns, before the intent is sent to Conversations, rather than to the skill.
             return handlerInput.responseBuilder
-                .speak(speakOutput)
-                .reprompt(reprompt)
-                .getResponse()
-        }
-        // if they passed in a name, but its not a special
-        if (!menu.getPizzaReferenceSpecials().includes(specialName)){
-            let specials = menu.makeSpeakableList(JSON.parse(JSON.stringify(menu.getPizzaReferenceSpecials())));
-            speakOutput = handlerInput.t('REPEAT_PIZZA_REFERENCE_SPECIALS_AND_GET_NAME', {
-                specials: specials,
-                error: "Sorry, I dont recognize " + specialName + " as one of our specials."
-            });
-            reprompt = handlerInput.t('REPEAT_PIZZA_REFERENCE_SPECIALS_AND_GET_NAME_REPROMPT');
-            return handlerInput.responseBuilder
-                .speak(speakOutput)
-                .reprompt(reprompt)
-                .getResponse()
-
-        }
-        // if we get here, we have a valid special name
-        const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
-        // if we are re-prompting them for the special name and they indicated they wanted to customize
-        if (sessionAttributes.state == states.PROMPTED_TO_CUSTOMIZE_SPECIAL_PIZZA){
-            return handlerInput.responseBuilder
-                .addDirective({
-                    type: 'Dialog.DelegateRequest',
-                    target: 'AMAZON.Conversations',
-                    period: {
-                        until: 'EXPLICIT_RETURN' 
-                    },
-                    updatedRequest: {
-                        type: 'Dialog.InputRequest',
-                        input: {
-                            name: 'customizePizzaReferenceSpecial',
-                            slots: {
-                                name: {
-                                    name: 'name',
-                                    value: specialName
-                                }
-                            }
-                        }
-                    }
-                })
+                .addDelegateDirective()
                 .getResponse();
         }
-        const special = menu.getSpecialPizzaDetails(specialName);
-        speakOutput = handlerInput.t('PIZZA_REFERENCE_SPECIAL_DETAILS_PROMPT_TO_ORDER', {
-            name : special.name,
-            qty : special.qty,
-            size : special.pizza.size,
-            crust : special.pizza.crust,
-            cheese : special.pizza.cheese,
-            toppings : menu.makeSpeakableList(special.pizza.toppingsList),
-            cost: special.cost
-        });
-        reprompt = handlerInput.t('PIZZA_REFERENCE_SPECIAL_DETAILS_PROMPT_TO_ORDER_REPROMPT', {
-            name: special.name
-        });
-        sessionAttributes.state = states.PROMPTED_TO_ORDER_SPECIAL;
-        sessionAttributes.specialName = specialName;
-        return handlerInput.responseBuilder
-            .speak(speakOutput)
-            .reprompt(reprompt)
-            .getResponse();
-    },
-};
-const BuildMyOwnPizzaIntentHandler = {
-    canHandle(handlerInput) {
-        const request = handlerInput.requestEnvelope.request;
-        return request.type === 'IntentRequest' && request.intent.name === 'BuildMyOwnPizzaIntent';
-    },
-    handle(handlerInput) {
-        console.log("In BuildMyOwnPizzaIntentHandler");
 
-        // get the name of the special
-        const countSlot = Alexa.getSlot(handlerInput.requestEnvelope, 'count');
-        if ( countSlot && countSlot.value ){
-            if (countSlot.value == 2){
-                return handlerInput.responseBuilder
-                    .addDirective({
-                        type: 'Dialog.DelegateRequest',
-                        target: 'AMAZON.Conversations',
-                        period: {
-                            until: 'EXPLICIT_RETURN' 
-                        },
-                        updatedRequest: {
-                            type: 'Dialog.InputRequest',
-                            input: {
-                                name: 'startTwoToppingPizzaOrder'
-                            }
-                        }
-                    })
-                    .getResponse();
-
-            }
-        }
-        const sizeSlot = Alexa.getSlot(handlerInput.requestEnvelope, 'size');
-        if ( sizeSlot && sizeSlot.value ){
-            return handlerInput.responseBuilder
-                .addDirective({
-                    type: 'Dialog.DelegateRequest',
-                    target: 'AMAZON.Conversations',
-                    period: {
-                        until: 'EXPLICIT_RETURN' 
-                    },
-                    updatedRequest: {
-                        type: 'Dialog.InputRequest',
-                        input: {
-                            name: 'orderSpecificSizePizza',
-                            slots: {
-                                name: {
-                                    name: 'size',
-                                    value: sizeSlot.value
-                                }
-                            }
-                        }
-                    }
-                })
-                .getResponse();
-        }
+        // If we have a name we'll let the user "free" into the dialogs by switching to Conversations mode. We can
+        // keep "saving the user name" in one place by having our first Conversations dialog be the shortcut that will
+        // allow a user to update their name in Conversations mode with the ChangeNameApi.
         return handlerInput.responseBuilder
             .addDirective({
-                type: 'Dialog.DelegateRequest',
-                target: 'AMAZON.Conversations',
-                period: {
-                    until: 'EXPLICIT_RETURN' 
+                'type': 'Dialog.DelegateRequest',
+                'target': 'AMAZON.Conversations',
+                'period': {
+                    'until': 'EXPLICIT_RETURN'
                 },
-                updatedRequest: {
-                    type: 'Dialog.InputRequest',
-                    input: {
-                        name: 'startPizzaOrder'
+                'updatedRequest': {
+                    'type': 'Dialog.InputRequest',
+                    'input': {
+                        'name': 'InvokeChangeUserWithNameUtteranceSet',
+                        'slots': {
+                            'name': Alexa.getSlot(handlerInput.requestEnvelope, 'name')
+                        }
                     }
                 }
             })
             .getResponse();
     }
 };
-const GetHoursIntentHandler = {
-    canHandle(handlerInput) {
-        const request = handlerInput.requestEnvelope.request;
-        return request.type === 'IntentRequest' && request.intent.name === 'GetHoursIntent';
-    },
-    async handle(handlerInput) {
-        const { requestEnvelope, serviceClientFactory, responseBuilder } = handlerInput;
-        const consentToken = requestEnvelope.context.System.user.permissions && requestEnvelope.context.System.user.permissions.consentToken;
-        
-        if (!consentToken) {
-          return responseBuilder
-            .speak(handlerInput.t('PERMISSIONS_ERROR'))
-            .withAskForPermissionsConsentCard(['read::alexa:device:all:address'])
-            .getResponse();
-        }
-        try {
-          const { deviceId } = requestEnvelope.context.System.device;
-          const deviceAddressServiceClient = serviceClientFactory.getDeviceAddressServiceClient();
-          const address = await deviceAddressServiceClient.getFullAddress(deviceId);
-       
-          let response;
-          if (address.addressLine1 === null && address.stateOrRegion === null) {
-            response = responseBuilder.speak(handlerInput.t('NO_ADDRESS_SET')).getResponse();
-          } else {
-            const city = address.city;
-            let prompt = handlerInput.t('CLOSEST_LOCATION', {
-                city: city
-            });
-            let reprompt = handlerInput.t('GENERIC_REPROMPT')
-            response = responseBuilder.speak(prompt)
-            .reprompt(reprompt)
-            .getResponse();
-          }
-          return response;
-        } catch (error) {
-          if (error.name !== 'ServiceError') {
-            const response = responseBuilder.speak(handlerInput.t('ERROR')).getResponse();
-            return response;
-          }
-          throw error;
-        }
-      }
-};
-// *****************************************************************************
-// This is the default intent handler to handle all intent requests.
-const OtherIntentHandler = {
-    canHandle(handlerInput) {
-        const request = handlerInput.requestEnvelope.request;
-        return request.type === 'IntentRequest' && request.intent.name !== 'GetSpecialtyPizzaListIntent' && request.intent.name !== 'BuildMyOwnPizzaIntent';
-    },
 
-    /**
-     * If user says something which is not handled by the specific intent handlers, then the request should be handled by this default
-     * Intent handler. This prompts the user to select one of our defined Intents. For now, GetSpecialtyPizzaListIntent and BuildMyOwnPizzaIntent
-     * 
-     * @param handlerInput {HandlerInput}
-     * @returns {Response}
-     */
-
+const RemoveNameIntentHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'RemoveNameIntent';
+    },
     handle(handlerInput) {
-        const intentName = handlerInput.requestEnvelope.request.intent.name;
-        console.log('In catch all intent handler. Intent invoked: ' + intentName);
-        const speechOutput = handlerInput.t('GENERIC_REPROMPT');
-
-        return handlerInput.responseBuilder
-            .speak(speechOutput)
-            .reprompt(speechOutput)
-            .getResponse();
-    },
-};
-const StopIntentHandler = {
-    canHandle(handlerInput) {
-        const request = handlerInput.requestEnvelope.request;
-        return request.type === 'IntentRequest' && request.intent.name === 'AMAZON.StopIntent';
-    },
-    handle(handlerInput){
-        let speechOutput = handlerInput.t('EXIT');
-        return handlerInput.responseBuilder
-            .speak(speechOutput)
-            .getResponse();
-    }
-}
-const CancelIntentHandler = {
-    canHandle(handlerInput) {
-        const request = handlerInput.requestEnvelope.request;
-        return request.type === 'IntentRequest' && request.intent.name === 'AMAZON.CancelIntent';
-    },
-    handle(handlerInput){
-        let speechOutput = handlerInput.t('PROMPT_FOR_ACTION');
-        let reprompt = handlerInput.t('GENERIC_REPROMPT');
-        return handlerInput.responseBuilder
-            .speak(speechOutput)
-            .reprompt(reprompt)
-            .getResponse();
-    }
-}
-// *****************************************************************************
-// Alexa Conversations API request handlers. Called by the Alexa Conversations platform when AMAZON.Conversations is the
-// focused dialog manager. These can instead be specified using the private SDK with execute() methods and the skill
-// builder addApiRequestHandler(). To work with the public SDK, these are written as generic request handlers.
-
-const OrderPizza = {
-    canHandle(handlerInput) {
-        return requestUtils.isApiRequest(handlerInput, 'OrderPizza');
-    },
-
-    /**
-     * OrderPizza API
-     * Consumes: size, crust, cheese and a list of toppings
-     * Returns: Valid custom pizza order from Alexa Conversations
-     *
-     * @param handlerInput {HandlerInput}
-     * @return {Promise<Response>}
-     */
-    handle(handlerInput) {
-        const apiArguments = requestUtils.getApiArguments(handlerInput);
         const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
-        sessionAttributes.in_progress = {pizza : apiArguments};
+        delete sessionAttributes.givenName;
 
-        return {
-            directives : [{
-                type: 'Dialog.DelegateRequest',
-                target: 'skill',
-                period: {
-                    until: 'EXPLICIT_RETURN'
-                },
-                updatedRequest: {
-                    type: 'IntentRequest',
-                    intent: {
-                        name: 'OrderIntent',
-                    }
-                }}],
-                apiResponse :{}
-            }
-        }
-};
-const GetPizzaReferenceSpecialDetails = {
-    canHandle(handlerInput) {
-        return requestUtils.isApiRequest(handlerInput, 'GetPizzaReferenceSpecialDetails');
-    },
-    /**
-     * Returns the special pizza detail from the menu
-     *
-     * @param handlerInput {HandlerInput}
-     * @returns {Promise<Response>}
-     */
-    handle(handlerInput) {
-        console.log("In GetPizzaReferenceSpecialDetails API Handler");
-        const apiArguments = requestUtils.getApiArguments(handlerInput);
-        let special = menu.getSpecialPizzaDetails(apiArguments.name);
-        return {
-            apiResponse: {
-                special
-            }
-         };
+        return handlerInput.responseBuilder
+            .speak(handlerInput.t('REMOVED_NAME'))
+            .reprompt(handlerInput.t('NO_NAME_PROMPT'))
+            .getResponse();
     }
 };
-const GetRelativeFeedingSize = {
+
+/**
+ * FallbackIntent triggers when a customer says something that doesn't map to any intents in your skill, while
+ * skill is the dialog manager controlling the session (we're not in Alexa Conversations). This handler will also catch
+ * requests for the UtteranceTrainingIntent.
+ *
+ * The UtteranceTrainingIntent contains samples that are the union of Alexa Conversations utterance sets that aren't
+ * already contained in the interaction model. This is because the interaction model is the source of truth for training
+ * the speech recognition for the skill: if we didn't specify these other utterances, our skill would bias toward
+ * recognizing all brief speech as first names, for instance: since AMAZON.FallbackIntent is lower confidence than an
+ * "okay" match to a defined interaction model sample utterance, and our skill defines intents dealing with first names.
+ * Ultimately, this should be done behind-the-scenes from the Conversations model, but for now, adding the utterances
+ * both places ensures good speech recognition.
+ *
+ * Note: it's expected that this is the last intent handler in the handlers list, so it doesn't preempt more specific
+ * intent handlers.
+ **/
+const FallbackIntentHandler = {
     canHandle(handlerInput) {
-        return requestUtils.isApiRequest(handlerInput, 'GetRelativeFeedingSize');
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest';
     },
-    /**
-     * Returns the special pizza detail from the menu
-     *
-     * @param handlerInput {HandlerInput}
-     * @returns {Promise<Response>}
-     */
     handle(handlerInput) {
-        console.log("In GetRelativeFeedingSize API Handler");
-        const apiArguments = requestUtils.getApiArguments(handlerInput);
-        let feedingSize = menu.getFeedingSize(apiArguments.size);
+        // We expect to handle utterances related to getting the user name: we can use the intent handlers as a loop to
+        // get the user to give us one (approximating a "sign in/out" or other separate locking loop function): if we
+        // get an utterance outside our skill-handled intents, we can check for a name in the session: if we don't have
+        // one, we can prompt for one; if we have one, we can delegate the incoming utterance unchanged to the
+        // Conversations handlers.
+        const { givenName } = handlerInput.attributesManager.getSessionAttributes();
+
+        if (!givenName) {
+            const speechOutput = handlerInput.t('NO_NAME_PROMPT')
+            return handlerInput.responseBuilder
+                .speak(speechOutput)
+                .reprompt(speechOutput)
+                .getResponse();
+        }
+
+        // We have a givenName, so switch to the Conversations handlers and pass this utterance unchanged to
+        // start off. (Since we delegate into Conversations mode as part of handling GiveNameIntent, and only switch
+        // back to skill-intent mode when removing the name, this is not likely to see much, if any, traffic.)
+
+        return handlerInput.responseBuilder
+            .addDirective({
+                'type': 'Dialog.DelegateRequest',
+                'target': 'AMAZON.Conversations',
+                'period': {
+                    'until': 'EXPLICIT_RETURN'
+                }
+            })
+            .getResponse();
+    }
+};
+
+const HelpIntentHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.HelpIntent';
+    },
+    handle(handlerInput) {
+        // Since this should only be hit while the skill is in the "intent handlers" mode - that is, the user is not
+        // 'signed in' - we use a sign-in-related prompt in response to "help" when this intent is hit.
+        return handlerInput.responseBuilder
+            .speak(handlerInput.t('HELP_INTENT'))
+            .reprompt(handlerInput.t('NO_NAME_PROMPT'))
+            .getResponse();
+    }
+};
+
+const CancelAndStopIntentHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+            && (Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.CancelIntent'
+                || Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.StopIntent');
+    },
+    handle(handlerInput) {
+        const speakOutput = handlerInput.t('EXIT');
+
+        return handlerInput.responseBuilder
+            .speak(speakOutput)
+            .withShouldEndSession(true)
+            .getResponse();
+    }
+};
+
+// *****************************************************************************
+// Conversations API handlers
+// *****************************************************************************
+
+const AddCustomPizzaApiHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'Dialog.API.Invoked'
+            && handlerInput.requestEnvelope.request.apiRequest.name === 'AddCustomPizzaApi';
+    },
+    handle(handlerInput) {
+        const apiArguments = _.get(handlerInput, 'requestEnvelope.request.apiRequest.arguments');
+
+        const sizeSlot = _.get(handlerInput, 'requestEnvelope.request.apiRequest.slots.size');
+        const resolvedSizeId = util.getSlotResolvedId(sizeSlot);
+
+        const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+        _.defaultsDeep(sessionAttributes, { inProgress: { pizzas: [] } });
+
+        const pizza = apiArguments;
+        pizza.cost = PIZZA_COSTS_BY_SIZE_ID[resolvedSizeId];
+        sessionAttributes.inProgress.pizzas.push(pizza);
+
+        // The Conversations API response contains an AMAZON.Ordinal (stringified number). APLA does not consume an
+        // associated datatype for the string field value, so it is spoken as its numerical value during the audio
+        // response. We mention it in the response to ensure it will be carried-over to an anaphoric "remove" utterance,
+        // as specified in the AddThenRemovePizza sample dialog.
         return {
             apiResponse: {
-                feedingSize
+                pizza: pizza,
+                ordinal: `${sessionAttributes.inProgress.pizzas.length}`
             }
         };
     }
 };
-const OrderTwoToppingPizza = {
+
+const GetSpecialtyPizzaDetailsApiHandler = {
     canHandle(handlerInput) {
-        return requestUtils.isApiRequest(handlerInput, 'OrderTwoToppingPizza');
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'Dialog.API.Invoked'
+            && handlerInput.requestEnvelope.request.apiRequest.name === 'GetSpecialtyPizzaDetailsApi';
     },
-    /**
-     * Returns the special pizza detail from the menu
-     *
-     * @param handlerInput {HandlerInput}
-     * @returns {Promise<Response>}
-     */
     handle(handlerInput) {
-        console.log("In OrderTwoToppingPizza API Handler");
-        const apiArguments = requestUtils.getApiArguments(handlerInput);
-        const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
-        apiArguments["cheese"] = "normal";
-        apiArguments["toppingsList"] = [apiArguments.toppingone, apiArguments.toppingtwo];
-        sessionAttributes.in_progress = {pizza : apiArguments};
+        const specialtyPizzaNameSlot = _.get(handlerInput,
+            'requestEnvelope.request.apiRequest.slots.specialtyPizzaName');
+        const specialtyPizzaNameId = util.getSlotResolvedId(specialtyPizzaNameSlot);
+
+        if (specialtyPizzaNameId && SPECIALTY_PIZZAS_BY_ID[specialtyPizzaNameId]) {
+            const pizza = SPECIALTY_PIZZAS_BY_ID[specialtyPizzaNameId];
+            pizza.nullableSpecialtyPizzaName = util.getSlotResolvedValue(specialtyPizzaNameSlot);
+            return {
+                apiResponse: pizza
+            };
+        }
+
+        // Give an empty response to cue the mapped response template we didn't find one.
         return {
-            directives : [{
-                type: 'Dialog.DelegateRequest',
-                target: 'skill',
-                period: {
-                    until: 'EXPLICIT_RETURN'
-                },
-                updatedRequest: {
-                    type: 'IntentRequest',
-                    intent: {
-                        name: 'OrderIntent',
-                    }
-                }}],
-                apiResponse :{}
+            apiResponse: {}
+        };
+    }
+};
+
+const AddSpecialtyPizzaApiHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'Dialog.API.Invoked'
+            && handlerInput.requestEnvelope.request.apiRequest.name === 'AddSpecialtyPizzaApi';
+    },
+    handle(handlerInput) {
+        const specialtyPizzaNameSlot = _.get(handlerInput,
+            'requestEnvelope.request.apiRequest.slots.specialtyPizzaName');
+        const specialtyPizzaNameId = util.getSlotResolvedId(specialtyPizzaNameSlot);
+
+        if (!specialtyPizzaNameId || !SPECIALTY_PIZZAS_BY_ID[specialtyPizzaNameId]) {
+            return {
+                apiResponse: {}
             }
-    }
-};
-const OrderCustomizedPizzaReferenceSpecial = {
-    canHandle(handlerInput) {
-        return requestUtils.isApiRequest(handlerInput, 'OrderCustomizedPizzaReferenceSpecial');
-    },
-    /**
-     * Returns the special pizza detail from the menu
-     *
-     * @param handlerInput {HandlerInput}
-     * @returns {Promise<Response>}
-     */
-    async handle(handlerInput) {
-        console.log("In OrderCustomizedPizzaReferenceSpecial API Handler");
-        const apiArguments = requestUtils.getApiArguments(handlerInput);
-        const sessionAttributes = await handlerInput.attributesManager.getSessionAttributes();
-        const special = {};
-        special.pizza = {};
-        special.name = apiArguments.name;
-        special.qty = apiArguments.qty;
-        special.pizza.size = apiArguments.size;
-        special.pizza.cheese = apiArguments.cheese;
-        special.pizza.crust = apiArguments.crust;
-        special.pizza.toppingsList = apiArguments.toppings;
-        special.pizza.cost = menu.getSpecialCost(special.name);
-        sessionAttributes.in_progress = special;
+        }
+
+        const pizza = SPECIALTY_PIZZAS_BY_ID[specialtyPizzaNameId];
+        pizza.nullableSpecialtyPizzaName = util.getSlotResolvedValue(specialtyPizzaNameSlot);
+
+        const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+        _.defaultsDeep(sessionAttributes, { inProgress: { pizzas: [] }});
+        sessionAttributes.inProgress.pizzas.push(pizza);
+
+        const latestOrdinalString = `${sessionAttributes.inProgress.pizzas.length}`;
         return {
-            directives : [{
-                type: 'Dialog.DelegateRequest',
-                target: 'skill',
-                period: {
-                    until: 'EXPLICIT_RETURN'
-                },
-                updatedRequest: {
-                    type: 'IntentRequest',
-                    intent: {
-                        name: 'OrderIntent',
-                    }
-                }}],
-                apiResponse :{}
-        }
+            apiResponse: latestOrdinalString
+        };
     }
 };
-const MenuQuestion = {
+
+const GetInProgressOrderApiHandler = {
     canHandle(handlerInput) {
-        return requestUtils.isApiRequest(handlerInput, 'MenuQuestion');
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'Dialog.API.Invoked'
+            && handlerInput.requestEnvelope.request.apiRequest.name === 'GetInProgressOrderApi';
     },
-    /**
-     * Returns the special pizza detail from the menu
-     *
-     * @param handlerInput {HandlerInput}
-     * @returns {Promise<Response>}
-     */
     handle(handlerInput) {
-        console.log("In API handler MenuQuestion")
-        const apiArguments = requestUtils.getApiArguments(handlerInput);
-        const slots = requestUtils.getApiSlots(handlerInput);
-        console.log(JSON.stringify(apiArguments));
-        console.log(JSON.stringify(slots));
-        let optionValue = apiArguments.option;
-        let optionResponse = "Your choices of ";
-        if (slots){
-             optionValue = slots.option.resolutions.resolutionsPerAuthority[0].values[0].value.name;
-        }
-        if (optionValue === 'size'){
-            optionResponse += 'size are small, medium, large, and extra large';
-        } else if (optionValue === 'crust'){
-            optionResponse += 'crust are thin crust, deep dish, regular and brooklyn style';
-        } else if (optionValue === 'cheese'){
-            optionResponse += 'cheese are no cheese, light, normal, extra cheese or double cheese';
-        }
-        optionResponse += ", what would you like"
-    
+        const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+
+        const nullablePizzas = _.get(sessionAttributes, 'inProgress.pizzas');
+
         return {
             apiResponse: {
-                optionResponse
+                pizzas: nullablePizzas
             }
         };
     }
 }
+
+const RemovePizzaApiHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'Dialog.API.Invoked'
+            && handlerInput.requestEnvelope.request.apiRequest.name === 'RemovePizzaApi';
+    },
+    handle(handlerInput) {
+        const apiArguments = _.get(handlerInput, 'requestEnvelope.request.apiRequest.arguments');
+
+        const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+
+        const nullablePizzas = _.get(sessionAttributes, 'inProgress.pizzas');
+        if (!nullablePizzas) {
+            // There's no order in progress: cue AC to a spoken error response per our saved APLA.
+            return {
+                apiResponse: {
+                    badRequestType: REMOVE_PIZZA_BAD_REQUEST_TYPES.NO_ORDER_IN_PROGRESS
+                }
+            };
+        }
+
+        if (apiArguments.ordinal < 0 || apiArguments.ordinal > nullablePizzas.length) {
+            // There's fewer pizzas in the array than the given ordinal: cue AC to a spoken error response.
+            return {
+                apiResponse: {
+                    badRequestType: REMOVE_PIZZA_BAD_REQUEST_TYPES.TOO_FEW_PIZZAS_FOR_ORDINAL
+                }
+            };
+        }
+
+        const arrayIndex = Number.parseInt(apiArguments.ordinal) - 1;
+        const removedPizza = nullablePizzas[arrayIndex];
+        sessionAttributes.inProgress.pizzas.splice(arrayIndex, 1);
+
+        return {
+            apiResponse: {
+                removedPizza: removedPizza
+            }
+        };
+    }
+};
+
+const PlaceOrderApiHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'Dialog.API.Invoked'
+            && handlerInput.requestEnvelope.request.apiRequest.name === 'PlaceOrderApi';
+    },
+    handle(handlerInput) {
+        const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+
+        const inProgressOrder = _.get(sessionAttributes, 'inProgress');
+        if (!inProgressOrder) {
+            // Return empty Order to cue error response.
+            return {
+                apiResponse: {}
+            }
+        }
+
+        _.defaults(sessionAttributes, { placedOrders: [] });
+        sessionAttributes.placedOrders.push(inProgressOrder);
+        inProgressOrder.cost = getTotalCost(inProgressOrder);
+        delete sessionAttributes.inProgress;
+
+        return {
+            apiResponse: inProgressOrder
+        };
+    }
+};
+
+const ChangeNameApiHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'Dialog.API.Invoked'
+            && handlerInput.requestEnvelope.request.apiRequest.name === 'ChangeNameApi';
+    },
+    handle(handlerInput) {
+        // The name slot currently loses its resolved capitalization after being delegated with correct capitalization.
+        // We can fix it for neatness. Since the resolved slot value doesn't add any data, we can just use the basic
+        // string version from the arguments.
+
+        const apiArguments = _.get(handlerInput, 'requestEnvelope.request.apiRequest.arguments');
+        const name = apiArguments.name;
+        const initialCapitalName = name.charAt(0).toUpperCase() + name.slice(1);
+
+        const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+        sessionAttributes.givenName = initialCapitalName;
+
+        return {
+            apiResponse: {
+                name: initialCapitalName
+            }
+        };
+    }
+};
+
+const DelegateToRemoveNameIntentApiHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'Dialog.API.Invoked'
+            && handlerInput.requestEnvelope.request.apiRequest.name === 'DelegateToRemoveNameIntentApi';
+    },
+    handle(handlerInput) {
+        // If we remove the name out, we want to be back in the loop to ensure we get a new name from the user, so we
+        // delegate back to the intent handlers. We can actually remove the name recorded in the session attributes here
+        // or in the target intent handler. For simplicity/reuse, we'll rely on the intent handler's existing logic.
+        return handlerInput.responseBuilder
+            .addDirective({
+                'type': 'Dialog.DelegateRequest',
+                'target': 'skill',
+                'period': {
+                    'until': 'EXPLICIT_RETURN'
+                },
+                'updatedRequest': {
+                    'type': 'IntentRequest',
+                    'intent': {
+                        'name': 'RemoveNameIntent'
+                    }
+                }
+            })
+            .getResponse();
+    }
+};
+
 // *****************************************************************************
-// Generic session-ended handling logging the reason received, to help debug in error cases.
+// Session ended request handler
+// *****************************************************************************
 
 const SessionEndedRequestHandler = {
     canHandle(handlerInput) {
-        return handlerInput.requestEnvelope.request.type === 'SessionEndedRequest';
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'SessionEndedRequest';
     },
     handle(handlerInput) {
+        // Add any custom end-of-session clean-up here.
         console.log(`Session ended with reason: ${handlerInput.requestEnvelope.request.reason}`);
         return handlerInput.responseBuilder.getResponse();
     },
 };
 
 // *****************************************************************************
-// Generic error handling to capture any syntax or routing errors. If you receive an error
-// stating the request handler chain is not found, you have not implemented a handler for
-// the intent being invoked or included it in the skill builder below.
+// Error handler
+// *****************************************************************************
 
 const ErrorHandler = {
     canHandle() {
@@ -1005,18 +505,16 @@ const ErrorHandler = {
         console.error(`Error stack`, JSON.stringify(error.stack));
         console.error(`Error`, JSON.stringify(error));
 
-        let speechOutput, reprompt;
-        speechOutput = handlerInput.t('GENERIC_REPROMPT');
-        reprompt = handlerInput.t('REPROMPT_FOR_ACTION');
         return handlerInput.responseBuilder
-            .speak(speechOutput)
-            .reprompt(reprompt)
+            .speak(handlerInput.t('ERROR'))
+            .reprompt(handlerInput.t('GENERIC_REPROMPT'))
             .getResponse();
     },
 };
 
 // *****************************************************************************
-// These simple interceptors just log the incoming and outgoing request bodies to assist in debugging.
+// Interceptors
+// *****************************************************************************
 
 const LogRequestInterceptor = {
     process(handlerInput) {
@@ -1029,6 +527,7 @@ const LogResponseInterceptor = {
         console.log(`RESPONSE = ${JSON.stringify(response)}`);
     },
 };
+
 const LocalizationInterceptor = {
     process(handlerInput) {
         i18next
@@ -1038,7 +537,7 @@ const LocalizationInterceptor = {
                 resources: resources,
                 returnObjects: true
             });
- 
+
         handlerInput.t = (key, opts) => {
             const value = i18next.t(key, {...{interpolation: {escapeValue: false}}, ...opts});
             if (Array.isArray(value)) {
@@ -1050,39 +549,40 @@ const LocalizationInterceptor = {
     }
 };
 
+const getTotalCost = (order) => {
+    let orderCost = 0;
+    if (order.pizzas) {
+        orderCost += order.pizzas.map(pizza => pizza.cost)
+            .reduce((total, pizzaCost) => total + pizzaCost, 0);
+    }
+    return orderCost;
+};
+
 // *****************************************************************************
 // The SkillBuilder acts as the entry point for your skill, routing all request and response
 // payloads to the handlers above. Make sure any new handlers or interceptors you've
 // defined are included below. The order matters in lists: they're processed top to bottom.
 module.exports.handler = Alexa.SkillBuilders.standard()
-    .addRequestHandlers(        
+    .addRequestHandlers(
         LaunchHandler,
-        YesIntentHandler,
-        NoIntentHandler,
-        OrderIntentHandler,
-        StartOverIntentHandler,
-        AddSomethingIntentHandler,
-        StopIntentHandler,
-        CancelIntentHandler,
+        GiveNameIntentHandler,
+        RemoveNameIntentHandler,
+        CancelAndStopIntentHandler,
         HelpIntentHandler,
-        WhatsInMyOrderIntentHandler,
-        SessionEndedRequestHandler,
-        GetHoursIntentHandler,
-        ContinueOrderIntentHandler,
-        HearPizzaReferenceSpecialsIntentHandler,
-        HearSpecialDetailsIntentHandler,
-        AddPizzaReferenceSpecialToOrderIntentHandler,
-        BuildMyOwnPizzaIntentHandler,
-        OtherIntentHandler,
-        OrderPizza,
-        OrderTwoToppingPizza,
-        MenuQuestion,
-        GetRelativeFeedingSize,
-        GetPizzaReferenceSpecialDetails,
-        OrderCustomizedPizzaReferenceSpecial)
+        FallbackIntentHandler,
+
+        AddCustomPizzaApiHandler,
+        GetSpecialtyPizzaDetailsApiHandler,
+        AddSpecialtyPizzaApiHandler,
+        GetInProgressOrderApiHandler,
+        RemovePizzaApiHandler,
+        PlaceOrderApiHandler,
+        ChangeNameApiHandler,
+        DelegateToRemoveNameIntentApiHandler,
+
+        SessionEndedRequestHandler)
     .addErrorHandlers(ErrorHandler)
     .addRequestInterceptors(LogRequestInterceptor, LocalizationInterceptor)
     .addResponseInterceptors(LogResponseInterceptor)
-    .withAutoCreateTable(true)
-    .withCustomUserAgent('reference-skills/pizza-reference/v1')
+    .withCustomUserAgent('reference-skills/pizza-reference/v1.1')
     .lambda();

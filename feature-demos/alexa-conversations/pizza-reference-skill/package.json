@@ -1,7 +1,7 @@
 {
   "name": "pizza-reference-skill",
-  "version": "1.0.0",
-  "description": "Example Alexa skill build in Alexa Conversations showing dialog design and interoperability",
+  "version": "1.1.0",
+  "description": "Example Alexa skill built with Alexa Conversations showing dialog design and interoperability.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
