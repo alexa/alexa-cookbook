@@ -15,7 +15,7 @@ const TIMER_FUNCTION = getAnnouncementTimer;
 function getAnnouncementTimer(handlerInput, duration) {
     return {
         duration: duration,
-        label: handlerInput.t('ANNOUNCEMENT_TIMER_TITLE_MSG'),
+        timerLabel: handlerInput.t('ANNOUNCEMENT_TIMER_TITLE_MSG'),
         creationBehavior: {
             displayExperience: {
                 visibility: 'VISIBLE'
@@ -39,7 +39,7 @@ function getAnnouncementTimer(handlerInput, duration) {
 function getCustomTaskLaunchTimer(handlerInput, duration) {
     return {
         duration: duration,
-        label: handlerInput.t('TASK_TIMER_TITLE_MSG'),
+        timerLabel: handlerInput.t('TASK_TIMER_TITLE_MSG'),
         creationBehavior: {
             displayExperience: {
                 visibility: 'VISIBLE'
@@ -70,7 +70,7 @@ function getCustomTaskLaunchTimer(handlerInput, duration) {
 function getPredefinedTaskLaunchTimer(handlerInput, duration) {
     return {
         duration: duration,
-        label: handlerInput.t('TASK_TIMER_TITLE_MSG'),
+        timerLabel: handlerInput.t('TASK_TIMER_TITLE_MSG'),
         creationBehavior: {
             displayExperience: {
                 visibility: 'VISIBLE'
