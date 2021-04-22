@@ -26,8 +26,8 @@ async function notify(mediaEventName, mediaEventTime, mediaEventProvider) {
     return status;
 }
 
-function getProactiveOptions(token, postLength){
-
+function getProactiveOptions(token, postData){
+    const size = (new TextEncoder).encode(postData).byteLength;
     return {
         hostname: 'api.amazonalexa.com',  // api.eu.amazonalexa.com (Europe) api.fe.amazonalexa.com (Far East)
         port: 443,
@@ -35,7 +35,7 @@ function getProactiveOptions(token, postLength){
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Content-Length': postLength,
+            'Content-Length': size,
             'Authorization' : 'Bearer ' + token
         }
     };
@@ -97,8 +97,9 @@ function getMediaEvent(mediaEventName, mediaEventTime, mediaEventProvider) {
 
 // ----------------------------------------------------------------------------
 
-function getTokenOptions(postLength){
+function getTokenOptions(postData){
     // const TokenPostData = getTokenPostData();
+    const size = (new TextEncoder).encode(postData).byteLength;
     return {
         hostname: 'api.amazon.com',
         port: 443,
@@ -106,7 +107,7 @@ function getTokenOptions(postLength){
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
-            'Content-Length': postLength // TokenPostData.length
+            'Content-Length': size
         }
     }
 }
@@ -118,7 +119,7 @@ function getTokenPostData() {
 function getToken() {
     return new Promise(resolve => {
         const TokenPostData = getTokenPostData();
-        const req = https.request(getTokenOptions(TokenPostData.length), (res) => {
+        const req = https.request(getTokenOptions(TokenPostData), (res) => {
             res.setEncoding('utf8');
             let returnData = '';
 
@@ -146,7 +147,7 @@ function sendEvent(token, mediaEventName, mediaEventTime, mediaEventProvider) {
 
         // console.log(`\nProactivePostData\n${JSON.stringify(JSON.parse(ProactivePostData), null, 2)}\n-----------`);
 
-        const ProactiveOptions = getProactiveOptions(token, ProactivePostData.length);
+        const ProactiveOptions = getProactiveOptions(token, ProactivePostData);
         // console.log(`ProactiveOptions\n${JSON.stringify(ProactiveOptions, null, 2)}`);
 
         const req = https.request(ProactiveOptions, (res) => {
