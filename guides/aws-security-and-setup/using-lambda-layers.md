@@ -6,7 +6,7 @@ You can check out the documentation [here](https://docs.aws.amazon.com/lambda/la
 
 ## How do I get my skill to use a layer?
 
-You can build your own layer, or use a public layer.  The ASK SDK can be found in the layers described [here](../../resources/lambda-layers/ask-sdk-lambda-layers.md).
+You can build your own layer, or use a public layer.  The ASK SDK can be found in the layers described [here](../../guides/lambda-layers/ask-sdk-lambda-layers.md).
 
 If you use one of the ASK sample skills found in the Serverless Application Repository published by "Alexa Skills Kit", it will use layers, so once you deploy the application you're all set!
 
