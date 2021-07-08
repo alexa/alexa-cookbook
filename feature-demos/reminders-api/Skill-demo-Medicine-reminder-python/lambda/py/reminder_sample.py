@@ -19,7 +19,7 @@ from ask_sdk_core.utils import is_intent_name, is_request_type
 from ask_sdk_core.api_client import DefaultApiClient
 from ask_sdk_core.skill_builder import SkillBuilder, CustomSkillBuilder
 from ask_sdk_model.services.reminder_management import (
-    Trigger, TriggerType, AlertInfo ,SpokenInfo, SpokenText, PushNotification, PushNotificationStatus, ReminderRequest, Recurrence, RecurrenceFreq)
+    Trigger, TriggerType, AlertInfo, AlertInfoSpokenInfo, SpokenText, PushNotification, PushNotificationStatus, ReminderRequest, Recurrence, RecurrenceFreq)
 
 from ask_sdk_model.ui import SimpleCard, AskForPermissionsConsentCard
 from ask_sdk_core.dispatch_components import AbstractRequestInterceptor
@@ -108,7 +108,7 @@ class CreateReminderIntentHandler(AbstractRequestHandler):
 
         trigger = Trigger(object_type = TriggerType.SCHEDULED_ABSOLUTE , scheduled_time = notification_time ,time_zone_id = TIME_ZONE_ID, recurrence = Recurrence(recurrence_rules=recurrence_pattern))
         text = SpokenText(locale='en-US', ssml = "<speak> Great! I have scheduled reminder for you.</speak>", text= 'This is medicine reminder. Please take your medicine')
-        alert_info = AlertInfo(SpokenInfo([text]))
+        alert_info = AlertInfo(AlertInfoSpokenInfo([text]))
         push_notification = PushNotification(PushNotificationStatus.ENABLED)
         reminder_request = ReminderRequest(notification_time, trigger, alert_info, push_notification)
 
